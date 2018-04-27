@@ -5,7 +5,16 @@
   "repository": "git@github.com:andyzg/class-profile.git",
   "author": "Andy Zhang <andzhng@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "bulma": "^0.7.1"
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^16.2.0",
+    "bulma": "^0.7.1",
+    "tsify": "^4.0.0",
+    "typescript": "^2.8.3",
+    "uglifyjs": "^2.4.11",
+    "watchify": "^3.11.0"
+  },
+  "scripts": {
+    "dev": "watchify main.ts -o build/bundle.js"
   }
 }
