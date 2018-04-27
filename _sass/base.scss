@@ -1,18 +1,32 @@
-/* TYPOGRAPHY */
+/* VARIABLES */
+$content-width: 1200px;
 
+// Background colors
+$bg-1: #3D454D;
+$bg-2: #294766;
+$bg-3: #1F4266;
+$bg-4: #F2F9FF;
+$bg-5: #707E8C;
+$bg-6: #246BB2;
+
+
+/* TYPOGRAPHY */
 body {
-    color: #333;
-    font-family: 'EB Garamond', serif;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
+    font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
 }
 
 h1 {
+    font-family: 'Source Code Pro', monospace;
     font-size: 40px;
+    letter-spacing: -2px;
 }
 
 h2 {
@@ -39,4 +53,61 @@ h6 {
     letter-spacing: 1.2px;
     font-weight: 400;
     color: #999
+}
+
+/* GRID */
+section {
+    width: 100vw;
+
+    .content {
+        margin: 0px auto;
+        padding: 32px 0;
+        max-width: $content-width;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .half {
+        display: inline-block;
+        width: 42%;
+        padding: 16px 7% 16px 0;
+    }
+
+    .second {
+        width: 42%;
+        padding: 16px 4% 16px 3%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .half {
+        display: block;
+        width: 100%;
+        padding: 16px;
+    }
+
+    .second {
+    }
+}
+
+/* COLORS */
+.bg-1 {
+    background-color: $bg-1;
+}
+
+.bg-2 {
+    background-color: $bg-2;
+}
+
+.bg-3 {
+    background-color: $bg-3;
+}
+
+.bg-4 {
+    background-color: $bg-4;
+}
+
+.bg-5 {
+    background-color: $bg-5;
 }
