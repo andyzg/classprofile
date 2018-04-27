@@ -5,7 +5,9 @@
   "repository": "git@github.com:andyzg/class-profile.git",
   "author": "Andy Zhang <andzhng@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "d3": "^5.1.0"
+  },
   "devDependencies": {
     "browserify": "^16.2.0",
     "bulma": "^0.7.1",
