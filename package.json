@@ -1,0 +1,11 @@
+{
+  "name": "class-profile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:andyzg/class-profile.git",
+  "author": "Andy Zhang <andzhng@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.7.1"
+  }
+}
