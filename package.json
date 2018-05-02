@@ -6,10 +6,14 @@
   "author": "Andy Zhang <andzhng@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/d3": "^5.0.0",
     "d3": "^5.1.0",
     "d3-cloud": "^1.2.5"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
     "browserify": "^16.2.0",
     "bulma": "^0.7.1",
     "tsify": "^4.0.0",
@@ -18,6 +22,18 @@
     "watchify": "^3.11.0"
   },
   "scripts": {
-    "dev": "watchify main.ts -o build/bundle.js"
+    "dev": "watchify main.ts -p [ tsify ] -o build/bundle.js -v"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   }
 }
