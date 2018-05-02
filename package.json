@@ -6,7 +6,8 @@
   "author": "Andy Zhang <andzhng@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "d3": "^5.1.0"
+    "d3": "^5.1.0",
+    "d3-cloud": "^1.2.5"
   },
   "devDependencies": {
     "browserify": "^16.2.0",
