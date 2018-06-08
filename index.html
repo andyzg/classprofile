@@ -3,6 +3,11 @@ layout: main
 ---
 <section class="bg-hero">
     <div class="content">
+        {% include_relative hero/index.html %}
+    </div>
+</section>
+<section class="bg-1">
+    <div class="content">
         {% include_relative introduction/index.html %}
     </div>
 </section>
@@ -34,5 +39,10 @@ layout: main
 <section class="bg-5">
     <div class="content">
         {% include_relative future/index.html %}
+    </div>
+</section>
+<section class="bg-5">
+    <div class="content">
+        {% include_relative end/index.html %}
     </div>
 </section>
