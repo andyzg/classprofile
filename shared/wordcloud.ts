@@ -1,3 +1,4 @@
+// TODO: refactor this file + documentation
 import * as d3 from 'd3';
 import * as WordCloud from 'd3-cloud';
 import * as $ from 'jquery';
@@ -5,7 +6,6 @@ import * as $ from 'jquery';
 const WORD_CLOUD_SIZE = [1000, 1000];
 
 let interpolater = d3.interpolate('#ccc', '#0059B2');
-console.log(interpolater(0), interpolater(1));
 
 function drawWordCloud(elem) {
   $.get('./data/company_work_count.json', (resp1) => {

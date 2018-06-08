@@ -1,0 +1,14 @@
+rect.bar {
+  fill: #fff;
+  mix-blend-mode: difference;
+}
+
+text {
+  fill: #fff;
+  mix-blend-mode: luminosity;
+  font-family: 'Source Code Pro', monospace;
+}
+
+path.domain {
+  stroke: #fff;
+}

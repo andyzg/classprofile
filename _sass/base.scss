@@ -16,6 +16,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: 300;
+    background-color: #0099ff;
 }
 
 p {
@@ -94,12 +95,12 @@ section {
     .half {
         display: inline-block;
         width: 42%;
-        padding: 0 7% 16px 0;
+        padding: 0 4% 16px 0;
     }
 
     .second {
         width: 42%;
-        padding: 0 4% 16px 3%;
+        padding: 0 4% 16px 0;
     }
 }
 
@@ -115,11 +116,11 @@ section {
 }
 
 .third {
-  width: 28%;
+  width: 24%;
 }
 
 .two-third {
-  width: 56%;
+  width: 60%;
 }
 
 .bg-hero {
