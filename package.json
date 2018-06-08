@@ -20,11 +20,12 @@
     "bulma": "^0.7.1",
     "tsify": "^4.0.0",
     "typescript": "^2.8.3",
-    "uglifyjs": "^2.4.11",
+    "uglify-js": "^3.4.0",
     "watchify": "^3.11.0"
   },
   "scripts": {
-    "dev": "watchify main.ts -p [ tsify ] -o build/bundle.js -v"
+    "dev": "watchify main.ts -p [ tsify ] -o build/bundle.js -v",
+    "prod": "browserify main.ts -p [ tsify ] -o build/bundle.js -v && uglifyjs --compress --mangle  -o build/bundle.min.js -- build/bundle.js && jekyll build"
   },
   "browserify": {
     "transform": [
