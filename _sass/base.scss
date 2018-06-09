@@ -69,10 +69,16 @@ section {
 }
 
 .bg-hero {
-  background-color: #0099ff;
+  background-image:url('/img/hero.png');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-color: #3D454D;
+  background-position: center center;
   height: 100vh;
   .content {
     padding: 0;
+    width: 90%;
+    max-width: 90%;
   }
 }
 
