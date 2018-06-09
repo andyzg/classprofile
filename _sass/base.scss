@@ -18,67 +18,13 @@ body {
     font-weight: 300;
     background-color: #0099ff;
 }
-
-p {
-  width: 70%;
-  line-height: 1.8;
-  font-size: 18px;
-  font-weight: 300;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-h1 {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 72px;
-    letter-spacing: -2px;
-    font-weight: 400;
-    margin-bottom: 32px;
-}
-
-h2 {
-    font-size: 32px;
-}
-
-h3 {
-    font-size: 24px;
-    opacity: 0.9;
-}
-
-h4 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    opacity: 0.6;
-    margin-bottom: 4px;
-}
-
-h5 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 4px;
-}
-
-h6 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    font-weight: 400;
-    color: #999
-}
-
 /* GRID */
 section {
     width: 100vw;
 
     .content {
         margin: 0px auto;
-        padding: 15% 0;
+        padding: 12% 0;
         max-width: $content-width;
         width: 80%;
         min-height: 100%;
@@ -86,7 +32,6 @@ section {
     }
 }
 
-/* TODO: Maybe have a third/2third? */
 .half {
   vertical-align: top;
 }
