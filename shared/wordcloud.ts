@@ -3,9 +3,9 @@ import * as d3 from 'd3';
 import * as WordCloud from 'd3-cloud';
 import * as $ from 'jquery';
 
-const WORD_CLOUD_SIZE = [1000, 1000];
+const WORD_CLOUD_SIZE = [1200, 700];
 
-let interpolater = d3.interpolate('#ccc', '#0059B2');
+let interpolater = d3.interpolate('#999', '#fff');
 
 function drawWordCloud(elem) {
   $.get('./data/company_work_count.json', (resp1) => {
@@ -34,6 +34,7 @@ function renderWordCloud(elem, words, scores) {
     .size(WORD_CLOUD_SIZE)
     .words(words)
     .padding(3)
+    .spiral(["rectangular"])
     .rotate(() => 0)
     .font("Open Sans")
     .fontSize(function(d) { return d.size; })
@@ -42,7 +43,6 @@ function renderWordCloud(elem, words, scores) {
 
 
   function draw(words) {
-    console.log(scores);
     elem.append('svg')
         .attr("width", WORD_CLOUD_SIZE[0])
         .attr("height", WORD_CLOUD_SIZE[1])

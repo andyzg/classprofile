@@ -238,6 +238,21 @@ let DISCPLINES = [{
   "value": 1,
 }]
 
+
+let HACKATHONS = [{
+  "name": "0",
+  "value": 19,
+}, {
+  "name": "1-5",
+  "value": 76,
+}, {
+  "name": "6-10",
+  "value": 13,
+}, {
+  "name": ">10",
+  "value": 5,
+}]
+
 export {
   EXERCISE,
   COOKING,
@@ -245,5 +260,6 @@ export {
   LANGUAGES,
   EDITOR,
   SIDE,
-  DISCPLINES
+  DISCPLINES,
+  HACKATHONS
 }
