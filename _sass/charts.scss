@@ -9,6 +9,14 @@ text {
   font-family: 'Source Code Pro', monospace;
 }
 
+.arc text {
+  font-size: 12px;
+}
+
 path.domain {
   stroke: #fff;
+}
+
+.horizontal-bar-chart {
+  margin-left: -80px;
 }

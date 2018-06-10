@@ -5,7 +5,7 @@ var margin = {
     top: 0,
     right: 25,
     bottom: 15,
-    left: 120
+    left: 200
 };
 
 
@@ -28,6 +28,7 @@ function renderHorizontalBarChat(elem, unsortedData, width, height, sort) {
 
   // Initial chart
   var svg = elem.append("svg")
+      .attr("class", 'horizontal-bar-chart')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
