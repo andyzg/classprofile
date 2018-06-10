@@ -16,7 +16,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: 300;
-    background-color: #0099ff;
+    background-color: #fff;
 }
 /* GRID */
 section {
@@ -57,6 +57,14 @@ section {
     }
 
     .second {
+    }
+}
+
+@media print {
+    .half {
+        display: block;
+        width: 100%;
+        padding: 16px;
     }
 }
 
