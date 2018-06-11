@@ -84,8 +84,17 @@ let ETHNICITY = [{
 "value": 2
 }]
 
+let GENDER = [{
+  "name": "Male",
+  "value": 93
+}, {
+  "name": "Female",
+  "value": 19
+}]
+
 export {
   INTERNATIONAL,
   PARENT_EDUCATION,
-  ETHNICITY
+  ETHNICITY,
+  GENDER
 }

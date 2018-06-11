@@ -253,6 +253,17 @@ let HACKATHONS = [{
   "value": 5,
 }]
 
+let DESKTOP = [{
+  "name": "Linux",
+  "value": 16,
+}, {
+  "name": "Windows",
+  "value": 20,
+}, {
+  "name": "macOS",
+  "value": 77,
+}]
+
 export {
   EXERCISE,
   COOKING,
@@ -261,5 +272,6 @@ export {
   EDITOR,
   SIDE,
   DISCPLINES,
-  HACKATHONS
+  HACKATHONS,
+  DESKTOP
 }
