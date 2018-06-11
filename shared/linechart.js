@@ -48,7 +48,6 @@ function renderLineChart(elem, data, width, height, options) {
             "translate(" + margin.left + "," + margin.top + ")");
 
   for (var i in lines) {
-    console.log(i, lines);
     // Add the valueline path.
     svg.append("path")
         .data([data])

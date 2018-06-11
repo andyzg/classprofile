@@ -1,144 +1,188 @@
+import * as d3 from 'd3';
 
-var labels = true; // show the text labels beside individual boxplots?
+let interpolater = d3.interpolate('#999', '#fff');
 
-var margin = {top: 30, right: 50, bottom: 70, left: 50};
-var  width = 800 - margin.left - margin.right;
-var height = 400 - margin.top - margin.bottom;
+function renderBoxPlot(elem, data, width, height) {
+  // set the dimensions and margins of the graph
+  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+      width = width - margin.left - margin.right,
+      height = height - margin.top - margin.bottom;
 
-var min = Infinity,
-    max = -Infinity;
+  var barWidth = 30;
 
-// parse in the data
-d3.csv("data.csv", function(error, csv) {
-	// using an array of arrays with
-	// data[n][2]
-	// where n = number of columns in the csv file
-	// data[i][0] = name of the ith column
-	// data[i][1] = array of values of ith column
+  // Setup a color scale for filling each box
+  var colorScale = d3.scaleOrdinal(d3.schemePastel1)
+    .domain(Object.keys(data));
 
-	var data = [];
-	data[0] = [];
-	data[1] = [];
-	data[2] = [];
-	data[3] = [];
-	// add more rows if your csv file has more columns
+  var globalMax = 0
+  var globalMin = 99999999;
+  // Prepare the data for the box plots
+  var boxPlotData = [];
+  for (var [key, groupCount] of Object.entries(data)) {
+    var localMin = d3.min(groupCount);
+    var localMax = d3.max(groupCount);
+    if (localMin < globalMin) globalMin = localMin
+    if (localMax > globalMax) globalMax = localMax
 
-	// add here the header of the csv file
-	data[0][0] = "Q1";
-	data[1][0] = "Q2";
-	data[2][0] = "Q3";
-	data[3][0] = "Q4";
-	// add more rows if your csv file has more columns
+    var obj = {};
+    obj["key"] = key;
+    obj["counts"] = groupCount;
+    obj["quartile"] = boxQuartiles(groupCount);
+    obj["whiskers"] = [localMin, localMax];
+    obj["color"] = colorScale(key);
+    boxPlotData.push(obj);
+  }
 
-	data[0][1] = [];
-	data[1][1] = [];
-	data[2][1] = [];
-	data[3][1] = [];
+  // Compute an ordinal xScale for the keys in boxPlotData
+  var xScale = d3.scalePoint()
+    .domain(Object.keys(data))
+    .rangeRound([0, width])
+    .padding([0.5]);
 
-	csv.forEach(function(x) {
-		var v1 = Math.floor(x.Q1),
-			v2 = Math.floor(x.Q2),
-			v3 = Math.floor(x.Q3),
-			v4 = Math.floor(x.Q4);
-			// add more variables if your csv file has more columns
+  // Compute a global y scale based on the global counts
+  var min = globalMin;
+  var max = globalMax;
+  var yScale = d3.scaleLinear()
+    .domain([min, max])
+    .range([height, 0]);
 
-		var rowMax = Math.max(v1, Math.max(v2, Math.max(v3,v4)));
-		var rowMin = Math.min(v1, Math.min(v2, Math.min(v3,v4)));
+  // append the svg obgect to the body of the page
+  // appends a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = elem.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
-		data[0][1].push(v1);
-		data[1][1].push(v2);
-		data[2][1].push(v3);
-		data[3][1].push(v4);
-		 // add more rows if your csv file has more columns
+  // Generate five 100 count, normal distributions with random means
+  var groupCounts = {};
+  var globalCounts = [];
+  var meanGenerator = d3.randomUniform(10);
+  for(let i=0; i <= 5; i++) {
+    var randomMean = meanGenerator();
+    var generator = d3.randomNormal(randomMean);
+    var key = i.toString();
+    groupCounts[key] = [];
 
-		if (rowMax > max) max = rowMax;
-		if (rowMin < min) min = rowMin;
-	});
+    for(let j=0; j<100; j++) {
+      var entry = generator();
+      groupCounts[key].push(entry);
+      globalCounts.push(entry);
+    }
+  }
 
-	var chart = d3.box()
-		.whiskers(iqr(1.5))
-		.height(height)
-		.domain([min, max])
-		.showLabels(labels);
-
-	var svg = d3.select("body").append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-		.attr("class", "box")
-		.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	// the x-axis
-	var x = d3.scale.ordinal()
-		.domain( data.map(function(d) { console.log(d); return d[0] } ) )
-		.rangeRoundBands([0 , width], 0.7, 0.3);
-
-	var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom");
-
-	// the y-axis
-	var y = d3.scale.linear()
-		.domain([min, max])
-		.range([height + margin.top, 0 + margin.top]);
-
-	var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
-
-	// draw the boxplots
-	svg.selectAll(".box")
-      .data(data)
-	  .enter().append("g")
-		.attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
-      .call(chart.width(x.rangeBand()));
+  // Sort group counts so quantile methods work
+  for(var key in groupCounts) {
+    var groupCount = groupCounts[key];
+    groupCounts[key] = groupCount.sort(sortNumber);
+  }
+  // append a group for the box plot elements
+  var g = svg.append("g");
 
 
-	// add a title
-	svg.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 0 + (margin.top / 2))
-        .attr("text-anchor", "middle")
-        .style("font-size", "18px")
-        //.style("text-decoration", "underline")
-        .text("Revenue 2012");
+  data = groupCounts;
 
-	 // draw y axis
-	svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-		.append("text") // and text1
-		  .attr("transform", "rotate(-90)")
-		  .attr("y", 6)
-		  .attr("dy", ".71em")
-		  .style("text-anchor", "end")
-		  .style("font-size", "16px")
-		  .text("Revenue in €");
+  // Draw the box plot vertical lines
+  var verticalLines = g.selectAll(".verticalLines")
+    .data(boxPlotData)
+    .enter()
+    .append("line")
+    .attr("x1", function(datum) { return xScale(datum.key); })
+    .attr("y1", function(datum) { return yScale(datum.whiskers[0]); })
+    .attr("x2", function(datum) { return xScale(datum.key); })
+    .attr("y2", function(datum) { return yScale(datum.whiskers[1]); })
+    .attr("stroke", "#000")
+    .attr("stroke-width", 1)
+    .attr("fill", "none");
 
-	// draw x axis
-	svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
-      .call(xAxis)
-	  .append("text")             // text label for the x axis
-        .attr("x", (width / 2) )
-        .attr("y",  10 )
-		.attr("dy", ".71em")
-        .style("text-anchor", "middle")
-		.style("font-size", "16px")
-        .text("Quarter");
-});
+  // Draw the boxes of the box plot, filled and on top of vertical lines
+  var rects = g.selectAll("rect")
+    .data(boxPlotData)
+    .enter()
+    .append("rect")
+    .attr("width", barWidth)
+    .attr("height", function(datum) {
+      var quartiles = datum.quartile;
+      var height =  yScale(quartiles[0]) - yScale(quartiles[2]);
+      return height;
+    })
+    .attr("x", function(datum) { return xScale(datum.key) - (barWidth/2); })
+    .attr("y", function(datum) { return yScale(datum.quartile[2]); })
+    .attr("fill", function(datum) { return datum.color; })
+    .attr("stroke", "#000")
+    .attr("stroke-width", 1);
 
-// Returns a function to compute the interquartile range.
-function iqr(k) {
-  return function(d, i) {
-    var q1 = d.quartiles[0],
-        q3 = d.quartiles[2],
-        iqr = (q3 - q1) * k,
-        i = -1,
-        j = d.length;
-    while (d[++i] < q1 - iqr);
-    while (d[--j] > q3 + iqr);
-    return [i, j];
-  };
+  // Now render all the horizontal lines at once - the whiskers and the median
+  var horizontalLineConfigs = [
+    // Top whisker
+    {
+      x1: function(datum) { return xScale(datum.key) - barWidth/2 },
+      y1: function(datum) { return yScale(datum.whiskers[0]) },
+      x2: function(datum) { return xScale(datum.key) + barWidth/2 },
+      y2: function(datum) { return yScale(datum.whiskers[0]) }
+    },
+    // Median line
+    {
+      x1: function(datum) { return xScale(datum.key) - barWidth/2 },
+      y1: function(datum) { return yScale(datum.quartile[1]) },
+      x2: function(datum) { return xScale(datum.key) + barWidth/2 },
+      y2: function(datum) { return yScale(datum.quartile[1]) }
+    },
+    // Bottom whisker
+    {
+      x1: function(datum) { return xScale(datum.key) - barWidth/2 },
+      y1: function(datum) { return yScale(datum.whiskers[1]) },
+      x2: function(datum) { return xScale(datum.key) + barWidth/2 },
+      y2: function(datum) { return yScale(datum.whiskers[1]) }
+    }
+  ];
+
+  for(var i=0; i < horizontalLineConfigs.length; i++) {
+    var lineConfig = horizontalLineConfigs[i];
+
+    // Draw the whiskers at the min for this series
+    var horizontalLine = g.selectAll(".whiskers")
+      .data(boxPlotData)
+      .enter()
+      .append("line")
+      .attr("x1", lineConfig.x1)
+      .attr("y1", lineConfig.y1)
+      .attr("x2", lineConfig.x2)
+      .attr("y2", lineConfig.y2)
+      .attr("stroke", "#000")
+      .attr("stroke-width", 1)
+      .attr("fill", "none");
+  }
+
+  // Move the left axis over 25 pixels, and the top axis over 35 pixels
+  //var axisY = svg.append("g").attr("transform", "translate(25,0)");
+  //var axisX = svg.append("g").attr("transform", "translate(35,0)");
+
+  //x-axis
+  svg.append("g")
+     .attr("transform", "translate(0," + height + ")")
+     .call(d3.axisBottom(xScale));
+
+  // Add the Y Axis
+  svg.append("g")
+     .call(d3.axisLeft(yScale));
+
+  function boxQuartiles(d) {
+    return [
+      d3.quantile(d, .25),
+      d3.quantile(d, .5),
+      d3.quantile(d, .75)
+    ];
+  }
+
+  // Perform a numeric sort on an array
+  function sortNumber(a,b) {
+    return a - b;
+  }
 }
+
+export { renderBoxPlot }
+
+
