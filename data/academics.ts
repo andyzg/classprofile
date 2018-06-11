@@ -118,8 +118,32 @@ let DISLIKED_MANDATORY = [{
   "value": 2
 }]
 
+let ATTENDANCE = [{
+  "x": "1A",
+  "value": [3.76],
+}, {
+  "x": "1B",
+  "value": [3.27],
+}, {
+  "x": "2A",
+  "value": [3.1],
+}, {
+  "x": "2B",
+  "value": [2.98],
+}, {
+  "x": "3A",
+  "value": [2.81],
+}, {
+  "x": "3B",
+  "value": [2.46],
+}, {
+  "x": "4A",
+  "value": [2.5],
+}];
+
 export {
   FAVOURITE_MANDATORY,
   FAVOURITE_ELECTIVE,
-  DISLIKED_MANDATORY
+  DISLIKED_MANDATORY,
+  ATTENDANCE
 }

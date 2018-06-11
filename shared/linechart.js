@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
-function renderLineChart(elem, data, width, height) {
+function renderLineChart(elem, data, width, height, options) {
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
 
@@ -19,6 +19,10 @@ function renderLineChart(elem, data, width, height) {
       .domain([0, d3.max(data, function (d) {
         return d3.max(d.value);
       })]);
+
+  if (options && options['range']) {
+    y.domain(options['range']);
+  }
 
   var lines = [];
 
