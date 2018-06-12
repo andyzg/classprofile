@@ -1,0 +1,46 @@
+.path-section {
+  padding-top: 8px;
+}
+
+.path-section p {
+  width: 100%;
+}
+
+.path-item {
+  width: 100%;
+
+}
+
+.path-metadata {
+  padding-top: 32px;
+  width: 100%;
+}
+
+.path-photo {
+  display: inline-block;
+}
+
+.path-photo img {
+  border-radius: 50%;
+  height: 92px;
+  width: 92px;
+}
+
+.path-text {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 28px;
+  padding-left: 8px;
+}
+
+.path-name {
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 8px;
+}
+
+.path-description {
+  font-weight: 400;
+  font-size: 16px;
+  opacity: 0.5;
+}

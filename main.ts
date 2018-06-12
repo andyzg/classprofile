@@ -1,15 +1,16 @@
 import * as d3 from 'd3';
-import { drawWordCloud } from './shared/wordcloud';
+import * as $ from 'jquery';
+import { renderWordCloud } from './shared/wordcloud';
 import { renderHorizontalBarChat } from './shared/horizontalbarchart.js';
 import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
 
-import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP } from './data/lifestyle';
+import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES } from './data/academics';
-import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME } from './data/background';
+import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
-import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY } from './data/coop';
+import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES } from './data/coop';
 import { POST_GRAD, POST_LOCATION } from './data/future';
 
 window.onload = () => {
@@ -21,8 +22,42 @@ window.onload = () => {
   renderFuture();
 }
 
+function drawCoopWordCloud(elem) {
+  let data = COMPANY_WORK_COUNT['data'];
+  let words: any[] = [];
+  for (let name in data) {
+    words.push({
+      text: name,
+      size: Math.sqrt(data[name]) * 10
+    });
+  }
+
+  let scores = {};
+  let data2 = FAVOURITE_COMPANIES['data'];
+  for (let i in data2) {
+    scores[data2[i][0]] = data2[i][1];
+  }
+  renderWordCloud(elem, words, scores, 1200, 700);
+}
+
+function drawWordCloud(elem, data) {
+  let max = 0;
+  for (var i in data) {
+    if (data[i] > max) { max = data[i]; }
+  }
+
+  let wordcloudData: any[] = [];
+  for (var i in data) {
+    wordcloudData.push({
+      text: i,
+      size: Math.pow(data[i] * 1.0 / max, 0.25) * 36
+    });
+  }
+  renderWordCloud(elem, wordcloudData, null, 500, 400);
+}
+
 function renderCoop() {
-  drawWordCloud(d3.select('#coop-cloud'));
+  drawCoopWordCloud(d3.select('#coop-cloud'));
   renderBoxPlot(d3.select('#salary'), SALARY, 600, 280);
   renderLineChart(d3.select('#work-location'), WORK_LOCATION, 600, 400);
   renderHorizontalBarChat(d3.select('#favourite-location'), FAVOURITE_LOCATION, 600, 240, true);
@@ -43,6 +78,7 @@ function renderLifestyle() {
   renderHorizontalBarChat(d3.select('#hackathons'), HACKATHONS, 600, 160, false);
   renderHorizontalBarChat(d3.select('#disciplines'), DISCPLINES, 600, 660, true);
   renderPieChart(d3.select('#desktop'), DESKTOP, 500, 500);
+  drawWordCloud(d3.select('#uni-extras'), UNI_EXTRAS);
 }
 
 function renderAcademics() {
@@ -62,6 +98,7 @@ function renderBackground() {
   renderHorizontalBarChat(d3.select('#parent-education'), PARENT_EDUCATION, 600, 280, true);
   renderPieChart(d3.select('#gender'), GENDER, 400, 400);
   renderHorizontalBarChat(d3.select('#family-income'), FAMILY_INCOME, 400, 200);
+  drawWordCloud(d3.select('#hs-extras'), HS_EXTRAS);
 }
 
 function renderOutcome() {

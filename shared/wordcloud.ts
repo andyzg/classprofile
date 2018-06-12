@@ -1,37 +1,22 @@
 // TODO: refactor this file + documentation
 import * as d3 from 'd3';
 import * as WordCloud from 'd3-cloud';
-import * as $ from 'jquery';
-
-const WORD_CLOUD_SIZE = [1200, 700];
 
 let interpolater = d3.interpolate('#999', '#fff');
 
-function drawWordCloud(elem) {
-  $.get('./data/company_work_count.json', (resp1) => {
-    $.get('./data/normalized_fav_companies.json', (resp2) => {
-      let data = resp1['data']
-      let words: any[] = [];
-      for (let name in data) {
-        words.push({
-          text: name,
-          size: Math.sqrt(data[name]) * 10
-        });
-      }
-
-      let scores = {};
-      let data2 = resp2['data'];
-      for (let i in data2) {
-        scores[data2[i][0]] = data2[i][1];
-      }
-      renderWordCloud(elem, words, scores);
-    });
-  });
+function maxWordSize(words) {
+  let max = 0;
+  for (var i in words) {
+    if (words[i].size > max) {
+      max = words[i].size;
+    }
+  }
+  return max;
 }
 
-function renderWordCloud(elem, words, scores) {
+function renderWordCloud(elem, words, scores, width, height) {
   let layout = WordCloud()
-    .size(WORD_CLOUD_SIZE)
+    .size([width, height])
     .words(words)
     .padding(3)
     .spiral(["rectangular"])
@@ -40,26 +25,28 @@ function renderWordCloud(elem, words, scores) {
     .fontSize(function(d) { return d.size; })
     .on("end", draw);
 
-
+  let max = maxWordSize(words);
 
   function draw(words) {
     elem.append('svg')
-        .attr("width", WORD_CLOUD_SIZE[0])
-        .attr("height", WORD_CLOUD_SIZE[1])
+        .attr("width", width)
+        .attr("height", height)
       .append("g")
-        .attr("transform", "translate(" + WORD_CLOUD_SIZE[0] / 2 + "," + WORD_CLOUD_SIZE[1] / 2 + ")")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
         .style("font-size", (d: any) => d.size + "px")
         .style("font-family", "Helvetica")
         .style('font-weight', (d: any) => {
-          if (d.text in scores && scores[d.text] > 0.3) {
+          if (scores && d.text in scores && scores[d.text] > 0.3) {
             return '700';
           }
           return '400';
         })
         .style("fill", (d: any) => {
+          if (!scores) { return interpolater(d.size / max); }
+
           let opacity = 0;
           if (d.text in scores) {
             opacity = scores[d.text];
@@ -75,4 +62,4 @@ function renderWordCloud(elem, words, scores) {
 }
 
 
-export { drawWordCloud };
+export { renderWordCloud };
