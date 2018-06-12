@@ -92,9 +92,27 @@ let GENDER = [{
   "value": 19
 }]
 
+let FAMILY_INCOME = [{
+  "name": "0-50k / year",
+  "value": 4
+}, {
+  "name": "50k-100k / year",
+  "value": 32
+}, {
+  "name": "100-150k / year",
+  "value": 49
+}, {
+  "name": ">150k / year",
+  "value": 5
+}, {
+  "name": "Not sure",
+  "value": 22
+}];
+
 export {
   INTERNATIONAL,
   PARENT_EDUCATION,
   ETHNICITY,
-  GENDER
+  GENDER,
+  FAMILY_INCOME
 }

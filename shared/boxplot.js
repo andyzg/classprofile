@@ -1,7 +1,5 @@
 import * as d3 from 'd3';
 
-let interpolater = d3.interpolate('#999', '#fff');
-
 function renderBoxPlot(elem, data, width, height) {
   // set the dimensions and margins of the graph
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -93,7 +91,7 @@ function renderBoxPlot(elem, data, width, height) {
     .attr("y1", function(datum) { return yScale(datum.whiskers[0]); })
     .attr("x2", function(datum) { return xScale(datum.key); })
     .attr("y2", function(datum) { return yScale(datum.whiskers[1]); })
-    .attr("stroke", "#000")
+    .attr("stroke", "#fff")
     .attr("stroke-width", 1)
     .attr("fill", "none");
 
@@ -111,7 +109,7 @@ function renderBoxPlot(elem, data, width, height) {
     .attr("x", function(datum) { return xScale(datum.key) - (barWidth/2); })
     .attr("y", function(datum) { return yScale(datum.quartile[2]); })
     .attr("fill", function(datum) { return datum.color; })
-    .attr("stroke", "#000")
+    .attr("stroke", "#fff")
     .attr("stroke-width", 1);
 
   // Now render all the horizontal lines at once - the whiskers and the median
@@ -151,7 +149,7 @@ function renderBoxPlot(elem, data, width, height) {
       .attr("y1", lineConfig.y1)
       .attr("x2", lineConfig.x2)
       .attr("y2", lineConfig.y2)
-      .attr("stroke", "#000")
+      .attr("stroke", "#fff")
       .attr("stroke-width", 1)
       .attr("fill", "none");
   }
