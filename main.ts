@@ -84,7 +84,6 @@ function renderLifestyle() {
 function renderAcademics() {
   renderBoxPlot(d3.select('#grades'), GRADES, 600, 280);
   renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, 600, 390, true);
-  renderHorizontalBarChat(d3.select('#favourite-elective'), FAVOURITE_ELECTIVE, 600, 330, true);
   renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, 600, 420, true);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, 600, 300, {
     range: [1, 5]
