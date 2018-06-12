@@ -32,7 +32,7 @@ let PARENT_EDUCATION = [{
 
 
 let ETHNICITY = [{
-"name": "Nigeria",
+"name": "Nigerian",
 "value": 1
 }, {
   "name": "European",
