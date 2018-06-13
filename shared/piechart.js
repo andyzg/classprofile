@@ -42,8 +42,8 @@ function renderPieChart(elem, data, width, height) {
       .innerRadius(radius + 20);
 
   var innerLabel = d3.arc()
-      .outerRadius(radius - 80)
-      .innerRadius(radius - 80);
+      .outerRadius(radius - 50)
+      .innerRadius(radius - 50);
 
   var arc = g.selectAll(".arc")
     .data(pie(data))

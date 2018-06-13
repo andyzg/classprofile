@@ -18,9 +18,11 @@ body {
     font-weight: 300;
     background-color: #fff;
 }
+
 /* GRID */
 section {
-    width: 100vw;
+    width: 100%;
+    overflow: hidden;
 
     .content {
         margin: 0px auto;
@@ -53,7 +55,7 @@ section {
     .half {
         display: block;
         width: 100%;
-        padding: 16px;
+        padding: 16px 0;
     }
 
     .second {

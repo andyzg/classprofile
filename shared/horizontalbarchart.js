@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import * as util from './utils';
 
 //set up svg using margin conventions - we'll need plenty of room on the left for labels
 var margin = {
@@ -16,6 +17,9 @@ function sortData(data) {
 }
 
 function renderHorizontalBarChat(elem, unsortedData, width, height, sort) {
+  if (util.isMobile()) {
+    height *= 0.7;
+  }
   width = width - margin.left - margin.right;
   height = height - margin.top - margin.bottom;
 
