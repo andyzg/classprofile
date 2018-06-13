@@ -2,12 +2,14 @@
 $content-width: 1200px;
 
 // Background colors
-$bg-1: #3D454D;
+$bg-1: #324c67;
 $bg-2: #294766;
-$bg-3: #1F4266;
+$bg-3: #2E6399;
 $bg-4: #F2F9FF;
-$bg-5: #707E8C;
-$bg-6: #246BB2;
+$bg-5: #383040;
+$bg-6: #586e75;
+$bg-7: #073642;
+$bg-8: #002b36;
 
 
 /* TYPOGRAPHY */
@@ -111,6 +113,18 @@ section {
 
 .bg-5 {
     background-color: $bg-5;
+}
+
+.bg-6 {
+    background-color: $bg-6;
+}
+
+.bg-7 {
+    background-color: $bg-7;
+}
+
+.bg-8 {
+    background-color: $bg-8;
 }
 
 .vb { /* Vertical buffer */

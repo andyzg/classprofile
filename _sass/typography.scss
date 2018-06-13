@@ -66,6 +66,17 @@ h1 {
   margin-bottom: 32px;
 }
 
+h1::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  transform: translate(-100%,0);
+  padding-right: 16px;
+  font-size: 36px;
+  padding-top: 6px;
+  opacity: 0.5;
+}
+
 h2 {
   font-size: 28px;
   margin-bottom: 32px;

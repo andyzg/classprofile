@@ -63,7 +63,7 @@ function drawWordCloud(elem, data, options) {
       size: Math.pow(data[i] * 1.0 / max, 0.25) * 36
     });
   }
-  renderWordCloud(elem, wordcloudData, null, options.width, Math.min(window.innerHeight * 0.75, 200000 / options.width));
+  renderWordCloud(elem, wordcloudData, null, options.width, Math.min(window.innerHeight * 0.5, 200000 / options.width));
 }
 
 function renderCoop(options) {
