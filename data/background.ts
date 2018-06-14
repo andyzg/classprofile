@@ -17,7 +17,7 @@ let PARENT_EDUCATION = [{
   "name": "Did not complete high school",
   "value": 4
   }, {
-  "name": "Doctorate",
+  "name": "Doctorates",
   "value": 9
   }, {
   "name": "High school",
