@@ -6,9 +6,10 @@ import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
 import * as util from './shared/utils';
+import { renderDotPlot } from './shared/dotplot.js';
 
 import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES } from './data/academics';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES } from './data/coop';
@@ -96,9 +97,10 @@ function renderAcademics(options) {
   renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, true);
   renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, true);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
-    range: [1, 5]
+    range: [1, 4]
   });
   renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280);
+  renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, 300, 300);
 }
 
 function renderBackground(options) {
