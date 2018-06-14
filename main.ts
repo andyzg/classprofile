@@ -42,14 +42,12 @@ function setupListeners() {
 }
 
 function setActive(term) {
-  console.log(term);
   for (let i = 0; i <= 5; i++) {
     let items = document.getElementsByClassName(i.toString());
     for (let j = 0; j < items.length; j++) {
       if (i !== term) {
         (items[j] as any).style.visibility = 'hidden';
       } else {
-        console.log('wtf');
         (items[j] as any).style.visibility = 'initial';
       }
     }
