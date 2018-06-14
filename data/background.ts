@@ -51,7 +51,7 @@ let ETHNICITY = [{
 "value": 50
 }, {
 "name": "Indian",
-"value": 20
+"value": 21
 }, {
 "name": "Filipino",
 "value": 4
@@ -74,9 +74,6 @@ let ETHNICITY = [{
 "name": "Pakistani",
 "value": 2
 }, {
-"name": "Punjabi",
-"value": 1
-}, {
 "name": "Sri Lankan",
 "value": 1
 }, {
@@ -85,10 +82,10 @@ let ETHNICITY = [{
 }]
 
 let GENDER = [{
-  "name": "Male",
+  "name": "Men",
   "value": 93
 }, {
-  "name": "Female",
+  "name": "Women",
   "value": 19
 }]
 
@@ -105,7 +102,7 @@ let FAMILY_INCOME = [{
   "name": ">150k / year",
   "value": 5
 }, {
-  "name": "Not sure",
+  "name": "Prefer not to disclose",
   "value": 22
 }];
 

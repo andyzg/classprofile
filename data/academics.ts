@@ -130,25 +130,25 @@ let DISLIKED_MANDATORY = [{
 
 let ATTENDANCE = [{
   "x": "1A",
-  "value": [3.76],
+  "value": [94],
 }, {
   "x": "1B",
-  "value": [3.27],
+  "value": [81.75],
 }, {
   "x": "2A",
-  "value": [3.1],
+  "value": [77.5],
 }, {
   "x": "2B",
-  "value": [2.98],
+  "value": [74],
 }, {
   "x": "3A",
-  "value": [2.81],
+  "value": [70.25],
 }, {
   "x": "3B",
-  "value": [2.46],
+  "value": [61.5],
 }, {
   "x": "4A",
-  "value": [2.5],
+  "value": [62.5],
 }];
 
 let PARENT_GRADES = {

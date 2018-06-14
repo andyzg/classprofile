@@ -12,7 +12,7 @@ import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKA
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
-import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES } from './data/coop';
+import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY } from './data/coop';
 import { POST_GRAD, POST_LOCATION, DEBT } from './data/future';
 
 window.onload = () => {
@@ -27,6 +27,33 @@ window.onload = () => {
   renderBackground(options);
   renderOutcome(options);
   renderFuture(options);
+  setActive(1);
+  setupListeners();
+}
+
+function setupListeners() {
+  let scaleItems = document.getElementsByClassName('scale-item');
+  for (let i = 0; i < scaleItems.length; i++) {
+    let j = i;
+    (scaleItems[i] as any).onclick = function() {
+      setActive(j);
+    }
+  }
+}
+
+function setActive(term) {
+  console.log(term);
+  for (let i = 0; i <= 5; i++) {
+    let items = document.getElementsByClassName(i.toString());
+    for (let j = 0; j < items.length; j++) {
+      if (i !== term) {
+        (items[j] as any).style.visibility = 'hidden';
+      } else {
+        console.log('wtf');
+        (items[j] as any).style.visibility = 'initial';
+      }
+    }
+  }
 }
 
 function drawCoopWordCloud(elem, options) {
@@ -77,6 +104,11 @@ function renderCoop(options) {
   renderBoxPlot(d3.select('#side-salary'), SIDE_SALARY, options.width, 350);
   renderBoxPlot(d3.select('#side-salary-2'), SIDE_SALARY_2, options.width, 350);
   renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350);
+  renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 600, {
+    rawSize: true,
+    domain: [50, 100],
+    range: [0, 16000],
+  });
 }
 
 function renderLifestyle(options) {
@@ -88,7 +120,7 @@ function renderLifestyle(options) {
   renderHorizontalBarChat(d3.select('#side'), SIDE, options.width, 300, false);
   renderHorizontalBarChat(d3.select('#hackathons'), HACKATHONS, options.width, 240, false);
   renderHorizontalBarChat(d3.select('#disciplines'), DISCPLINES, options.width, 660, true);
-  renderPieChart(d3.select('#desktop'), DESKTOP, options.width * 0.9, options.width * 0.9);
+  renderPieChart(d3.select('#desktop'), DESKTOP, options.width * 0.75, options.width * 0.75);
   drawWordCloud(d3.select('#uni-extras'), UNI_EXTRAS, options);
 }
 
@@ -97,17 +129,22 @@ function renderAcademics(options) {
   renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, true);
   renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, true);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
-    range: [1, 4]
+    range: [50, 100]
   });
   renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280);
-  renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, 300, 300);
+  renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, 300, 300, {
+    domainValues: [0, 100],
+    rangeValues: [0, 100],
+    domain: [0, 5],
+    range: [-6, 4]
+  });
 }
 
 function renderBackground(options) {
-  renderHorizontalBarChat(d3.select('#ethnicity'), ETHNICITY, 400, 405, true);
-  renderPieChart(d3.select('#international'), INTERNATIONAL, options.width * 0.9, options.width * 0.9);
+  renderHorizontalBarChat(d3.select('#ethnicity'), ETHNICITY, 400, 300, true);
+  renderPieChart(d3.select('#international'), INTERNATIONAL, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#parent-education'), PARENT_EDUCATION, options.width, 280, true);
-  renderPieChart(d3.select('#gender'), GENDER, options.width * 0.9, options.width * 0.9);
+  renderPieChart(d3.select('#gender'), GENDER, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#family-income'), FAMILY_INCOME, 400, 200);
   drawWordCloud(d3.select('#hs-extras'), HS_EXTRAS, options);
 }

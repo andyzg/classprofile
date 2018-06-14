@@ -140,6 +140,10 @@ function renderBoxPlot(elem, data, width, height) {
   for(var i=0; i < horizontalLineConfigs.length; i++) {
     var lineConfig = horizontalLineConfigs[i];
 
+    let color = '#fff';
+    if (i % 3 == 1) {
+      color = '#000';
+    }
     // Draw the whiskers at the min for this series
     var horizontalLine = g.selectAll(".whiskers")
       .data(boxPlotData)
@@ -149,7 +153,7 @@ function renderBoxPlot(elem, data, width, height) {
       .attr("y1", lineConfig.y1)
       .attr("x2", lineConfig.x2)
       .attr("y2", lineConfig.y2)
-      .attr("stroke", "#fff")
+      .attr("stroke", color)
       .attr("stroke-width", 1)
       .attr("fill", "none");
   }
@@ -158,14 +162,17 @@ function renderBoxPlot(elem, data, width, height) {
   //var axisY = svg.append("g").attr("transform", "translate(25,0)");
   //var axisX = svg.append("g").attr("transform", "translate(35,0)");
 
+  let xAxis = d3.axisBottom(xScale);
+  let yAxis = d3.axisLeft(yScale);
+
   //x-axis
   svg.append("g")
      .attr("transform", "translate(0," + height + ")")
-     .call(d3.axisBottom(xScale));
+     .call(xAxis);
 
   // Add the Y Axis
   svg.append("g")
-     .call(d3.axisLeft(yScale));
+     .call(yAxis);
 
   function boxQuartiles(d) {
     return [

@@ -9,7 +9,8 @@ text {
   font-family: 'Source Code Pro', monospace;
 }
 
-.arc text {
+.arc text,
+text.label {
   font-size: 12px;
 }
 
@@ -27,4 +28,59 @@ path.domain {
 
 g.tick line {
   stroke: #fff;
+}
+
+.scale {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.legend {
+  font-family: 'Source Code Pro', monospace;
+  padding-right: 8px;
+}
+
+.scale-item {
+  display: inline-block;
+  font-family: 'Source Code Pro', monospace;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  width: 32px;
+  color: #333;
+  border-radius: 50%;
+  margin: 2px 2px;
+  cursor: pointer;
+  box-shadow: 0px 3px 2px rgba(0,0,0,.2);
+  transition: 0.2s ease;
+}
+
+.scale-item:hover {
+  box-shadow: 0px 5px 3px rgba(0,0,0,.2);
+}
+
+.c1 {
+  background-color: #7fc97f;
+}
+
+.c2 {
+  background-color: #ffff99;
+}
+
+.c3 {
+  background-color: #386cb0;
+}
+
+.c4 {
+  background-color: #bf5b17;
+}
+
+.c5 {
+  background-color: #f0027f;
+}
+
+.c6 {
+  background-color: #fdc086;
 }

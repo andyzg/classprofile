@@ -65,7 +65,7 @@ function renderLineChart(elem, data, width, height, options) {
 
   // Add the Y Axis
   svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y).ticks(5));
 }
 
 export {

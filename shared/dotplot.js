@@ -2,7 +2,13 @@ import * as d3 from 'd3';
 
 var margin = {top: 20, right: 20, bottom: 30, left: 70};
 
-function renderDotPlot(elem, data, width, height) {
+function renderDotPlot(elem, data, width, height, options) {
+  var MAX = {};
+
+  // Setup a color scale for filling each box
+  var colorScale = d3.scaleOrdinal(d3.schemeAccent)
+    .domain([0, 6]);
+
   width = width - margin.left - margin.right;
   height = height - margin.top - margin.bottom;
 
@@ -14,15 +20,15 @@ function renderDotPlot(elem, data, width, height) {
 
   var y = d3.scaleLinear()
      .range([height, 0])
-     .domain([-6, 4])
+     .domain(options.range)
 
   var x = d3.scaleLinear()
      .range([0, width])
-     .domain([1, 4])
+     .domain(options.domain)
 
-  var xAxis = d3.axisBottom(x).ticks(4);
+  var xAxis = d3.axisBottom(x);
 
-  var yAxis = d3.axisLeft(y).ticks(4);
+  var yAxis = d3.axisLeft(y);
 
 
   svg.append("g")
@@ -44,8 +50,21 @@ function renderDotPlot(elem, data, width, height) {
       return x(parseInt(d.x)+1);
     })
     .attr("cy", function (d) { return y(parseInt(d.y)); })
-    .attr("r", function (d) { return Math.pow(d.size, 0.5); })
-    .style("fill", function(d) { return '#fff'; });
+    .attr('class', (d) => {
+      return d.term;
+    })
+    .attr("r", function (d) {
+      if (options.rawSize) {
+        return d.size * 3;
+      }
+      return Math.pow(d.size, 0.5);
+    })
+    .style("fill", function(d) {
+      if ('term' in d) {
+        return colorScale(d['term']);
+      }
+      return '#fff';
+    });
 }
 
 export {
