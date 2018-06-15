@@ -87,7 +87,7 @@ let GENDER = [{
 }, {
   "name": "Women",
   "value": 19
-}]
+}];
 
 let FAMILY_INCOME = [{
   "name": "0-50k / year",

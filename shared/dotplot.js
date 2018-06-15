@@ -64,7 +64,9 @@ function renderDotPlot(elem, data, width, height, options) {
         return colorScale(d['term']);
       }
       return '#fff';
-    });
+    })
+    .style('stroke', 'rgba(0,0,0,0.2)')
+    .style('stroke-width', '1');
 }
 
 export {

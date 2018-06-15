@@ -27,7 +27,7 @@ window.onload = () => {
   renderBackground(options);
   renderOutcome(options);
   renderFuture(options);
-  setActive(1);
+  setActive(0);
   setupListeners();
 }
 
@@ -130,7 +130,7 @@ function renderAcademics(options) {
     range: [50, 100]
   });
   renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280);
-  renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, 300, 300, {
+  renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, options.width, 300, {
     domainValues: [0, 100],
     rangeValues: [0, 100],
     domain: [0, 5],
