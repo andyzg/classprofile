@@ -32,52 +32,25 @@ let PARENT_EDUCATION = [{
 
 
 let ETHNICITY = [{
-"name": "Nigerian",
-"value": 1
+  "name": "African",
+  "value": 1
 }, {
   "name": "European",
   "value": 22
 }, {
-"name": "American",
-"value": 1
+  "name": "North American",
+  "value": 27
+  }, {
+  "name": "South East Asian",
+  "value": 7
+  }, {
+  "name": "South Asian",
+  "value": 25
 }, {
-"name": "Bengali",
-"value": 1
+"name": "East Asian",
+"value": 55
 }, {
-"name": "Canadian",
-"value": 26
-}, {
-"name": "Chinese",
-"value": 50
-}, {
-"name": "Indian",
-"value": 21
-}, {
-"name": "Filipino",
-"value": 4
-}, {
-"name": "Iranian",
-"value": 1
-}, {
-"name": "Japanese",
-"value": 1
-}, {
-"name": "Korean",
-"value": 4
-}, {
-"name": "Lao",
-"value": 1
-}, {
-"name": "Lebanese",
-"value": 1
-}, {
-"name": "Pakistani",
-"value": 2
-}, {
-"name": "Sri Lankan",
-"value": 1
-}, {
-"name": "Vietnamese",
+"name": "Middle Eastern",
 "value": 2
 }]
 

@@ -15,23 +15,41 @@
 .path-metadata {
   padding-top: 32px;
   width: 100%;
+  min-height: 100px;
 }
 
 .path-photo {
   display: inline-block;
+  width: 18%;
+  position: relative;
 }
 
 .path-photo img {
   border-radius: 50%;
-  height: 92px;
-  width: 92px;
+  width: 100%;
+}
+
+.path-photo img.duo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+}
+
+.path-photo img.duo:nth-child(1) {
+  z-index: 1;
+}
+
+.path-photo img.duo:nth-child(2) {
+  left: 40%;
 }
 
 .path-text {
   display: inline-block;
   vertical-align: top;
-  padding-top: 28px;
+  padding-top: 24px;
   padding-left: 8px;
+  width: 70%;
 }
 
 .path-name {

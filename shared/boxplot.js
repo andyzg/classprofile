@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 
-function renderBoxPlot(elem, data, width, height) {
+function renderBoxPlot(elem, data, width, height, options) {
   // set the dimensions and margins of the graph
-  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+  var margin = {top: 20, right: 20, bottom: 50, left: 80},
       width = width - margin.left - margin.right,
       height = height - margin.top - margin.bottom;
 
@@ -53,6 +53,29 @@ function renderBoxPlot(elem, data, width, height) {
     .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
+  if (options && options.yAxisTitle) {
+  // text label for the y axis
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("font-size", "10px")
+        .style("text-anchor", "middle")
+        .text(options.yAxisTitle);
+  }
+
+  if (options && options.xAxisTitle) {
+    // text label for the x axis
+    svg.append("text")
+        .attr("transform",
+              "translate(" + (width/2) + " ," +
+                             (height + margin.top + 20) + ")")
+        .style("text-anchor", "middle")
+        .attr("font-size", "10px")
+        .text(options.xAxisTitle);
+  }
 
   // Generate five 100 count, normal distributions with random means
   var groupCounts = {};

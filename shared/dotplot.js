@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-var margin = {top: 20, right: 20, bottom: 30, left: 70};
+var margin = {top: 20, right: 20, bottom: 60, left: 80};
 
 function renderDotPlot(elem, data, width, height, options) {
   var MAX = {};
@@ -26,9 +26,9 @@ function renderDotPlot(elem, data, width, height, options) {
      .range([0, width])
      .domain(options.domain)
 
-  var xAxis = d3.axisBottom(x);
+  var xAxis = d3.axisBottom(x).tickFormat(options.xTickFormat);
 
-  var yAxis = d3.axisLeft(y);
+  var yAxis = d3.axisLeft(y).tickFormat(options.tickFormat);
 
 
   svg.append("g")
@@ -39,6 +39,29 @@ function renderDotPlot(elem, data, width, height, options) {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
+
+  if (options && options.yAxisTitle) {
+  // text label for the y axis
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("font-size", "10px")
+        .style("text-anchor", "middle")
+        .text(options.yAxisTitle);
+  }
+
+  if (options && options.xAxisTitle) {
+    // text label for the x axis
+    svg.append("text")
+        .attr("transform",
+              "translate(" + (width/2) + " ," +
+                             (height + margin.top + 20) + ")")
+        .style("text-anchor", "middle")
+        .attr("font-size", "10px")
+        .text(options.xAxisTitle);
+  }
 
   let circles = svg.selectAll('circle')
     .data(data)

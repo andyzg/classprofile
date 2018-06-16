@@ -35,7 +35,7 @@ p {
   width: 100%;
   font-size: 14px;
   padding-bottom: 16px;
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 span.big {
@@ -107,8 +107,14 @@ h6 {
 }
 
 b {
-  font-weight: 700;
+  font-weight: 400;
   color: rgba(255,255,255,1);
+}
+
+.center {
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
 }
 
 @media screen and (max-width: 820px) {
@@ -140,4 +146,25 @@ b {
   h5, h6 {
     font-size: 10px;
   }
+}
+
+.coop-cloud-legend {
+  padding-top: 16px;
+  text-align: center;
+  line-height: 36px;
+}
+
+.cloud-small {
+  color: rgb(153, 153, 153);
+  font-size: 12px;
+  line-height: 36px;
+  mix-blend-mode: color-dodge;
+  padding-right: 8px;
+}
+
+.cloud-big {
+  color: rgb(230, 230, 230);
+  font-size: 24px;
+  line-height: 36px;
+  mix-blend-mode: color-dodge;
 }

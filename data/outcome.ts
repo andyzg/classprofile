@@ -17,16 +17,16 @@ let CHOOSE_PROGRAM = [{
   "name": "Fine arts",
   "value": 1
   }, {
-  "name": "Mechatronics",
+  "name": "Mechatronics Engineering",
   "value": 1
   }, {
-  "name": "Systems Design",
+  "name": "Systems Design Engineering",
   "value": 1
   }, {
   "name": "Computer Science",
   "value": 29
   }, {
-  "name": "Software",
+  "name": "Software Engineering",
   "value": 79
 }]
 

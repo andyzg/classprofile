@@ -1,10 +1,14 @@
 import * as d3 from 'd3';
 
-var margin = {top: 20, right: 20, bottom: 30, left: 50};
+var margin = {top: 20, right: 60, bottom: 50, left: 80};
 
 function renderLineChart(elem, data, width, height, options) {
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
+
+
+  // Setup a color scale for filling each box
+  var colorScale = d3.scaleOrdinal(d3.schemePastel1);
 
   // set the ranges
   var x = d3.scaleBand()
@@ -52,10 +56,50 @@ function renderLineChart(elem, data, width, height, options) {
     svg.append("path")
         .data([data])
         .attr("class", "line")
-        .style("stroke", "#fff")
+        .style("stroke", (d) => {
+          return colorScale(i);
+        })
+        .style('stroke-width', 2)
         .attr("d", lines[i])
         .attr("transform",
               "translate(" + x.bandwidth() / 2 + ",0)");
+  }
+
+  if (options && options.yAxisTitle) {
+  // text label for the y axis
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("font-size", "10px")
+        .style("text-anchor", "middle")
+        .text(options.yAxisTitle);
+  }
+
+  if (options && options.xAxisTitle) {
+    // text label for the x axis
+    svg.append("text")
+        .attr("transform",
+              "translate(" + (width/2) + " ," +
+                             (height + margin.top + 20) + ")")
+        .style("text-anchor", "middle")
+        .attr("font-size", "10px")
+        .text(options.xAxisTitle);
+  }
+
+  if (options.lineLabels) {
+    for (var i in options.lineLabels) {
+    svg.append("text")
+        .datum(options.lineLabels[i])
+        .attr("transform", function(d) {
+          return "translate(" + x(d.x) + "," + y(d.value) + ")";
+        })
+        .attr("x", 40)
+        .attr("dy", "0.35em")
+        .style("font", "10px sans-serif")
+        .text(function(d) { return d.location; });
+    }
   }
 
   // Add the X Axis
@@ -63,9 +107,11 @@ function renderLineChart(elem, data, width, height, options) {
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
+  let yAxis = d3.axisLeft(y).tickFormat(options.tickFormat);
+
   // Add the Y Axis
   svg.append("g")
-      .call(d3.axisLeft(y).ticks(5));
+      .call(yAxis);
 }
 
 export {

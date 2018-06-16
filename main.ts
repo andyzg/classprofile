@@ -94,15 +94,61 @@ function drawWordCloud(elem, data, options) {
 
 function renderCoop(options) {
   drawCoopWordCloud(d3.select('#coop-cloud'), options);
-  renderBoxPlot(d3.select('#salary'), SALARY, options.width, 350);
-  renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.width, 400);
+  renderBoxPlot(d3.select('#salary'), SALARY, options.width, 350, {
+    xAxisTitle: 'Co-op term number',
+    yAxisTitle: 'Monthly salary',
+    tickFormat: (d) => { return '$' + d; }
+  });
+  renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.width, 500, {
+    lineLabels: [{
+      'x': '6th',
+      'value': 57,
+      'location': 'California'
+    }, {
+      'x': '6th',
+      'value': 23,
+      'location': 'East Coast Canada'
+    }, {
+      'x': '6th',
+      'value': 5,
+      'location': 'West Coast Canada'
+    }, {
+      'x': '6th',
+      'value': 17,
+      'location': 'PNW USA'
+    }, {
+      'x': '6th',
+      'value': 6,
+      'location': 'East Coast USA'
+    }, {
+      'x': '6th',
+      'value': 2,
+      'location': 'Outside NA'
+    }],
+    xAxisTitle: 'Co-op term number',
+    yAxisTitle: 'Proportion of students in the area',
+    tickFormat: (d) => { return d + '%'; }
+  });
   renderHorizontalBarChat(d3.select('#favourite-location'), FAVOURITE_LOCATION, options.width, 240, true);
-  renderBoxPlot(d3.select('#age-salary'), AGE_SALARY, options.width, 280);
-  renderBoxPlot(d3.select('#hackathon-salary'), HACKATHON_SALARY, options.width, 400);
-  renderBoxPlot(d3.select('#side-salary'), SIDE_SALARY, options.width, 350);
-  renderBoxPlot(d3.select('#side-salary-2'), SIDE_SALARY_2, options.width, 350);
-  renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350);
-  renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 600, {
+  renderBoxPlot(d3.select('#age-salary'), AGE_SALARY, options.width, 280, {
+    yAxisTitle: 'Average first 3 co-op monthly salary',
+    xAxisTitle: 'Age started coding'
+  });
+  renderBoxPlot(d3.select('#hackathon-salary'), HACKATHON_SALARY, options.width, 400, {
+    xAxisTitle: 'Number of hackathons attended',
+    yAxisTitle: 'Average first 3 co-op monthly salary',
+  });
+  renderBoxPlot(d3.select('#side-salary'), SIDE_SALARY, options.width, 350, {
+    xAxisTitle: 'Commitment to side projects',
+    yAxisTitle: 'Average first 3 co-op monthly salary',
+  });
+  renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350, {
+    yAxisTitle: 'Average first 3 co-op monthly salary',
+    xAxisTitle: 'Cumulative average',
+  });
+  renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 400, {
+    yAxisTitle: 'Average first 3 co-op monthly salary',
+    xAxisTitle: 'Admission average',
     rawSize: true,
     domain: [50, 100],
     range: [0, 16000],
@@ -123,18 +169,36 @@ function renderLifestyle(options) {
 }
 
 function renderAcademics(options) {
-  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 280);
+  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 280, {
+    yAxisTitle: 'Term average',
+    xAxisTitle: 'Study term number',
+  });
   renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, true);
   renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, true);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
+    yAxisTitle: 'Proportion of class attended',
+    xAxisTitle: 'Study term number',
     range: [50, 100]
   });
-  renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280);
+  renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280, {
+    yAxisTitle: 'Cumulative average',
+    xAxisTitle: 'Parents education',
+  });
   renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, options.width, 300, {
+    yAxisTitle: 'Grades relative to average',
+    xAxisTitle: 'Proportion of class attended',
     domainValues: [0, 100],
     rangeValues: [0, 100],
     domain: [0, 5],
-    range: [-6, 4]
+    range: [-6, 4],
+    tickFormat: (d) => {
+      let sign = '+';
+      if (d < 0) { sign = ''; }
+      return sign + (d * 5) + '%';
+    },
+    xTickFormat: (d) => {
+      return (d * 20) + '%'
+    }
   });
 }
 
@@ -149,11 +213,18 @@ function renderBackground(options) {
 
 function renderOutcome(options) {
   renderHorizontalBarChat(d3.select('#choose-program'), CHOOSE_PROGRAM, options.width, 280, true);
-  renderBoxPlot(d3.select('#gender-rating'), GENDER_RATING, options.width, 280);
+  renderBoxPlot(d3.select('#gender-rating'), GENDER_RATING, options.width, 280, {
+    xAxisTitle: 'Gender',
+    yAxisTitle: 'Rating',
+    tickFormat: (d) => { return (d * 20) + '%'; }
+  });
 }
 
 function renderFuture(options) {
   renderHorizontalBarChat(d3.select('#post-grad'), POST_GRAD, options.width, 150, true);
   renderHorizontalBarChat(d3.select('#post-location'), POST_LOCATION, options.width, 180, true);
-  renderBoxPlot(d3.select('#debt'), DEBT, options.width, 280);
+  renderBoxPlot(d3.select('#debt'), DEBT, options.width, 280, {
+    xAxisTitle: 'Family income class',
+    yAxisTitle: 'Amount of debt upon graduation'
+  });
 }
