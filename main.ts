@@ -12,7 +12,7 @@ import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKA
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
-import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY } from './data/coop';
+import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
 import { POST_GRAD, POST_LOCATION, DEBT } from './data/future';
 
 window.onload = () => {
@@ -131,27 +131,40 @@ function renderCoop(options) {
   });
   renderHorizontalBarChat(d3.select('#favourite-location'), FAVOURITE_LOCATION, options.width, 240, true);
   renderBoxPlot(d3.select('#age-salary'), AGE_SALARY, options.width, 280, {
-    yAxisTitle: 'Average first 3 co-op monthly salary',
+    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
     xAxisTitle: 'Age started coding'
   });
   renderBoxPlot(d3.select('#hackathon-salary'), HACKATHON_SALARY, options.width, 400, {
     xAxisTitle: 'Number of hackathons attended',
-    yAxisTitle: 'Average first 3 co-op monthly salary',
+    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
   });
   renderBoxPlot(d3.select('#side-salary'), SIDE_SALARY, options.width, 350, {
     xAxisTitle: 'Commitment to side projects',
-    yAxisTitle: 'Average first 3 co-op monthly salary',
+    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
   });
   renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350, {
-    yAxisTitle: 'Average first 3 co-op monthly salary',
+    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
     xAxisTitle: 'Admission average',
   });
   renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 400, {
-    yAxisTitle: 'Average first 3 co-op monthly salary',
+    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
     xAxisTitle: 'Cumulative average',
     rawSize: true,
     domain: [50, 100],
     range: [0, 16000],
+  });
+  renderLineChart(d3.select('#gender-salary'), GENDER_SALARY, options.width, 300, {
+    lineLabels: [{
+      'x': '6th',
+      'value': 10205,
+      'location': 'Male'
+    }, {
+      'x': '6th',
+      'value': 9793,
+      'location': 'Female'
+    }],
+    yAxisTitle: 'Monthly salary in CAD',
+    xAxisTitle: 'Co-op term number',
   });
 }
 

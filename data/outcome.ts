@@ -14,7 +14,7 @@ let CHOOSE_PROGRAM = [{
   "name": "English",
   "value": 1
   }, {
-  "name": "Fine arts",
+  "name": "Fine Arts",
   "value": 1
   }, {
   "name": "Mechatronics Engineering",

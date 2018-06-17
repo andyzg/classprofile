@@ -55,12 +55,32 @@ let WORK_LOCATION = [{
   'value': [57, 23, 5, 17, 6, 2]
 }]
 
+let GENDER_SALARY = [{
+  'x': '1st',
+  'value': [2605, 2976]
+}, {
+  'x': '2nd',
+  'value': [4192, 4252]
+}, {
+  'x': '3rd',
+  'value': [6072, 5877]
+}, {
+  'x': '4th',
+  'value': [7938, 7990]
+}, {
+  'x': '5th',
+  'value': [8703, 9439]
+}, {
+  'x': '6th',
+  'value': [9993, 10005]
+}]
+
 let FAVOURITE_LOCATION = [{
   "name": "California",
   "value": 64,
   }, {
   "name": "East Coast Canada",
-  "value": 20,
+  "value": 25,
   }, {
   "name": "West Coast Canada",
   "value": 7,
@@ -69,7 +89,7 @@ let FAVOURITE_LOCATION = [{
   "value": 8,
   }, {
   "name": "East Coast USA",
-  "value": 7,
+  "value": 12,
   }, {
   "name": "Outside NA",
   "value": 3,
@@ -416,5 +436,6 @@ export {
   ADMISSION_SALARY,
   COMPANY_WORK_COUNT,
   FAVOURITE_COMPANIES,
-  GRADE_SALARY
+  GRADE_SALARY,
+  GENDER_SALARY
 }
