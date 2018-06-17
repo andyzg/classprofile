@@ -144,11 +144,11 @@ function renderCoop(options) {
   });
   renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350, {
     yAxisTitle: 'Average first 3 co-op monthly salary',
-    xAxisTitle: 'Cumulative average',
+    xAxisTitle: 'Admission average',
   });
   renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 400, {
     yAxisTitle: 'Average first 3 co-op monthly salary',
-    xAxisTitle: 'Admission average',
+    xAxisTitle: 'Cumulative average',
     rawSize: true,
     domain: [50, 100],
     range: [0, 16000],
