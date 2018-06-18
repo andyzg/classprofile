@@ -15,7 +15,6 @@ let POST_GRAD = [{
   "value": 17
 }];
 
-
 let POST_LOCATION = [{
   "name": "California",
   "value": 49
@@ -36,6 +35,27 @@ let POST_LOCATION = [{
   "value": 2
 }]
 
+let MOTIVATIONS = [{
+  "name": "Compensation",
+  "value": 53
+  }, {
+  "name": "Family",
+  "value": 19
+  }, {
+  "name": "Good coworkers",
+  "value": 34
+  }, {
+  "name": "Having an impact",
+  "value": 26
+  }, {
+  "name": "Location",
+  "value": 30
+  }, {
+  "name": "Improving skills",
+  "value": 39
+}]
+
+
 let DEBT = {
   "0-50k/year": [0,0,10000,30000,30000],
   "50-100k/year": [0,0,0,0,0,0,0,0,0,0,0,10000,10000,100000,15000,18000,20000,20000,20000,20000,20000,20000,22000,24000,24000,25000,30000,30000,30000,30000,32000,55000],
@@ -47,5 +67,6 @@ let DEBT = {
 export {
   POST_GRAD,
   POST_LOCATION,
-  DEBT
+  DEBT,
+  MOTIVATIONS
 }

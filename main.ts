@@ -13,7 +13,7 @@ import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
-import { POST_GRAD, POST_LOCATION, DEBT } from './data/future';
+import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 
 window.onload = () => {
   let options = {
@@ -240,4 +240,5 @@ function renderFuture(options) {
     xAxisTitle: 'Family income class',
     yAxisTitle: 'Amount of debt upon graduation'
   });
+  renderHorizontalBarChat(d3.select('#motivation'), MOTIVATIONS, options.width, 180, true);
 }
