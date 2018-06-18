@@ -24,6 +24,11 @@
         <meta name="og:description" content="The UW Software Engineering 2018 Class Profile is a report that showcases who SE students are, what they've done, and how university went for them.">
         <meta name="og:type" content="website">
         <meta property="og:url" content="https://andyzhang.net/classprofile" />
+        <script>
+          var host = "classprofile.andyzhang.net";
+          if ((host == window.location.host) && (window.location.protocol != "https:"))
+              window.location.protocol = "https";
+        </script>
     </head>
     <body class="content">
     {{ content }}
