@@ -195,7 +195,7 @@ function renderAcademics(options) {
   });
   renderBoxPlot(d3.select('#parent-grades'), PARENT_GRADES, options.width, 280, {
     yAxisTitle: 'Cumulative average',
-    xAxisTitle: 'Parents education',
+    xAxisTitle: 'Parents\' education',
   });
   renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, options.width, 300, {
     yAxisTitle: 'Grades relative to average',
