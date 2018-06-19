@@ -96,7 +96,7 @@ function renderCoop(options) {
   drawCoopWordCloud(d3.select('#coop-cloud'), options);
   renderBoxPlot(d3.select('#salary'), SALARY, options.width, 350, {
     xAxisTitle: 'Co-op term number',
-    yAxisTitle: 'Monthly salary',
+    yAxisTitle: 'Monthly compensation',
     tickFormat: (d) => { return '$' + d; }
   });
   renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.width, 500, {
@@ -237,7 +237,7 @@ function renderFuture(options) {
   renderHorizontalBarChat(d3.select('#post-grad'), POST_GRAD, options.width, 150, true);
   renderHorizontalBarChat(d3.select('#post-location'), POST_LOCATION, options.width, 180, true);
   renderBoxPlot(d3.select('#debt'), DEBT, options.width, 280, {
-    xAxisTitle: 'Family income class',
+    xAxisTitle: 'Family income bracket',
     yAxisTitle: 'Amount of debt upon graduation'
   });
   renderHorizontalBarChat(d3.select('#motivation'), MOTIVATIONS, options.width, 180, true);
