@@ -147,7 +147,7 @@ function renderCoop(options) {
     xAxisTitle: 'Admission average',
   });
   renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 400, {
-    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
+    yAxisTitle: 'Monthly compensation in CAD',
     xAxisTitle: 'Cumulative average',
     rawSize: true,
     domain: [50, 100],
