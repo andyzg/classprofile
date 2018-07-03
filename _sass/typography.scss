@@ -5,8 +5,11 @@
   letter-spacing: -2px;
   line-height: 1.2;
   position: absolute;
-  top: 85%;
+  top: 92%;
   transform: translate(0, -100%);
+}
+
+.university {
 }
 
 .subtitle {
@@ -14,11 +17,8 @@
   font-weight: 600;
   font-size: 24px;
   letter-spacing: -1px;
-  line-height: 1.2;
-  position: absolute;
-  top: 85%;
-  transform: translate(0, 50%);
-  color: rgba(255,255,255,.5);
+  line-height: 1.4;
+  color: rgba(255,255,255,.7);
 }
 
 p {
@@ -28,7 +28,6 @@ p {
   font-weight: 300;
   color: rgba(255,255,255,.8);
 }
-
 
 .graph-title {
   display: block;
