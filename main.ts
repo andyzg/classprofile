@@ -151,7 +151,7 @@ function renderCoop(options) {
     xAxisTitle: 'Cumulative average',
     rawSize: true,
     domain: [50, 100],
-    range: [0, 16000],
+    range: [0, 18000],
   });
   renderLineChart(d3.select('#gender-salary'), GENDER_SALARY, options.width, 300, {
     lineLabels: [{
