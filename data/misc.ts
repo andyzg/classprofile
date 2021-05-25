@@ -85,11 +85,20 @@ let DROPOUT_THOUGHTS = [{
   "value": 46
 }]
 
+let SE21_GRAD = [{
+  "name": "Yes",
+  "value": 44,
+  }, {
+  "name": "No",
+  "value": 6
+}]
+
 export {
   BURNOUT,
   FIGHTS,
   REDDIT_USAGE,
   CRYING,
   TRANSFER_THOUGHTS,
-  DROPOUT_THOUGHTS
+  DROPOUT_THOUGHTS,
+  SE21_GRAD
 }
