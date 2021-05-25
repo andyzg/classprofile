@@ -27,6 +27,30 @@ let BURNOUT = [{
   "value": 8
 }];
 
+let FIGHTS = [{
+  "name": "Never involved",
+  "value": 48
+}]
+
+let REDDIT_USAGE = [{
+  "name": "< 1 Hour",
+  "value": 0
+  }, {
+  "name": "[1,3) Hours",
+  "value": 33
+  }, {
+  "name": "[3,5) Hours",
+  "value": 6
+  }, {
+  "name": "[5,7) Hours",
+  "value": 1
+  }, {
+  "name": ">= 7 Hours",
+  "value": 0
+}]
+
 export {
-  BURNOUT
+  BURNOUT,
+  FIGHTS,
+  REDDIT_USAGE
 }
