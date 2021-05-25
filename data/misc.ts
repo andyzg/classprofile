@@ -69,9 +69,27 @@ let CRYING = [{
   "value": 3
 }]
 
+let TRANSFER_THOUGHTS = [{
+  "name": "Yes",
+  "value": 29,
+  }, {
+  "name": "No",
+  "value": 21
+}]
+
+let DROPOUT_THOUGHTS = [{
+  "name": "Yes",
+  "value": 4,
+  }, {
+  "name": "No",
+  "value": 46
+}]
+
 export {
   BURNOUT,
   FIGHTS,
   REDDIT_USAGE,
-  CRYING
+  CRYING,
+  TRANSFER_THOUGHTS,
+  DROPOUT_THOUGHTS
 }
