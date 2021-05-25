@@ -10,7 +10,7 @@ import * as util from './shared/utils';
 import { renderDotPlot } from './shared/dotplot.js';
 
 import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
@@ -18,6 +18,8 @@ import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUG
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
+let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
+let campus_location_term_post = ["loc-4a", "loc-4b"];
 
 window.onload = () => {
   let options = {
@@ -32,6 +34,8 @@ window.onload = () => {
   renderOutcome(options);
   renderMisc(options);
   renderFuture(options);
+  setMultiBarActive("loc-1a", campus_location_term_pre);
+  setMultiBarActive("loc-4a", campus_location_term_post);
   setActive(0);
   setMultiBarActive("ethnicity-all", ethnicity);
   setupListeners();
@@ -51,6 +55,22 @@ function setupListeners() {
     let j = ethnicity[i];
     (ethnicityItems[i] as any).onclick = function() {
       setMultiBarActive(j, ethnicity);
+    }
+  }
+  
+  let locPreItems = document.getElementsByClassName('loc-pre-item');
+  for (let i = 0; i < locPreItems.length; i++) {
+    let j = campus_location_term_pre[i];
+    (locPreItems[i] as any).onclick = function() {
+      setMultiBarActive(j, campus_location_term_pre);
+    }
+  }
+
+  let locPostItems = document.getElementsByClassName('loc-post-item');
+  for (let i = 0; i < locPostItems.length; i++) {
+    let j = campus_location_term_post[i];
+    (locPostItems[i] as any).onclick = function() {
+      setMultiBarActive(j, campus_location_term_post);
     }
   }
 }
@@ -209,6 +229,9 @@ function renderLifestyle(options) {
 }
 
 function renderAcademics(options) {
+  renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-pre'), CAMPUS_LOCATION_PRE, 400, 500, false, {"loc-1a": 0, "loc-1b": 1, "loc-2a": 2, "loc-2b": 3,"loc-3a": 4, "loc-3b": 5});
+  renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-post'), CAMPUS_LOCATION_POST, 400, 300, false, {"loc-4a": 0, "loc-4b": 1});
+
   renderBoxPlot(d3.select('#grades'), GRADES, options.width, 280, {
     yAxisTitle: 'Term average',
     xAxisTitle: 'Study term number',
