@@ -13,6 +13,7 @@ import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
+import { BURNOUT } from './data/misc';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 
 window.onload = () => {
@@ -26,6 +27,7 @@ window.onload = () => {
   renderAcademics(options);
   renderBackground(options);
   renderOutcome(options);
+  renderMisc(options);
   renderFuture(options);
   setActive(0);
   setupListeners();
@@ -231,6 +233,10 @@ function renderOutcome(options) {
     yAxisTitle: 'Rating',
     tickFormat: (d) => { return (d * 20) + '%'; }
   });
+}
+
+function renderMisc(options) {
+  renderHorizontalBarChat(d3.select('#burnout'), BURNOUT, options.width, 150, false);
 }
 
 function renderFuture(options) {
