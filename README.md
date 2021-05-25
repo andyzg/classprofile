@@ -7,4 +7,10 @@ The Software Engineering Class Profile is a student-initiative focused on showca
 You can view the class profile at [https://classprofile.andyzhang.net](https://classprofile.andyzhang.net).
 
 # Setup
+**You need a Ruby version at least < 3.0 (2.7.0 works)!**
+
 Run `yarn install`. You'll also need `jekyll` to run a local host. Run `gem install jekyll` if you don't have it.
+
+# Running Locally
+- `npm run prod` (build the TypeScript Code) will update the `min.js` file in the `build` directory.
+- `bundle exec jekyll serve` run the jekyll server
