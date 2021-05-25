@@ -13,7 +13,7 @@ import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
-import { BURNOUT, FIGHTS, REDDIT_USAGE } from './data/misc';
+import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING } from './data/misc';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 
 window.onload = () => {
@@ -239,6 +239,7 @@ function renderMisc(options) {
   renderHorizontalBarChat(d3.select('#burnout'), BURNOUT, options.width, 250, false);
   renderPieChart(d3.select('#fights'), FIGHTS, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#reddit'), REDDIT_USAGE, options.width, 150, false);
+  renderHorizontalBarChat(d3.select('#crying'), CRYING, options.width, 250, false);
 }
 
 function renderFuture(options) {

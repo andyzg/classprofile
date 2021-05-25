@@ -49,8 +49,29 @@ let REDDIT_USAGE = [{
   "value": 0
 }]
 
+let CRYING = [{
+  "name": "0",
+  "value": 0
+  }, {
+  "name": "1",
+  "value": 29
+  }, {
+  "name": "2",
+  "value": 15
+  }, {
+  "name": "3",
+  "value": 2
+  }, {
+  "name": "4",
+  "value": 1
+  }, {
+  "name": "5",
+  "value": 3
+}]
+
 export {
   BURNOUT,
   FIGHTS,
-  REDDIT_USAGE
+  REDDIT_USAGE,
+  CRYING
 }
