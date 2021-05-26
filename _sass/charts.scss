@@ -61,6 +61,27 @@ g.tick line {
   box-shadow: 0px 5px 3px rgba(0,0,0,.4);
 }
 
+.ethnicity-item {
+  display: inline-block;
+  font-family: 'Source Code Pro', monospace;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  // width: 32px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: rgba(0,0,0,0.5);
+  border-radius: 20%;
+  margin: 2px 2px;
+  cursor: pointer;
+  box-shadow: 0px 3px 2px rgba(0,0,0,.4);
+  transition: 0.2s ease;
+}
+
+.ethnicity-item {
+  box-shadow: 0px 5px 3px rgba(0,0,0,.4);
+}
+
 .c1 {
   background-color: #7fc97f;
 }

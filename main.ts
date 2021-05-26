@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import * as $ from 'jquery';
 import { renderWordCloud } from './shared/wordcloud';
 import { renderHorizontalBarChat } from './shared/horizontalbarchart.js';
+import { renderMultiSeriesHorizontalBarChat } from './shared/multiserieshorizontalbarchart.js';
 import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
@@ -10,11 +11,13 @@ import { renderDotPlot } from './shared/dotplot.js';
 
 import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
-import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_EXTRAS } from './data/background';
+import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
+
+let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 
 window.onload = () => {
   let options = {
@@ -30,6 +33,7 @@ window.onload = () => {
   renderMisc(options);
   renderFuture(options);
   setActive(0);
+  setMultiBarActive("ethnicity-all", ethnicity);
   setupListeners();
 }
 
@@ -41,6 +45,14 @@ function setupListeners() {
       setActive(j);
     }
   }
+
+  let ethnicityItems = document.getElementsByClassName('ethnicity-item');
+  for (let i = 0; i < ethnicityItems.length; i++) {
+    let j = ethnicity[i];
+    (ethnicityItems[i] as any).onclick = function() {
+      setMultiBarActive(j, ethnicity);
+    }
+  }
 }
 
 function setActive(term) {
@@ -48,6 +60,19 @@ function setActive(term) {
     let items = document.getElementsByClassName(i.toString());
     for (let j = 0; j < items.length; j++) {
       if (i !== term) {
+        (items[j] as any).style.visibility = 'hidden';
+      } else {
+        (items[j] as any).style.visibility = 'initial';
+      }
+    }
+  }
+}
+
+function setMultiBarActive(term, arr) {
+  for (let i = 0; i <= arr.length; i++) {
+    let items = document.getElementsByClassName(arr[i]);
+    for (let j = 0; j < items.length; j++) {
+      if (arr[i] !== term) {
         (items[j] as any).style.visibility = 'hidden';
       } else {
         (items[j] as any).style.visibility = 'initial';
@@ -218,12 +243,29 @@ function renderAcademics(options) {
 }
 
 function renderBackground(options) {
-  renderHorizontalBarChat(d3.select('#ethnicity'), ETHNICITY, 400, 300, true);
+  renderMultiSeriesHorizontalBarChat(d3.select('#ethnicity'), ETHNICITY, 400, 300, true, {"ethnicity-all": 0, "ethnicity-women": 1, "ethnicity-men": 2});
   renderPieChart(d3.select('#international'), INTERNATIONAL, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#parent-education'), PARENT_EDUCATION, options.width, 280, true);
   renderPieChart(d3.select('#gender'), GENDER, options.width * 0.75, options.width * 0.75);
-  renderHorizontalBarChat(d3.select('#family-income'), FAMILY_INCOME, 400, 200);
-  drawWordCloud(d3.select('#hs-extras'), HS_EXTRAS, options);
+  renderHorizontalBarChat(d3.select('#family-income'), FAMILY_INCOME, 400, 300, false);
+  renderPieChart(d3.select('#year-of-birth'), YEAR_OF_BIRTH, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#sexual-orientation'), SEXUAL_ORIENTATION, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#home-location'), HOME_LOCATION, 400, 300, false);
+  renderPieChart(d3.select('#immigrated'), IMMIGRATED, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#siblings'), SIBLINGS, 400, 300, false);
+  renderHorizontalBarChat(d3.select('#enriched-program'), ENRICHED_PROGRAM, 400, 300, false);
+  renderPieChart(d3.select('#cegep'), CEGEP, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#cegep-attended'), CEGEP_ATTENDED, 400, 300, true);
+  renderHorizontalBarChat(d3.select('#mother-tongue'), MOTHER_TONGUE, 400, 300, true);
+  renderPieChart(d3.select('#programming'), PROGRAMMING, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#cat-or-dog'), CAT_OR_DOG, options.width * 0.75, options.width * 0.75);
+  renderDotPlot(d3.select('#admission-average'), ADMISSION_AVERAGE, options.width, 400, {
+    yAxisTitle: 'Number of Students',
+    xAxisTitle: 'High School Admission Average',
+    rawSize: true,
+    domain: [84, 100],
+    range: [0, 20],
+  });
 }
 
 function renderOutcome(options) {
