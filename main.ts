@@ -7,6 +7,7 @@ import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
 import * as util from './shared/utils';
 import { renderDotPlot } from './shared/dotplot.js';
+import { renderHistogram } from './shared/histogram.js';
 
 import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
@@ -14,6 +15,7 @@ import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, FAMILY_INCOME, HS_E
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
+import { FAMILY } from './data/relationships';
 
 window.onload = () => {
   let options = {
@@ -27,6 +29,7 @@ window.onload = () => {
   renderBackground(options);
   renderOutcome(options);
   renderFuture(options);
+  renderRelationships(options);
   setActive(0);
   setupListeners();
 }
@@ -241,4 +244,30 @@ function renderFuture(options) {
     yAxisTitle: 'Amount of debt upon graduation'
   });
   renderHorizontalBarChat(d3.select('#motivation'), MOTIVATIONS, options.width, 180, true);
+}
+
+function renderRelationships(options) {
+  console.log('relationships rendering...', options);
+  // renderHorizontalBarChat(d3.select('#fam-digital'), EXERCISE, options.width, 200, false);
+  renderHistogram(d3.select('#fam-digital'),
+    FAMILY.DIGITAL,
+    options.width,
+    200,
+    {
+      binCount: 7,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'Hours'
+    }
+  );
+
+  renderHistogram(d3.select('#fam-physical'),
+    FAMILY.PHYSICAL_DAYS,
+    options.width,
+    200,
+    {
+      binCount: 10,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'Days'
+    }
+  );
 }
