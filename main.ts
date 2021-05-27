@@ -10,7 +10,7 @@ import * as util from './shared/utils';
 import { renderDotPlot } from './shared/dotplot.js';
 
 import { EXERCISE, COOKING, SLEEPING, LANGUAGES, EDITOR, SIDE, DISCPLINES, HACKATHONS, DESKTOP, UNI_EXTRAS } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST } from './data/academics';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
@@ -231,13 +231,19 @@ function renderLifestyle(options) {
 function renderAcademics(options) {
   renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-pre'), CAMPUS_LOCATION_PRE, 400, 500, false, {"loc-1a": 0, "loc-1b": 1, "loc-2a": 2, "loc-2b": 3,"loc-3a": 4, "loc-3b": 5});
   renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-post'), CAMPUS_LOCATION_POST, 400, 300, false, {"loc-4a": 0, "loc-4b": 1});
+  drawWordCloud(d3.select('#prof-cloud'), FAVOURITE_PROF_COUNT, options);
+  renderHorizontalBarChat(d3.select('#failing'), FAILING, options.width, 100, false);
+  renderHorizontalBarChat(d3.select('#options'), OPTIONS, options.width, 100, true);
+  renderHorizontalBarChat(d3.select('#overloading'), OVERLOADING, options.width, 200, false);
+  renderHorizontalBarChat(d3.select('#overloading-reasons'), OVERLOADING_REASONS, options.width, 200, false);
+  renderHorizontalBarChat(d3.select('#largest-workload'), LARGEST_WORKLOAD, options.width, 200, false);
 
-  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 280, {
+  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 300, {
     yAxisTitle: 'Term average',
     xAxisTitle: 'Study term number',
   });
-  renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, true);
-  renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, true);
+  renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, false);
+  renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, false);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
     yAxisTitle: 'Proportion of class attended',
     xAxisTitle: 'Study term number',

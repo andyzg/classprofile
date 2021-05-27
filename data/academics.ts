@@ -6,48 +6,113 @@ let GRADES = {
   "3A": [74,75,76,79,80,80,82,82,83,83,85,85,85,86,86,87,87,87,87,87,88,88,88,88,89,89,89,89,89,89,89,90,90,90,92,93,93,93,93,93,94,94,94,94,94,95,95,95,96],
   "3B": [72,73,74,76,76,77,77,77,77,79,80,82,82,83,83,84,84,84,84,85,85,86,86,86,86,87,87,87,87,88,89,90,93,93,93,94,95,95,96,96,96,97,98,99],
   "4A": [71,77,79,85,85,85,86,86,86,87,88,88,89,89,89,89,89,90,90,91,91,91,92,92,92,92,92,93,94,94,94,94,94,94,94,95,95,96,96,96,96,97,97,97,98,98],
-  "4B": [86,88,88.6,89,90,90,91,92,94,95,95,95,95,95,96,96,96,97,98]
+  "4B": [86,88,88.6,89,90,90,91,92,94,95,95,95,95,95,96,96,96,97,98],
+  "Overall": [74,75,75,76,76,76,77,78,79,80,80,80,80,80,80,80,81,82,83,83,84,84,85,85,85,85,86,86,86,86,86,86,87,87,88,88,88,89,89,90,90,90,91,92,93,93,93,94,94,95,96,96,96]
 };
 
-let FAVOURITE_MANDATORY = [{
-  "name": "CS 240",
-  "value": 2
-  }, {
+let LARGEST_WORKLOAD = [{
   "name": "CS 241",
-  "value": 12
+  "value": 1
+  }, {
+  "name": "CS 241E",
+  "value": 1
   }, {
   "name": "CS 341",
-  "value": 8
+  "value": 1
   }, {
   "name": "CS 343",
-  "value": 20
+  "value": 6
+  }, {
+  "name": "CS 444",
+  "value": 5
+  }, {
+  "name": "ECE 106",
+  "value": 1
+  }, {
+  "name": "MATH 239",
+  "value": 1
+  }, {
+  "name": "SE 350",
+  "value": 21
+  }, {
+  "name": "SE 380",
+  "value": 2
+  }, {
+  "name": "SE 491",
+  "value": 2
+  }, {
+  "name": "SPCOMM 100",
+  "value": 3
+  }
+];
+
+// FAVOURITE COURSE AT THIS TIME
+let FAVOURITE_MANDATORY = [{
+  "name": "CS 240",
+  "value": 1
+  }, {
+  "name": "CS 241",
+  "value": 1
+  }, {
+  "name": "CS 241E",
+  "value": 1
+  }, {
+  "name": "CS 341",
+  "value": 2
+  }, {
+  "name": "CS 343",
+  "value": 4
   }, {
   "name": "CS 349",
+  "value": 5
+  }, {
+  "name": "CS 444",
   "value": 3
   }, {
-  "name": "ECE 124",
+  "name": "CS 451",
+  "value": 1
+  }, {
+  "name": "CS 488",
+  "value": 2
+  }, {
+  "name": "ECE 140",
   "value": 1
   }, {
   "name": "ECE 222",
   "value": 1
   }, {
+  "name": "ECE 224",
+  "value": 1
+  }, {
+  "name": "ECE 454",
+  "value": 6
+  }, {
   "name": "MATH 135",
   "value": 1
   }, {
   "name": "MATH 239",
-  "value": 3
-  }, {
-  "name": "SE 101",
-  "value": 1
-  }, {
-  "name": "SE 212",
-  "value": 1
+  "value": 7
   }, {
   "name": "SE 350",
-  "value": 9
-  }, {
-  "name": "SE 380",
   "value": 2
+  }, {
+  "name": "STATS 206",
+  "value": 1
+  }, {
+  "name": "ENGL 335",
+  "value": 1
+  }, {
+  "name": "SPAN 101",
+  "value": 1
+  }, {
+  "name": "LS 202",
+  "value": 1
+  }, {
+  "name": "MUSIC 246",
+  "value": 1
+  }, {
+  "name": "MUSIC 140",
+  "value": 1
 }]
 
 let FAVOURITE_ELECTIVE = [{
@@ -85,77 +150,78 @@ let FAVOURITE_ELECTIVE = [{
   "value": 7
   }]
 
+// DISLIKED COURSE AT THIS TIME
 let DISLIKED_MANDATORY = [{
   "name": "CHE 102",
-  "value": 3
-}, {
-  "name": "CS 240",
-  "value": 1
+  "value": 4
 }, {
   "name": "CS 247",
-  "value": 1
-}, {
-  "name": "CS 341",
   "value": 1
 }, {
   "name": "ECE 105",
   "value": 4
 }, {
   "name": "ECE 106",
-  "value": 5
+  "value": 8
 }, {
-  "name": "ECE 124",
+  "name": "MSCI 261",
   "value": 1
-}, {
-  "name": "MATH 213",
-  "value": 4
-}, {
-  "name": "SE 212",
-  "value": 10
 }, {
   "name": "SE 350",
-  "value": 3
+  "value": 2
 }, {
   "name": "SE 380",
-  "value": 34
+  "value": 7
 }, {
   "name": "SE 463",
-  "value": 34
+  "value": 9
 }, {
   "name": "SE 464",
+  "value": 3
+}, {
+  "name": "SE 491",
+  "value": 2
+}, {
+  "name": "SMF 101",
   "value": 1
 }, {
-  "name": "STAT 231",
-  "value": 2
+  "name": "SPCOMM 100",
+  "value": 1
+}, {
+  "name": "SPCOMM 223",
+  "value": 1
 }]
 
 let ATTENDANCE = [{
   "x": "1A",
-  "value": [94],
+  "value": [98],
 }, {
   "x": "1B",
-  "value": [81.75],
+  "value": [86.1],
 }, {
   "x": "2A",
-  "value": [77.5],
+  "value": [77.2],
 }, {
   "x": "2B",
-  "value": [74],
+  "value": [73.6],
 }, {
   "x": "3A",
-  "value": [70.25],
+  "value": [66.7],
 }, {
   "x": "3B",
-  "value": [61.5],
+  "value": [62.6],
 }, {
   "x": "4A",
-  "value": [62.5],
+  "value": [63.3],
+}, {
+  "x": "4B",
+  "value": [65.4],
 }];
 
 let PARENT_GRADES = {
-  "Post-secondary, high school": [64.33333333333333, 65.26666666666667, 72.66666666666667, 73.33333333333333, 73.95, 74.0, 76.0, 76.0, 81.0, 81.26666666666667, 82.0, 83.63333333333334, 84.66666666666667, 85.46666666666665, 87.21, 88.0, 88.58333333333333, 89.27666666666666],
-  "Bachelors": [72.66666666666667, 73.66666666666667, 74.0, 75.02333333333333, 75.89999999999999, 76.12333333333333, 77.02333333333333, 77.04333333333334, 77.66666666666667, 77.66666666666667, 78.81, 79.33333333333333, 79.33333333333333, 79.66666666666667, 79.77666666666666, 80.0, 80.0, 80.16499999999999, 80.55, 80.64666666666666, 80.75666666666666, 81.93333333333334, 82.33333333333333, 82.66666666666667, 83.14333333333333, 83.58999999999999, 84.16666666666667, 84.23333333333333, 84.69999999999999, 84.81, 84.99000000000001, 85.33333333333333, 85.55666666666666, 85.66666666666667, 86.0, 86.61, 87.22333333333334, 87.31, 87.93333333333334, 88.0, 90.66666666666667, 90.7, 91.35666666666667, 92.0, 93.11, 93.38999999999999],
-  "Masters, Doctorate": [63.95666666666667, 73.13333333333333, 74.0, 74.78000000000002, 75.27666666666667, 75.3, 76.66666666666667, 77.5, 77.77666666666666, 78.66666666666667, 78.66666666666667, 79.07666666666667, 80.0, 80.16666666666667, 80.2, 80.33333333333333, 80.82333333333334, 81.66666666666667, 81.71666666666665, 81.83333333333333, 82.92333333333333, 83.66666666666667, 84.0, 84.27666666666666, 84.66666666666667, 84.76666666666667, 84.87666666666667, 85.0, 85.0, 85.56666666666666, 85.66666666666667, 85.71, 85.89999999999999, 87.0, 88.5, 88.56666666666666, 88.63333333333333, 88.79, 89.0, 89.0, 89.085, 89.5, 89.71, 89.76666666666667, 90.38666666666667, 91.2, 93.06666666666666]
+  "High School": [85,85,90],
+  "Bachelors, College": [75,79,80,82,86,86,86,87,89,92,93,95,96,96],
+  "Masters, Doctorate": [74,76,76,77,78,80,80,80,80,81,83,84,85,85,86,86,87,88,88,88,89,90,90,91,93,93,96]
 };
 
 let ATTENDANCE_GRADE = [
@@ -472,7 +538,96 @@ let CAMPUS_LOCATION_POST = [
     "value": 1,
     "toggle": "loc-4b"
   }
+];
+
+let FAILING = [
+  {
+    "name": "Failed a midterm",
+    "value": 19
+  }, {
+    "name": "Failed a class",
+    "value": 8
+  }
 ]
+
+let OVERLOADING = [
+  {
+    "name": "2A",
+    "value": 2
+  }, {
+    "name": "2B",
+    "value": 4
+  },
+  {
+    "name": "3A",
+    "value": 12
+  }, {
+    "name": "3B",
+    "value": 5
+  },
+  {
+    "name": "4A",
+    "value": 17
+  }, {
+    "name": "4B",
+    "value": 2
+  }
+]
+
+let OVERLOADING_REASONS = [
+  {
+    "name": "Graduate earlier",
+    "value": 2
+  }, {
+    "name": "Hve a lighter term after",
+    "value": 14
+  },
+  {
+    "name": "Take a class only offered a specific term",
+    "value": 6
+  }, {
+    "name": "Take more electives than prescribed",
+    "value": 12
+  },
+  {
+    "name": "Complete a minor",
+    "value": 2
+  }, {
+    "name": "Prepare for/amend for an exchange term",
+    "value": 2
+  }
+]
+
+let OPTIONS = [
+  {
+    "name": "Economics",
+    "value": 1
+  }, {
+    "name": "Entrepreneurship",
+    "value": 1
+  }
+]
+
+let FAVOURITE_PROF_COUNT = {
+  "Ali Abedi": 1,
+  "Alice Gao": 5,
+  "Andrew Kennings": 5,
+  "Christopher Nielsen": 1,
+  "Edward Lank": 1,
+  "George Labahn": 1,
+  "Igor Ivkovic": 1,
+  "Mansour": 1,
+  "Martin Pei": 11,
+  "Nancy Day": 1,
+  "Ondrej Lhotak": 2,
+  "Patrick Lam": 5,
+  "Peter Buhr": 5,
+  "Scott Campbell": 1,
+  "Seyed Majid Zahedi": 3,
+  "Simon Wood": 2,
+  "Stephen Mann ": 1,
+  "Surya Banerjee": 3
+};
 
 export {
   FAVOURITE_MANDATORY,
@@ -483,5 +638,11 @@ export {
   PARENT_GRADES,
   ATTENDANCE_GRADE,
   CAMPUS_LOCATION_PRE,
-  CAMPUS_LOCATION_POST
+  CAMPUS_LOCATION_POST,
+  FAVOURITE_PROF_COUNT,
+  FAILING,
+  OPTIONS,
+  OVERLOADING,
+  OVERLOADING_REASONS,
+  LARGEST_WORKLOAD
 }
