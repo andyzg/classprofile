@@ -8,6 +8,7 @@ import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
 import * as util from './shared/utils';
 import { renderDotPlot } from './shared/dotplot.js';
+import { renderHistogram } from './shared/histogram.js';
 
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
@@ -17,6 +18,7 @@ import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
+import { FAMILY } from './data/relationships';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 
@@ -34,6 +36,7 @@ window.onload = () => {
   renderMisc(options);
   renderFuture(options);
   renderTransfers(options);
+  renderRelationships(options);
   setActive(0);
   setMultiBarActive("ethnicity-all", ethnicity);
   setupListeners();
@@ -308,4 +311,28 @@ function renderTransfers(options) {
   renderPieChart(d3.select('#reasons-transferred'), REASONS_TRANSFERRED, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#disliked-courses-transferred'), DISLIKED_COURSES_TRANSFERRED, options.width * 0.75, 250);
   renderPieChart(d3.select('#regret-transferred'), REGRET_TRANSFFERED, options.width * 0.75, options.width * 0.75);
+}
+
+function renderRelationships(options) {
+  renderHistogram(d3.select('#fam-digital'),
+    FAMILY.DIGITAL,
+    options.width,
+    200,
+    {
+      binCount: 7,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'Hours'
+    }
+  );
+
+  renderHistogram(d3.select('#fam-physical'),
+    FAMILY.PHYSICAL_DAYS,
+    options.width,
+    200,
+    {
+      binCount: 10,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'Days'
+    }
+  );
 }
