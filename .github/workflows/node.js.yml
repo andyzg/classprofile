@@ -41,3 +41,4 @@ jobs:
         file-path: classprofile/build/bundle.min.js
         commit-msg: Update bundle min js
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        allow-removing: true
