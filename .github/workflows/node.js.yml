@@ -35,3 +35,9 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: yarn
     - run: npm run prod --if-present
+    - name: Update resources
+      uses: test-room-7/action-update-file@v1
+      with:
+        file-path: classprofile/build/bundle.min.js
+        commit-msg: Update bundle min js
+        github-token: ${{ secrets.GITHUB_TOKEN }}
