@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "watchify main.ts -p [ tsify ] -o build/bundle.js -v",
-    "prod": "browserify main.ts -p [ tsify ] -o build/bundle.js -v && uglifyjs --compress --mangle  -o build/bundle.min.js -- build/bundle.js && jekyll build"
+    "prod": "browserify main.ts -p [ tsify ] -o build/bundle.js -v && uglifyjs --compress --mangle  -o build/bundle.min.js -- build/bundle.js && bundle exec jekyll build"
   },
   "browserify": {
     "transform": [

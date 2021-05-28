@@ -11,6 +11,7 @@ import { renderDotPlot } from './shared/dotplot.js';
 
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
+import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
@@ -32,6 +33,7 @@ window.onload = () => {
   renderOutcome(options);
   renderMisc(options);
   renderFuture(options);
+  renderTransfers(options);
   setActive(0);
   setMultiBarActive("ethnicity-all", ethnicity);
   setupListeners();
@@ -298,4 +300,12 @@ function renderFuture(options) {
     yAxisTitle: 'Amount of debt upon graduation'
   });
   renderHorizontalBarChat(d3.select('#motivation'), MOTIVATIONS, options.width, 180, true);
+}
+
+function renderTransfers(options) {
+  renderPieChart(d3.select('#students-transferred'), TRANSFERRED, options.width * 0.75, options.width * 0.75, false);
+  renderHorizontalBarChat(d3.select('#term-transferred'), TERM_TRANSFERRED, options.width * 0.75, 250, false);
+  renderPieChart(d3.select('#reasons-transferred'), REASONS_TRANSFERRED, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#disliked-courses-transferred'), DISLIKED_COURSES_TRANSFERRED, options.width * 0.75, 250);
+  renderPieChart(d3.select('#regret-transferred'), REGRET_TRANSFFERED, options.width * 0.75, options.width * 0.75);
 }

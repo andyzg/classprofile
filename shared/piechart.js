@@ -10,7 +10,7 @@ function getMax(data) {
   return max;
 }
 
-function renderPieChart(elem, data, width, height) {
+function renderPieChart(elem, data, width, height, showValues = true) {
   let max = getMax(data);
   var svg = elem.append("svg")
     .attr("width", width)
@@ -62,13 +62,15 @@ function renderPieChart(elem, data, width, height) {
       })
       .attr("dy", "0.35em")
       .text(function(d) { return d.data.name; });
-
-  arc.append("text")
-      .attr("transform", function(d) {
-        return "translate(" + innerLabel.centroid(d) + ")";
-      })
-      .attr("dy", "0.35em")
-      .text(function(d) { return d.data.value; });
+  
+  if(showValues) {
+    arc.append("text")
+    .attr("transform", function(d) {
+      return "translate(" + innerLabel.centroid(d) + ")";
+    })
+    .attr("dy", "0.35em")
+    .text(function(d) { return d.data.value; });
+  }
 
 }
 
