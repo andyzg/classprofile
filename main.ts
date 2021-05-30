@@ -7,7 +7,7 @@ import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
 import * as util from './shared/utils';
-import { renderDotPlot } from './shared/dotplot.js';
+import { renderDotPlot, renderBinnedDotLine } from './shared/dotplot.js';
 import { renderHistogram } from './shared/histogram.js';
 
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
@@ -325,6 +325,7 @@ function renderTransfers(options) {
 }
 
 function renderRelationships(options) {
+  // family section
   renderHistogram(d3.select('#fam-digital'),
     FAMILY.DIGITAL,
     options.width,
@@ -344,6 +345,17 @@ function renderRelationships(options) {
       binCount: 10,
       yAxisTitle: 'Count',
       xAxisTitle: 'Days'
+    }
+  );
+
+  renderBinnedDotLine(d3.select('#fam-distance'),
+    FAMILY.DISTANCE,
+    options.fullWidth,
+    400,
+    {
+      domain: [0, 13000], // ignoring the last few values that skew the graph
+      binCount: 12,
+      fillColour: '#18bbc9',
     }
   );
 }
