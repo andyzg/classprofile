@@ -12,6 +12,14 @@ FAMILY.PHYSICAL_DAYS = FAMILY.PHYSICAL_HOURS.map((hours) => {
   return hours / 24;
 });
 
+const FRIENDSHIPS = {
+  GAIN_COOP: [{"name": "0", "value": 0}, {"name": "Less than 1", "value": 1},{"name": "1", "value": 11},{"name": "2", "value": 11},{"name": "3", "value": 2},{"name": "4", "value": 5},{"name": "5", "value": 15},{"name": "6", "value": 3},{"name": "7", "value": 4},{"name": "8", "value": 1},{"name": "10", "value": 8}],
+  LOSS_COOP: [{"name": "0", "value": 30},{"name": "Less than 1", "value": 2},{"name": "1", "value": 7},{"name": "2", "value": 6},{"name": "3", "value": 4},{"name": "4", "value": 3},{"name": "5", "value": 4},{"name": "10", "value": 1}],
+  GAIN_SCHOOL: [{"name": "0", "value": 7},{"name": "1", "value": 9},{"name": "2", "value": 16},{"name": "3", "value": 10},{"name": "4", "value": 1},{"name": "5", "value": 9},{"name": "6", "value": 1},{"name": "10+", "value": 3}],
+  LOSS_SCHOOL: [{"name": "0", "value": 38},{"name": "1", "value": 11},{"name": "2", "value": 2},{"name": "3", "value": 2},{"name": "5", "value": 2}],
+}
+
 export {
   FAMILY,
+  FRIENDSHIPS,
 }
