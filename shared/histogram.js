@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 // modifies https://www.d3-graph-gallery.com/graph/histogram_basic.html
 /**
  * 
- * @param {import('d3-selection').Selection} elem 
+ * @param {import('d3-selection').Selection} elem html element to which the graph is appended
  * @param {Number[]} data array of values. e.g: [0, 3, 1, 1, 5].
  *                    assumption: data values are non-negative.
  * @param {Number} width of chart in pixels
@@ -10,24 +10,17 @@ import * as d3 from 'd3';
  * @param {*} options additional parametres object. may contain the following:
  *                      - binCount: number of bins. ideally between
  *                          5 and 20. defaults to 12.
- *                      - xMax: maximum of the data. defaults to
- *                          binWidth * (binCount + 1) if left unspecified.
+ *                      - domain: [min, max] of x values to consider
  *                      - xAxisTitle
  *                      - yAxisTitle
  */
 function renderHistogram(elem, data, width, height, options) {
   // create options object
-  const maxXValue = d3.max(data);
   const histogramOptions = {
     binCount: 12,
-    ...options
+    domain: d3.extent(data), // default to min, max of data
+    ...options,
   };
-  // determine the binWidth if unspecified
-  histogramOptions.binWidth = histogramOptions.binWidth || Math.round(maxXValue / (histogramOptions.binCount));
-  // make the xmax value 1 bin size more if unspecified
-  histogramOptions.xMax = histogramOptions.xMax ||
-                          (histogramOptions.binCount + 1) * histogramOptions.binWidth;
-  // console.log('rendering histogram with options:', histogramOptions, maxXValue);
 
   if (histogramOptions.binCount < 1) {
     // force at least 1 bin
@@ -35,12 +28,12 @@ function renderHistogram(elem, data, width, height, options) {
   }
 
   // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 30, left: 40},
+  const margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
-  var svg = elem.append("svg")
+  const svg = elem.append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -73,32 +66,29 @@ function renderHistogram(elem, data, width, height, options) {
 
   // helper function to process data (array of values)
   function insertData(data) {
+    // set the parameters for the histogram
+    const makeHistogramBins = d3.histogram()
+                                .domain(histogramOptions.domain)  // then the domain of the graphic
+                                .thresholds(histogramOptions.binCount); // then the number of bins
+
+    // And apply this function to data to get the bins
+    const bins = makeHistogramBins(data);
+    // assumption: first bin's boundaries should reflect the general binWidth
+    const binWidth = bins[0].x1 - bins[0].x0;
+    // make sure that last binWidth is equal to calculated binWidth
+    bins[bins.length - 1].x1 = bins[bins.length - 1].x0 + binWidth;
+
     // X axis: scale and draw:
-    var x = d3.scaleLinear()
-              .domain([0, histogramOptions.xMax])
+    const x = d3.scaleLinear()
+              .domain([histogramOptions.domain[0],
+                       bins[bins.length - 1].x1 + binWidth])
               .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
-    // set the parameters for the histogram
-    var histogram = d3.histogram()
-                      .value(function(d) { return d; })   // I need to give the vector of value
-                      .domain(x.domain())  // then the domain of the graphic
-                      .thresholds(x.ticks(histogramOptions.binCount)); // then the number of bins
-
-    // And apply this function to data to get the bins
-    var bins = histogram(data);
-
-    // remove the last bin if it causes an error on line 110
-    const lastBin = bins.pop();
-    if (lastBin.x1 - lastBin.x0 >= 1) {
-      // will not cause an error, so add back
-      bins.push(lastBin);
-    }
-
     // Y axis: scale and draw:
-    var y = d3.scaleLinear()
+    const y = d3.scaleLinear()
               .range([height, 0]);
     y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 
