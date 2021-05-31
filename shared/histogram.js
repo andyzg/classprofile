@@ -29,13 +29,13 @@ function renderHistogram(elem, data, width, height, options) {
 
   // set the dimensions and margins of the graph
   const margin = {top: 10, right: 30, bottom: 30, left: 40},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    graphWidth = width - margin.left - margin.right,
+    graphHeight = height - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg = elem.append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", graphWidth + margin.left + margin.right)
+    .attr("height", graphHeight + margin.top + margin.bottom)
     .append("g")
     .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
@@ -46,7 +46,7 @@ function renderHistogram(elem, data, width, height, options) {
     svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
-      .attr("x",0 - (height / 2))
+      .attr("x",0 - (graphHeight / 2))
       .attr("dy", "1em")
       .attr("font-size", "10px")
       .style("text-anchor", "middle")
@@ -57,8 +57,8 @@ function renderHistogram(elem, data, width, height, options) {
     // text label for the x axis
     svg.append("text")
       .attr("transform",
-            "translate(" + (width/2) + " ," +
-                           (height + margin.top + 20) + ")")
+            "translate(" + (graphWidth/2) + " ," +
+                           (graphHeight + margin.top + 20) + ")")
       .style("text-anchor", "middle")
       .attr("font-size", "10px")
       .text(options.xAxisTitle);
@@ -82,14 +82,14 @@ function renderHistogram(elem, data, width, height, options) {
     const x = d3.scaleLinear()
               .domain([histogramOptions.domain[0],
                        bins[bins.length - 1].x1 + binWidth])
-              .range([0, width]);
+              .range([0, graphWidth]);
     svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + graphHeight + ")")
         .call(d3.axisBottom(x));
 
     // Y axis: scale and draw:
     const y = d3.scaleLinear()
-              .range([height, 0]);
+              .range([graphHeight, 0]);
     y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 
     svg.append("g")
@@ -103,7 +103,7 @@ function renderHistogram(elem, data, width, height, options) {
         .attr("x", 1)
         .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
         .attr("width", function(d) { return x(d.x1) - x(d.x0) - 1 ; })
-        .attr("height", function(d) { return height - y(d.length); })
+        .attr("height", function(d) { return graphHeight - y(d.length); })
         .style("fill", "#69b3a2")
 
   };
