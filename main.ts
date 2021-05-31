@@ -18,7 +18,7 @@ import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
-import { FAMILY, FRIENDSHIPS } from './data/relationships';
+import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
 import { BUDGET, INVEST, RESP, SCHOOL_EXPENSES, NEW_DEBT, LOANS } from './data/finances';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
@@ -364,4 +364,36 @@ function renderRelationships(options) {
   renderHorizontalBarChat(d3.select('#friends-loss-coop'), FRIENDSHIPS.LOSS_COOP, options.width, 250, false);
   renderHorizontalBarChat(d3.select('#friends-gain-school'), FRIENDSHIPS.GAIN_SCHOOL, options.width, 250, false);
   renderHorizontalBarChat(d3.select('#friends-loss-school'), FRIENDSHIPS.LOSS_SCHOOL, options.width, 250, false);
+
+  // romance section
+  renderHistogram(
+    d3.select('#romance-degree'), ROMANCE.DEGREE_NON_SINGLE,
+    options.fullWidth, 300,
+    {
+      binCount: 10,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'Percentage (%) of degree (56 months)',
+    }
+  );
+
+  renderHorizontalBarChat(d3.select('#romance-relationship-count'),
+    ROMANCE.RELATIONSHIP_COUNT,
+    options.width,
+    250,
+    false
+  );
+  renderPieChart(d3.select('#romance-secest'), ROMANCE.SECEST, options.width * 0.75, options.width * 0.75);
+  
+  renderBoxPlot(d3.select('#romance-sex'), ROMANCE.SEXUAL_PARTNERS, options.width, 280, {
+    yAxisTitle: 'Number of sexual partners',
+    xAxisTitle: 'Sexual activity',
+  });
+  
+  renderPieChart(d3.select('#romance-cheating'), ROMANCE.CHEATING, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#romance-cheating-reasons'),
+    ROMANCE.CHEATING_REASONS,
+    options.width,
+    250,
+    false
+  );
 }
