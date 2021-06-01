@@ -9,7 +9,7 @@ function renderBoxPlot(elem, data, width, height, options) {
   var barWidth = 30;
 
   // Setup a color scale for filling each box
-  var colorScale = d3.scaleOrdinal(d3.schemePastel1)
+  var colorScale = d3.scaleOrdinal(d3.schemeSet2)
     .domain(Object.keys(data));
 
   var globalMax = 0
@@ -114,7 +114,7 @@ function renderBoxPlot(elem, data, width, height, options) {
     .attr("y1", function(datum) { return yScale(datum.whiskers[0]); })
     .attr("x2", function(datum) { return xScale(datum.key); })
     .attr("y2", function(datum) { return yScale(datum.whiskers[1]); })
-    .attr("stroke", "#fff")
+    .attr("stroke", "#000")
     .attr("stroke-width", 1)
     .attr("fill", "none");
 
@@ -163,10 +163,7 @@ function renderBoxPlot(elem, data, width, height, options) {
   for(var i=0; i < horizontalLineConfigs.length; i++) {
     var lineConfig = horizontalLineConfigs[i];
 
-    let color = '#fff';
-    if (i % 3 == 1) {
-      color = '#000';
-    }
+    let color = '#000'
     // Draw the whiskers at the min for this series
     var horizontalLine = g.selectAll(".whiskers")
       .data(boxPlotData)

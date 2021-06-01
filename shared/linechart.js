@@ -8,7 +8,7 @@ function renderLineChart(elem, data, width, height, options) {
 
 
   // Setup a color scale for filling each box
-  var colorScale = d3.scaleOrdinal(d3.schemePastel1);
+  var colorScale = d3.scaleOrdinal(d3.schemeSet2);
 
   // set the ranges
   var x = d3.scaleBand()

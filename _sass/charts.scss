@@ -1,10 +1,10 @@
 rect.bar {
-  fill: #fff;
+  fill: rgb(71, 71, 71);;
   mix-blend-mode: difference;
 }
 
 text {
-  fill: #fff;
+  fill: rgb(71, 71, 71);;
   mix-blend-mode: luminosity;
   font-family: 'Source Code Pro', monospace;
 }
@@ -15,7 +15,7 @@ text.label {
 }
 
 path.domain {
-  stroke: #fff;
+  stroke: rgb(71, 71, 71);;
 }
 
 .horizontal-bar-chart {
@@ -27,7 +27,7 @@ path.domain {
 }
 
 g.tick line {
-  stroke: #fff;
+  stroke: rgb(71, 71, 71);;
 }
 
 .scale {
@@ -83,25 +83,25 @@ g.tick line {
 }
 
 .c1 {
-  background-color: #7fc97f;
+  background-color: #66C2A6;
 }
 
 .c2 {
-  background-color: #386cb0;
+  background-color: #A6D954;
 }
 
 .c3 {
-  background-color: #f0027f;
+  background-color: #FFD92F;
 }
 
 .c4 {
-  background-color: #bf5b17;
+  background-color: #E5C594;
 }
 
 .c5 {
-  background-color: #ffff99;
+  background-color: #E88AC3;
 }
 
 .c6 {
-  background-color: #fdc086;
+  background-color: #8DA0CC;
 }

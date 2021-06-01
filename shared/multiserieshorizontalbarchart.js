@@ -31,7 +31,10 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
     data = data.reverse();
   }
 
-  var colorScale = ["#7fc97f", "#386cb0", "#f0027f", "#bf5b17", "#ffff99"," #fdc086"]
+  //   var colorScale = d3.scaleOrdinal(d3.schemeAccent)
+  //     .domain([0, 6]);
+  // var colorScale = ["#7fc97f", "#386cb0", "#f0027f", "#bf5b17", "#ffff99"," #fdc086"]
+  var colorScale = d3.scaleOrdinal(d3.schemeSet2);
 
   // Initial chart
   var svg = elem.append("svg")

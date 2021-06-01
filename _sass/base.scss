@@ -2,23 +2,23 @@
 $content-width: 1200px;
 
 // Background colors
-$bg-1: #324c67;
-$bg-2: #294766;
-$bg-3: #2E6399;
-$bg-4: #165050;
-$bg-5: #383040;
-$bg-6: #586e75;
-$bg-7: #073642;
-$bg-8: #002b36;
+$bg-1: #d7fff7ef;
+$bg-2: #fff7db;
+$bg-3: #f3f3f3; 
+$bg-4: #cbf6db;
+$bg-5: #ffe5d9;
+$bg-6: #e6e7ff;
+$bg-7: #ffe0e0;
+$bg-8: #e4f4f3; 
 
 
 /* TYPOGRAPHY */
 body {
-    color: #fff;
+    color: rgb(71, 71, 71);
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: 300;
-    background-color: #fff;
+    background-color: rgb(71, 71, 71);;
 }
 
 /* GRID */
