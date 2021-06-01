@@ -31,8 +31,6 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
     data = data.reverse();
   }
 
-  //   var colorScale = d3.scaleOrdinal(d3.schemeAccent)
-  //     .domain([0, 6]);
   var colorScale = ["#7fc97f", "#386cb0", "#f0027f", "#bf5b17", "#ffff99"," #fdc086"]
 
   // Initial chart
@@ -88,7 +86,7 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
       // Fill the bar a specific color
       .style("fill", function(d) {
         if ('toggle' in d) {
-          return colorScale[numSeries[d['toggle']]];
+          return colorScale[numSeries[d['toggle']] % 6];
         }
         return '#fff';
       })

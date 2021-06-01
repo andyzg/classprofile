@@ -10,9 +10,9 @@ import * as util from './shared/utils';
 import { renderDotPlot, renderBinnedDotLine } from './shared/dotplot.js';
 import { renderHistogram } from './shared/histogram.js';
 
-import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE } from './data/academics';
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
+import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY } from './data/coop';
@@ -22,6 +22,8 @@ import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
 import { BUDGET, INVEST, RESP, SCHOOL_EXPENSES, NEW_DEBT, LOANS } from './data/finances';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
+let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
+let campus_location_term_post = ["loc-4a", "loc-4b"];
 
 window.onload = () => {
   let options = {
@@ -41,6 +43,8 @@ window.onload = () => {
   renderRelationships(options);
   setActive(0);
   setMultiBarActive("ethnicity-all", ethnicity);
+  setMultiBarActive("loc-1a", campus_location_term_pre);
+  setMultiBarActive("loc-4a", campus_location_term_post);
   setupListeners();
 }
 
@@ -58,6 +62,22 @@ function setupListeners() {
     let j = ethnicity[i];
     (ethnicityItems[i] as any).onclick = function() {
       setMultiBarActive(j, ethnicity);
+    }
+  }
+  
+  let locPreItems = document.getElementsByClassName('loc-pre-item');
+  for (let i = 0; i < locPreItems.length; i++) {
+    let j = campus_location_term_pre[i];
+    (locPreItems[i] as any).onclick = function() {
+      setMultiBarActive(j, campus_location_term_pre);
+    }
+  }
+
+  let locPostItems = document.getElementsByClassName('loc-post-item');
+  for (let i = 0; i < locPostItems.length; i++) {
+    let j = campus_location_term_post[i];
+    (locPostItems[i] as any).onclick = function() {
+      setMultiBarActive(j, campus_location_term_post);
     }
   }
 }
@@ -219,12 +239,21 @@ function renderLifestyle(options) {
 }
 
 function renderAcademics(options) {
-  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 280, {
+  renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-pre'), CAMPUS_LOCATION_PRE, 400, 500, false, {"loc-1a": 0, "loc-1b": 1, "loc-2a": 2, "loc-2b": 3,"loc-3a": 4, "loc-3b": 5});
+  renderMultiSeriesHorizontalBarChat(d3.select('#campus-location-post'), CAMPUS_LOCATION_POST, 400, 300, false, {"loc-4a": 0, "loc-4b": 1});
+  drawWordCloud(d3.select('#prof-cloud'), FAVOURITE_PROF_COUNT, options);
+  renderHorizontalBarChat(d3.select('#failing'), FAILING, options.width, 100, false);
+  renderHorizontalBarChat(d3.select('#options'), OPTIONS, options.width, 100, true);
+  renderHorizontalBarChat(d3.select('#overloading'), OVERLOADING, options.width, 200, false);
+  renderHorizontalBarChat(d3.select('#overloading-reasons'), OVERLOADING_REASONS, options.width, 200, false);
+  renderHorizontalBarChat(d3.select('#largest-workload'), LARGEST_WORKLOAD, options.width, 200, false);
+
+  renderBoxPlot(d3.select('#grades'), GRADES, options.width, 300, {
     yAxisTitle: 'Term average',
     xAxisTitle: 'Study term number',
   });
-  renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, true);
-  renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, true);
+  renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, false);
+  renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, false);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
     yAxisTitle: 'Proportion of class attended',
     xAxisTitle: 'Study term number',
