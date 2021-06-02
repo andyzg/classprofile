@@ -81,10 +81,10 @@ section {
 }
 
 .bg-hero {
-  background-image:url('../img/hero.png');
+  background-image:url('../img/cover.png');
   background-repeat:no-repeat;
   background-size:cover;
-  background-color: #3D454D;
+  background-color: $bg-8;
   background-position: center center;
   height: 100vh;
   .content {
@@ -92,6 +92,14 @@ section {
     width: 90%;
     max-width: 90%;
   }
+}
+
+.cover_graphic {
+  width: 35vw;
+  height: auto;
+  position: absolute;
+  top:50%;
+  transform: translate(0, -50%);
 }
 
 /* COLORS */
@@ -159,4 +167,30 @@ section {
 
 .class-photo img {
   width: 100%;
+}
+
+@media screen and (min-width: 820px) {
+  .cover_half {
+      display: inline-block;
+      width: 48%;
+      padding: 0 4% 16px 0;
+  }
+
+  .cover_second {
+      display: inline-block;
+      width: 42%;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .cover_half {
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+  }
+
+  .cover_second {
+    width:0%;
+    display: none;
+  }
 }

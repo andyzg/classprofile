@@ -1,18 +1,18 @@
 .title {
   font-family: 'Source Code Pro', monospace;
   font-weight: 600;
-  font-size: 64;
+  font-size: 3.5vw;
   letter-spacing: -2px;
   line-height: 1.2;
   position: absolute;
-  top: 92%;
+  top: 60%;
   transform: translate(0, -100%);
 }
 
 .subtitle {
   font-family: 'Source Code Pro', monospace;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 1.5vw;
   letter-spacing: -1px;
   line-height: 1.4;
   color: rgba(71, 71, 71, .85);
@@ -119,6 +119,10 @@ b {
 @media screen and (max-width: 820px) {
   .title {
     font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 24px;
   }
 
   p {
