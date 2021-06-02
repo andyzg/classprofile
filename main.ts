@@ -20,6 +20,7 @@ import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUG
 import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
 import { BUDGET, INVEST, RESP, SCHOOL_EXPENSES, NEW_DEBT, LOANS } from './data/finances';
+import {SICK, OHIP, MENTAL_HEALTH, MENTAL_HEALTH_ISSUES, EXERCISE_FREQ, INTRAMURALS, EXERCISE_TYPE, EXERCISE_WORDS, WEIGHT, RECREATIONAL_SUBSTANCES} from './data/health';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
@@ -37,6 +38,7 @@ window.onload = () => {
   renderBackground(options);
   renderOutcome(options);
   renderFinances(options);
+  renderHealth(options);
   renderMisc(options);
   renderFuture(options);
   renderTransfers(options);
@@ -323,6 +325,18 @@ function renderFinances(options) {
   renderPieChart(d3.select('#loans'), LOANS, options.width * 0.75, options.width * 0.75);
   renderHorizontalBarChat(d3.select('#expenses'), SCHOOL_EXPENSES, options.width, 250, false);
   renderHorizontalBarChat(d3.select('#new-debt'), NEW_DEBT, options.width, 250, false);
+}
+
+function renderHealth(options) {
+  renderHorizontalBarChat(d3.select('#sickness'), SICK, options.width, 250, false);
+  renderPieChart(d3.select('#health-insurance'), OHIP, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#mental-health-count'), MENTAL_HEALTH, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#mental-health-issues'), MENTAL_HEALTH_ISSUES, options.width, 250, false);
+  renderHorizontalBarChat(d3.select('#exercise-frequency'), EXERCISE_FREQ, options.width, 250, false);
+  drawWordCloud(d3.select('#exercise-type'), EXERCISE_WORDS, options);
+  renderHorizontalBarChat(d3.select('#intramurals'), INTRAMURALS, options.width, 250, false);
+  renderHorizontalBarChat(d3.select('#weight'), WEIGHT, options.width, 250, false);
+  drawWordCloud(d3.select('#controlled-substances'), RECREATIONAL_SUBSTANCES, options);
 }
 
 function renderMisc(options) {
