@@ -41,7 +41,7 @@ function renderHistogram(elem, data, width, height, options) {
       "translate(" + margin.left + "," + margin.top + ")");
 
   // add titles if provided
-  if (options && options.yAxisTitle) {
+  if (histogramOptions.yAxisTitle) {
     // text label for the y axis
     svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -53,7 +53,7 @@ function renderHistogram(elem, data, width, height, options) {
       .text(options.yAxisTitle);
   }
 
-  if (options && options.xAxisTitle) {
+  if (histogramOptions.xAxisTitle) {
     // text label for the x axis
     svg.append("text")
       .attr("transform",
@@ -85,7 +85,7 @@ function renderHistogram(elem, data, width, height, options) {
               .range([0, graphWidth]);
     svg.append("g")
         .attr("transform", "translate(0," + graphHeight + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).ticks(bins.length));
 
     // Y axis: scale and draw:
     const y = d3.scaleLinear()
