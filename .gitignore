@@ -4,6 +4,6 @@ _site/
 .jekyll-cache/
 .bundle/
 node_modules/
-build/bundle.js*
+build/*
 
 .DS_Store
