@@ -448,6 +448,49 @@ let LATE_INTERVIEWER = [{
 "value": 2
 }]
 
+let FAVOURITE_COOP = {
+  "ADP":	1,
+  "Alarm.com":	1,
+  "Apple":	1,
+  "Bloomberg":	1,
+  "Facebook":	5,
+  "Google":	2,
+  "Grain Discovery":	1,
+  "Humu":	1,
+  "Jane Street":	2,
+  "Manulife":	1,
+  "MongoDB":	1,
+  "Nvidia":	1,
+  "QuEra Computing":	1,
+  "Shopify":	2,
+  "Splunk":	2,
+  "Stripe":	1,
+  "The Trade Desk":	1,
+  "whiterabbit.ai":	1,
+  "Wish":	3,
+  "Zazzle":	1,
+  "Zynga":	1,
+}
+
+let FAVOURITE_COOP_REASON = [{
+    "name": "Culture & Environment", 
+    "value":	7},
+  {"name": "Pay", 
+    "value":	7},
+  {"name": "Perks", 
+    "value":	6},
+  {"name": "Work & Projects", 
+    "value":	13},
+  {"name": "Location", 
+    "value":	2},
+  {"name": "Team & Co-workers", 
+    "value":	6},
+  {"name": "Friendships", 
+    "value":	7},
+  {"name": "Intern Experience", 
+    "value":	6
+}]
+
 export {
   SALARY,
   WORK_LOCATION,
@@ -463,5 +506,7 @@ export {
   GENDER_SALARY,
   MISSED_INTERVIEW,
   LATE_INTERVIEW,
-  LATE_INTERVIEWER
+  LATE_INTERVIEWER,
+  FAVOURITE_COOP,
+  FAVOURITE_COOP_REASON
 }

@@ -65,9 +65,21 @@ let DEBT = {
   "Not disclosed": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10000,20000,20000,20000,23000,25000,60000]
 }
 
+let POST_RETURN_HOME = [{
+  "name": "Yes",
+  "value": 8
+  }, {
+  "name": "No",
+  "value": 6
+  }, {
+  "name": "Maybe",
+  "value": 15
+}]
+
 export {
   POST_GRAD,
   POST_LOCATION,
   DEBT,
-  MOTIVATIONS
+  MOTIVATIONS,
+  POST_RETURN_HOME
 }
