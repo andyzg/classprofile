@@ -45,6 +45,14 @@ span.big {
   line-height: 1.8;
 }
 
+span.small {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(71, 71, 71, 0.7);
+  line-height: 1.8;
+}
+
 a {
   color: rgba(71, 71, 71, .9);
   text-decoration: underline;
@@ -132,6 +140,10 @@ b {
 
   span.big {
     font-size: 18px;
+  }
+
+  span.small {
+    font-size: 10px;
   }
 
   h1 {
