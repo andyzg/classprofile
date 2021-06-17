@@ -172,6 +172,22 @@ let RECREATIONAL_SUBSTANCES = {
     "Modafinil":1,
 }
 
+let IMPOSTER_SYNDROME = [
+    {"name": "Yes",
+    "value": 31},
+    {"name": "No",
+    "value": 7}
+]
+
+let IMPOSTER_SYNDROME_NOW = [
+    {"name": "Yes",
+    "value": 9},
+    {"name": "No",
+    "value": 17},
+    {"name": "Sometimes",
+    "value": 11}
+]
+
 export {
     SICK,
     OHIP,
@@ -183,4 +199,6 @@ export {
     EXERCISE_WORDS,
     INTRAMURALS,
     RECREATIONAL_SUBSTANCES,
+    IMPOSTER_SYNDROME,
+    IMPOSTER_SYNDROME_NOW
 }
