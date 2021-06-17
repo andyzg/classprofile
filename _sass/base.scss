@@ -169,6 +169,40 @@ section {
   width: 100%;
 }
 
+.goto_toc {
+  /* Hide the button by default */
+  visibility: hidden; 
+
+  /* Fix the position as an overlay in the bottom */
+  position: fixed;
+  display: block;
+  bottom: 25px;
+  left: 50%;
+  width: 58px;
+  padding: 12px;
+  margin-left: -42px;
+  z-index: 100;
+
+  /*
+    Make the element appear as a button (it is an `a` 
+    element to set the href attribute without javascript)
+  */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+  color: initial;
+
+  /* Visual styling */
+  border: none;
+  outline: none;
+  background-color: white;
+  color: rgb(92, 92, 92);
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 12px;
+}
+
 @media screen and (min-width: 820px) {
   .cover_half {
       display: inline-block;

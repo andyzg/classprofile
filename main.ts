@@ -9,9 +9,10 @@ import { renderBoxPlot} from './shared/boxplot.js';
 import * as util from './shared/utils';
 import { renderDotPlot, renderBinnedDotLine } from './shared/dotplot.js';
 import { renderHistogram } from './shared/histogram.js';
+import { renderGeographicMap } from './shared/geographicmap.js';
 
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
-import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES } from './data/lifestyle';
+import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
@@ -21,6 +22,7 @@ import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS } from './data/future';
 import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
 import { BUDGET, INVEST, RESP, SCHOOL_EXPENSES, NEW_DEBT, LOANS } from './data/finances';
 import {SICK, OHIP, MENTAL_HEALTH, MENTAL_HEALTH_ISSUES, EXERCISE_FREQ, INTRAMURALS, EXERCISE_TYPE, EXERCISE_WORDS, WEIGHT, RECREATIONAL_SUBSTANCES, IMPOSTER_SYNDROME, IMPOSTER_SYNDROME_NOW} from './data/health';
+import { EXCHANGE, EXCHANGE_GEO_DATA } from './data/exchange';
 
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
@@ -43,6 +45,7 @@ window.onload = () => {
   renderFuture(options);
   renderTransfers(options);
   renderRelationships(options);
+  renderExchange(options);
   setActive(0);
   setMultiBarActive("ethnicity-all", ethnicity);
   setMultiBarActive("loc-1a", campus_location_term_pre);
@@ -82,6 +85,8 @@ function setupListeners() {
       setMultiBarActive(j, campus_location_term_post);
     }
   }
+
+  window.addEventListener("scroll", onScroll);
 }
 
 function setActive(term) {
@@ -110,6 +115,17 @@ function setMultiBarActive(term, arr) {
   }
 }
 
+function onScroll(e) {
+  var button = document.getElementById("goto_toc");
+  var offsetFromToc = document.getElementById("toc").getBoundingClientRect().top
+  
+  if (offsetFromToc < 0) {
+    button.style.visibility = "visible";
+  } else {
+    button.style.visibility = "hidden";
+  }
+}
+
 function drawCoopWordCloud(elem, options) {
   let data = COMPANY_WORK_COUNT['data'];
   let words: any[] = [];
@@ -132,7 +148,7 @@ function drawCoopWordCloud(elem, options) {
   renderWordCloud(elem, words, scores, options.fullWidth, Math.min(window.innerHeight * 0.75, 800000 / options.fullWidth));
 }
 
-function drawWordCloud(elem, data, options) {
+function drawWordCloud(elem, data, options, isFullWidth: boolean = false, height: Number = null) {
   let max = 0;
   for (var i in data) {
     if (data[i] > max) { max = data[i]; }
@@ -145,7 +161,9 @@ function drawWordCloud(elem, data, options) {
       size: Math.pow(data[i] * 1.0 / max, 0.25) * 36
     });
   }
-  renderWordCloud(elem, wordcloudData, null, options.width, Math.min(window.innerHeight * 0.5, 200000 / options.width));
+  const cloudWidth = isFullWidth? options.fullWidth : options.width;
+  const cloudHeight = height ? height : Math.min(window.innerHeight * 0.5, 200000 / cloudWidth);
+  renderWordCloud(elem, wordcloudData, null, cloudWidth, cloudHeight);
 }
 
 function renderCoop(options) {
@@ -232,6 +250,8 @@ function renderLifestyle(options) {
 
   drawWordCloud(d3.select('#travel-locations'), TRAVEL_LOCATIONS, options);
   drawWordCloud(d3.select('#restaurants'), RESTAURANTS, options);
+  drawWordCloud(d3.select('#happy-things'), HAPPY_THINGS.COUNTS, options);
+  drawWordCloud(d3.select('#hobbies'), NEW_HOBBIES, options, true, Math.min(window.innerHeight * 0.55, 650000 / options.fullWidth));
 
   renderHorizontalBarChat(d3.select('#sleep-time'), SLEEP_TIME, options.width, 250, false);
   renderHorizontalBarChat(d3.select('#sleep-duration'), SLEEP_DURATION, options.width, 250, false);
@@ -443,4 +463,60 @@ function renderRelationships(options) {
     250,
     false
   );
+}
+
+function renderExchange(options) {
+  renderPieChart(d3.select('#exchange-participation'), EXCHANGE.PARTICIPATION, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#exchange-no-reasons'),
+    EXCHANGE.NO_REASON,
+    options.fullWidth,
+    300,
+    true
+  );
+
+  // exchange map handlers
+  function onMouseOver(data) {
+    if (data.properties.schools) {
+      d3.select(this)
+        .attr('fill', () => '#ffe2b5');
+    }
+  }
+  function onMouseOut(data) {
+    if (data.properties.schools) {
+      d3.select(this)
+        .attr('fill', '#ffb84d');
+    } else {
+      d3.select(this)
+      .attr('fill', '#c3d6d2');
+    }
+  }
+  function onClick(data) {
+    const props = data.properties;
+    let exchangeStr = `<h5>${props.name}</h5>`;
+    if (props.schools) {
+      props.schools.forEach((school) => {
+        exchangeStr += `<div class="hvb"/> - ${school.uni_name} (${school.uni_abbrev}): ${school.count}`;
+      });
+    } else {
+      exchangeStr += `<div class="hvb"/> No respondents went on exchange in this country.`
+    }
+    d3.select("#exchange-map-text").html(exchangeStr);
+  }
+
+  renderGeographicMap(
+    d3.select('#exchange-countries-map'), EXCHANGE_GEO_DATA,
+    options.fullWidth, options.fullWidth * 0.45,
+    {
+      zoomThreshold: [0.5, 20],
+      scale: 250,
+      fillColourFunction: (data) => {
+        if (data.properties.schools) {
+          return '#ffb84d';
+        }
+        return '#c3d6d2';
+      },
+      onMouseOver,
+      onMouseOut,
+      onClick,
+    });
 }
