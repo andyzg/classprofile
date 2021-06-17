@@ -323,6 +323,80 @@ const NEW_HOBBIES = {
   'Muay Thai': 1,
   'Yoga': 2,
 };
+let PROGRAMMING_LANGUAGE = [{
+  "name": "Brainf*ck",
+  "value": 2
+  },{
+  "name": "C#",
+  "value": 2
+  },{
+  "name": "C++",
+  "value": 5
+  },{
+  "name": "Go",
+  "value": 1
+  },{
+  "name": "Java",
+  "value": 1
+  },{
+  "name": "JavaScript",
+  "value": 3
+  },{
+  "name": "Julia",
+  "value": 1
+  },{
+  "name": "OCaml",
+  "value": 1
+  },{
+  "name": "Python",
+  "value": 13
+  },{
+  "name": "Ruby",
+  "value": 2
+  },{
+  "name": "Rust",
+  "value": 4
+  },{
+  "name": "Scala",
+  "value": 1
+  },{
+  "name": "Swift",
+  "value": 1
+  },{
+  "name": "TypeScript",
+  "value":	1
+}]
+
+let EDITOR = [{
+  "name": "Emacs",
+  "value": 2
+  },{
+  "name": "IntelliJ",
+  "value": 3
+  },{
+  "name": "JetBrains",
+  "value": 1
+  },{
+  "name": "Sublime",
+  "value": 1
+  },{
+  "name": "Vim",
+  "value": 3
+  },{
+  "name": "Visual editor ",
+  "value": 1
+  },{
+  "name": "Visual Studio Code",
+  "value": 27
+}]
+
+let MOBILE_OS = [{
+  "name": "Android",
+  "value": 14
+  },{
+  "name": "iOS",
+  "value": 24
+}]
 
 export {
   EXTRACURRICULARS,
@@ -338,4 +412,7 @@ export {
   PARTIES,
   HAPPY_THINGS,
   NEW_HOBBIES,
+  PROGRAMMING_LANGUAGE,
+  EDITOR,
+  MOBILE_OS
 }

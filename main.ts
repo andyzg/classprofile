@@ -12,7 +12,7 @@ import { renderHistogram } from './shared/histogram.js';
 import { renderGeographicMap } from './shared/geographicmap.js';
 
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
-import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES } from './data/lifestyle';
+import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES, PROGRAMMING_LANGUAGE, EDITOR, MOBILE_OS } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE} from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
@@ -245,6 +245,10 @@ function renderCoop(options) {
 }
 
 function renderLifestyle(options) {
+  renderHorizontalBarChat(d3.select('#programming-language'), PROGRAMMING_LANGUAGE, options.width, 400, true);
+  renderHorizontalBarChat(d3.select('#editor'), EDITOR, options.width, 250, true);
+  renderPieChart(d3.select('#mobile-os'), MOBILE_OS, options.width * 0.80, options.width * 0.80);
+
   renderPieChart(d3.select('#grocery-stores'), GROCERY_STORES, options.width * 0.80, options.width * 0.80);
   renderPieChart(d3.select('#fav-exercise'), FAVOURITE_EXERCISE, options.width * 0.80, options.width * 0.80);
 
