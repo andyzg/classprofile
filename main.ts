@@ -85,6 +85,8 @@ function setupListeners() {
       setMultiBarActive(j, campus_location_term_post);
     }
   }
+
+  window.addEventListener("scroll", onScroll);
 }
 
 function setActive(term) {
@@ -110,6 +112,17 @@ function setMultiBarActive(term, arr) {
         (items[j] as any).style.visibility = 'initial';
       }
     }
+  }
+}
+
+function onScroll(e) {
+  var button = document.getElementById("goto_toc");
+  var offsetFromToc = document.getElementById("toc").getBoundingClientRect().top
+  
+  if (offsetFromToc < 0) {
+    button.style.visibility = "visible";
+  } else {
+    button.style.visibility = "hidden";
   }
 }
 

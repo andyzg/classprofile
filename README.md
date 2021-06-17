@@ -32,4 +32,4 @@ Run `yarn install`. You'll also need `jekyll` to run a local host. Run `gem inst
 - add a `render<topic name>` function in [`main.ts`](main.ts)
   - the logic to generate the graphs should be included in this function
 - include the `<topic name>.html` file in [`index.html`](./index.html) in the right section
-- link the section in [`introduction.html`](./content/introduction.html), Table of contents
+- link the section in [`introduction.html`](./content/introduction.html), Sections
