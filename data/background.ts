@@ -218,6 +218,63 @@ let IMMIGRATED = [{
   "value": 6
 }];
 
+let EMIGRATED_COUNTRY = [{
+  "name": "BELGIUM",
+  "value": 1
+}, {
+  "name": "CHINA",
+  "value": 10
+}, {
+  "name": "ENGLAND",
+  "value": 1
+}, {
+  "name": "INDIA",
+  "value": 4
+}];
+
+let NUM_LANGUAGE = [{
+  "name": "1",
+  "value": 14
+}, {
+  "name": "2",
+  "value": 18
+}, {
+  "name": "3",
+  "value": 5
+}, {
+  "name": "4",
+  "value": 1
+}];
+
+let LANGUAGE_KNOWN = [{
+  "name": "FRENCH",
+  "value": 8
+}, {
+  "name": "FARSI",
+  "value": 1
+}, {
+  "name": "MANDARIN",
+  "value": 10
+}, {
+  "name": "HINDI",
+  "value": 3
+}, {
+  "name": "PUNJABI",
+  "value": 2
+}, {
+  "name": "TELUGU",
+  "value": 1
+}, {
+  "name": "TAMIL",
+  "value": 1
+}, {
+  "name": "CANTONESE",
+  "value": 2
+}, {
+  "name": "CHINESE (UNSPECIFIED)",
+  "value": 2
+}];
+
 let SIBLINGS = [{
   "name": "0",
   "value": 22
@@ -357,18 +414,7 @@ let CAT_OR_DOG = [{
   "value": 18
 }];
 
-let ADMISSION_AVERAGE = [
-  {"y": 3, "x": 85, "term": 0, "size": 2},
-  {"y": 1, "x": 87, "term": 0, "size": 2},
-  {"y": 1, "x": 90, "term": 0, "size": 2},
-  {"y": 2, "x": 93, "term": 0, "size": 2},
-  {"y": 5, "x": 94, "term": 0, "size": 2},
-  {"y": 10, "x": 95, "term": 0, "size": 2},
-  {"y": 14, "x": 96, "term": 0, "size": 2},
-  {"y": 10, "x": 97, "term": 0, "size": 2},
-  {"y": 12, "x": 98, "term": 0, "size": 2},
-  {"y": 5, "x": 99, "term": 0, "size": 2},
-]
+let ADMISSION_AVERAGE = [85,85,85,87,90,93,93,94,94,94,94.5,94.5,95,95,95,95,95,95,95,95,95.4,95.6,96,96,96,96,96,96,96,96,96,96,96,96.4,96.5,96.5,97,97,97,97,97,97,97.5,97.5,97.5,97.5,98,98,98,98,98,98,98,98,98,98,98,98,99,99,99.2,99.38]
 
 export {
   INTERNATIONAL,
@@ -387,5 +433,8 @@ export {
   MOTHER_TONGUE,
   PROGRAMMING,
   CAT_OR_DOG,
-  ADMISSION_AVERAGE
+  ADMISSION_AVERAGE,
+  EMIGRATED_COUNTRY,
+  NUM_LANGUAGE,
+  LANGUAGE_KNOWN
 }

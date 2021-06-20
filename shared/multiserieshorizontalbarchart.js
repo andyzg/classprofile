@@ -31,10 +31,9 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
     data = data.reverse();
   }
 
-  //   var colorScale = d3.scaleOrdinal(d3.schemeAccent)
-  //     .domain([0, 6]);
-  // var colorScale = ["#7fc97f", "#386cb0", "#f0027f", "#bf5b17", "#ffff99"," #fdc086"]
-  var colorScale = d3.scaleOrdinal(d3.schemeSet2);
+    var colorScale = d3.scaleOrdinal(d3.schemeAccent)
+      .domain([0, 6]);
+    var colorScale = ["#66C2A6", "#A6D954", "#FFD92F", "#E5C594", "#E88AC3"," #8DA0CC"]
 
   // Initial chart
   var svg = elem.append("svg")
@@ -92,6 +91,12 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
           return colorScale[numSeries[d['toggle']] % 6];
         }
         return '#fff';
+      })
+      .style("mix-blend-mode", function(d) {
+        if ('toggle' in d) {
+          return 'initial';
+        }
+        return 'difference';
       })
       .attr("width", function (d) {
           return x(d.value);
