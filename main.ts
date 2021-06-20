@@ -13,7 +13,7 @@ import { renderGeographicMap } from './shared/geographicmap.js';
 
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES, PROGRAMMING_LANGUAGE, EDITOR, MOBILE_OS } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD } from './data/academics';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD, TRANSFER_FROM, ENRICHED_VS_GRADES, SLEEP_VS_GRADES } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE, EMIGRATED_COUNTRY, NUM_LANGUAGE, LANGUAGE_KNOWN } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON } from './data/coop';
@@ -283,8 +283,10 @@ function renderAcademics(options) {
     yAxisTitle: 'Term average',
     xAxisTitle: 'Study term number',
   });
-  renderHorizontalBarChat(d3.select('#favourite-course'), FAVOURITE_MANDATORY, options.width, 390, false);
-  renderHorizontalBarChat(d3.select('#disliked-course'), DISLIKED_MANDATORY, options.width, 420, false);
+  renderHorizontalBarChat(d3.select('#favourite-mandatory'), FAVOURITE_MANDATORY, options.width, 390, false);
+  renderHorizontalBarChat(d3.select('#disliked-mandatory'), DISLIKED_MANDATORY, options.width, 420, false);
+  renderHorizontalBarChat(d3.select('#favourite-elective'), FAVOURITE_ELECTIVE, options.width, 390, false);
+  renderHorizontalBarChat(d3.select('#transfer-from'), TRANSFER_FROM, options.width, 100, false);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
     yAxisTitle: 'Proportion of class attended',
     xAxisTitle: 'Study term number',
@@ -294,20 +296,28 @@ function renderAcademics(options) {
     yAxisTitle: 'Cumulative average',
     xAxisTitle: 'Parents\' education',
   });
+  renderBoxPlot(d3.select('#enriched-grades'), ENRICHED_VS_GRADES, options.width, 280, {
+    yAxisTitle: 'Cumulative average',
+    xAxisTitle: 'Enriched Program (EP)',
+  });
+  renderBoxPlot(d3.select('#sleep-grades'), SLEEP_VS_GRADES, options.width, 280, {
+    yAxisTitle: 'Cumulative average',
+    xAxisTitle: 'Hours of Sleep',
+  });
   renderDotPlot(d3.select('#distribution'), ATTENDANCE_GRADE, options.width, 300, {
     yAxisTitle: 'Grades relative to average',
     xAxisTitle: 'Proportion of class attended',
     domainValues: [0, 100],
     rangeValues: [0, 100],
-    domain: [0, 5],
-    range: [-6, 4],
+    domain: [0, 10],
+    range: [-4, 4],
     tickFormat: (d) => {
       let sign = '+';
       if (d < 0) { sign = ''; }
       return sign + (d * 5) + '%';
     },
     xTickFormat: (d) => {
-      return (d * 20) + '%'
+      return ((d) * 10) + '%'
     }
   });
 }

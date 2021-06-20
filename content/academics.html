@@ -77,6 +77,23 @@
 
 <div class="vbx2"></div>
 
+<h3>Transferred From</h3>
+<p class="half">
+  <span class="big">
+  Some students joined the class later in their degree. Among respondents, all students who transferred in the
+  class came from engineering.
+  </span>
+  Computer Science students do not appear to be interested in transferring into the class. Some possible explanations is
+  the freedom provided by the CS program and the possibility of taking a Digital Hardware or a Software Engineering specialization.
+</p>
+<div class="half second">
+  <span class="graph-title">Transferred From </span>
+  <div id="transfer-from">
+  </div>
+</div>
+
+<div class="vbx2"></div>
+
 <h3>Favourite Professors</h3>
 <p class="half">
   <span class="big">
@@ -98,25 +115,22 @@
 
 
 <h2> Courses </h2>
-<h3> Favourite courses </h3>
+<h3> Favourite required courses </h3>
 <p class="half">
 <span class="big">
-  Among core courses, <a href="https://uwflow.com/course/math239" target="_blank">MATH 239 (Introduction to Combinatorics)</a>
-  and <a href="https://uwflow.com/course/cs349" target="_blank">CS 349 (User Interface)</a> were the most popular courses. Among electives 
-  <a href="https://uwflow.com/course/ece454" target="_blank">ECE 454 (Distributed Computing)</a>
-  was the most popular.
+  <a href="https://uwflow.com/course/se350" target="_blank">SE 350 (Operating Systems)</a>, 
+  <a href="https://uwflow.com/course/cs343" target="_blank">CS 343 (Concurrent and Parallel Programming)</a>, 
+  and <a href="https://uwflow.com/course/math239" target="_blank">MATH 239 (Introduction to Combinatorics)</a>
+  are the most popular core courses.
   <!-- Although 3B was the most difficult term, it had Concurrency (CS343), the most popular course. -->
 </span>
-  The top favourited courses were all taken between 3A and 4B, this can either be because
+  The top favourited courses were all taken between 2B and 3B, this can either be because
   students don't remember much of their first and second year courses, or that students
   enjoyed more higher level courses.
-  <!-- Students are also required to take several technical electives to fulfill
-  their credits.  The most popular electives included Graphics (CS488),
-  Distributed Computing (ECE 454), and Human-Computer Interaction (CS 449). -->
 </p>
 <div class="half second">
   <span class="graph-title">Favourite mandatory courses</span>
-  <div id="favourite-course"></div>
+  <div id="favourite-mandatory"></div>
 </div>
 
 <h3> Least favourite required courses </h3>
@@ -126,7 +140,7 @@
     <a href="https://uwflow.com/course/ece106" target="_blank">ECE 106 (Electricity and Magnetism)</a>
     and <a href="https://uwflow.com/course/se380" target="_blank">SE 380 (Introduction to Feedback Control)</a> were the most disliked courses.
   </span>
-  Most of the disliked courses were core courses, although some of them were also Linkage Electives (SMF 101, SPCOMM 100, SPCOMM 223)
+  Some Linkage Electives were also not liked among the class such as (SMF 101, SPCOMM 100, SPCOMM 223)
   <!-- Although SE 463 is just as disfavoured, it was a much easier course, which explains why 4A
   was an easier term. -->
   <!-- It's important to note that courses that were disliked do not imply that
@@ -138,7 +152,25 @@
 </p>
 <div class="half">
   <span class="graph-title">Least favourite mandatory courses</span>
-  <div id="disliked-course"></div>
+  <div id="disliked-mandatory"></div>
+</div>
+
+<h3> Favourite electives </h3>
+<p class="half">
+<span class="big">
+  <a href="https://uwflow.com/course/clas104" target="_blank">CLAS 104 (Classical Mythology)</a>,
+  <a href="https://uwflow.com/course/cs444" target="_blank">CS 444 (Compiler Construction)</a>,
+  <a href="https://uwflow.com/course/music140" target="_blank">MUSIC 140 (Popular Music and Culture)</a>, 
+  and <a href="https://uwflow.com/course/music140" target="_blank">MUSIC 246 (Soundtracks: Music in Film)</a>
+  were the most popular electives.
+
+  <!-- Although 3B was the most difficult term, it had Concurrency (CS343), the most popular course. -->
+</span>
+  None of the favourite electives were among the communication electives or science electives options.
+</p>
+<div class="half second">
+  <span class="graph-title">Favourite elective courses</span>
+  <div id="favourite-elective"></div>
 </div>
 
 <h3> Largest Workload </h3>
@@ -243,23 +275,22 @@
   </p>
 </div>
 
-<h2> Does X affect grades? [Still work  in progress]</h2>
+<h2> Does X affect grades?</h2>
 
-<!-- <h3> Attendance </h3>
+<h3> Attendance </h3>
 <p class="half">
 <span class="big">
-  There was no correlation between self-reported attendance and grades.
+  There is no clear correlation between self-reported attendance and grades, although 
+  it appears that attending all classes benefited students academically.
 </span>
-To be clear, this does not suggest that not going to class is
-beneficial. Instead, it suggests that it is possible to achieve good grades without
-attending all classes.
+
 </p>
 <div class="half second">
   <span class="graph-title">Attendance compared to relative grade from the
     average</span>
   <div id="distribution"></div>
 </div>
-<div class="vbx2"></div> -->
+<div class="vbx2"></div>
 
 <h3> Parents' education </h3>
 <p class="half">
@@ -270,6 +301,34 @@ attending all classes.
 <div class="half second">
   <span class="graph-title">Parents' education compared to grades</span>
   <div id="parent-grades"></div>
+</div>
+
+<h3> Enriched Programs </h3>
+<p class="half">
+  <span class="big">
+  Enriched Programs did not appear to benefit students academically, even in first year.
+  </span>
+  On average, students who took part in an enriched program performed worse in first year than students who
+  did not take part in an enriched program. To be clear, this does not suggest that doing an Enriched Program is not
+  beneficial. Instead, it suggests that it is possible to achieve good grades without
+  taking part in an Enriched Program.
+</p>
+<div class="half second">
+  <span class="graph-title">Enriched Programs compared to grades</span>
+  <div id="enriched-grades"></div>
+</div>
+
+<h3> Sleep </h3>
+<p class="half">
+  <span class="big">
+  On average, students performed slighlty better if they slept less.
+  </span>
+  Note that all respondents slept at least 5 hours. Although there seems to be some correlation between sleep
+  and grade, this does not necessarily mean that one causes the other.
+</p>
+<div class="half second">
+  <span class="graph-title">Hours of Sleep compared to grades</span>
+  <div id="sleep-grades"></div>
 </div>
 
 <div class="vbx4"></div>
