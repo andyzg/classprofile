@@ -9,6 +9,7 @@ var margin = {
     left: 200
 };
 
+var MAX_LINE_SIZE = 25;
 
 function sortData(data) {
   return data.sort(function (a, b) {
@@ -61,6 +62,50 @@ function renderHorizontalBarChat(elem, unsortedData, width, height, sort) {
   var gy = svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
+      // Once the labels have been created, we want to double check that
+      // none of them are too long.
+      .selectAll('.y .tick text') // select all the y tick texts
+        .call(function(t){                
+        t.each(function(d){ // for each one
+            var self = d3.select(this);
+            let name = self.text();
+            // Acquires the name of the current label being examined
+            let name = self.text();
+            // Check whether the label is too long and is composed of more than
+            // one word.
+            if (name.length > MAX_LINE_SIZE && name.split(" ").length > 1) {
+                self.text(''); // clear out the current label name
+                let list = name.split(" ");
+                let num_lines = Math.min(1 + Math.floor(name.length/MAX_LINE_SIZE), list.length);
+                let cur = 0;
+                let split_name = [];
+                for (let idx = 0; idx < num_lines; idx++) {
+                    let str = list[cur];
+                    let count = list[cur].length;
+                    // Generates a subtring from the initial label that is less than the specified size
+                    // or contains at most one word
+                    while (cur < list.length - 1 && count + list[cur + 1].length + 1 <= MAX_LINE_SIZE) {
+                        count += list[cur + 1].length + 1
+                        str += " " + list[cur + 1]
+                        cur += 1;
+                    }
+                    cur += 1;
+                    split_name.push(str);
+                }
+                // We need to shift the label slightly to the left (-5) so it is not right next to the y axis
+                self.append("tspan") // insert two tspans
+                    .attr("x", -5)
+                    .attr("dy", num_lines * -1)
+                    .text(split_name[0]);
+                for (let idx = 1; idx < num_lines; idx++) {
+                    self.append("tspan") // insert two tspans
+                        .attr("x", -5)
+                        .attr("dy", 10)
+                        .text(split_name[idx]);
+                }
+            }
+        })
+    });
 
   var bars = svg.selectAll(".bar")
       .data(data)
