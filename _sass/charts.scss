@@ -62,7 +62,7 @@ g.tick line {
 }
 
 
-.loc-pre-item, .loc-post-item, .ethnicity-item {
+.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item {
   display: inline-block;
   font-family: 'Source Code Pro', monospace;
   height: 32px;
@@ -76,32 +76,59 @@ g.tick line {
   cursor: pointer;
   box-shadow: 0px 3px 2px rgba(0,0,0,.4);
   transition: 0.2s ease;
+
+  &.pressed {
+    box-shadow: inset 0px 5px 3px rgba(0,0,0,.2);
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0px 5px 3px rgba(0,0,0,.4);
+  }
 }
 
-.loc-pre-item:hover, .loc-post-item:hover, .ethnicity-item:hover {
-  box-shadow: 0px 5px 3px rgba(0,0,0,.4);
-}
+// .pressed state = "not shown"
 
 .c1 {
-  background-color: #66C2A6;
+  background-color: #c1e6db;
+  &.pressed {
+    background-color: #66C2A6;
+  }
 }
 
 .c2 {
-  background-color: #A6D954;
+  background-color: #dbefba;
+  &.pressed {
+    background-color: #A6D954;
+  }
 }
 
 .c3 {
-  background-color: #FFD92F;
+  background-color: #ffefab;
+  &.pressed {
+    background-color: #FFD92F;
+  }
 }
 
 .c4 {
-  background-color: #E5C594;
+  background-color: #f4e7d4;
+  &.pressed {
+    background-color: #E5C594;
+  }
 }
 
 .c5 {
-  background-color: #E88AC3;
+  background-color: #f5d0e7;
+  &.pressed {
+    background-color: #E88AC3;
+  }
 }
 
 .c6 {
-  background-color: #8DA0CC;
+  background-color: #d1d9ea;
+  &.pressed {
+    background-color: #8DA0CC;
+  }
 }

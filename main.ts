@@ -58,6 +58,7 @@ function setupListeners() {
   for (let i = 0; i < scaleItems.length; i++) {
     let j = i;
     (scaleItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, scaleItems);
       setActive(j);
     }
   }
@@ -66,6 +67,7 @@ function setupListeners() {
   for (let i = 0; i < ethnicityItems.length; i++) {
     let j = ethnicity[i];
     (ethnicityItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, ethnicityItems);
       setMultiBarActive(j, ethnicity);
     }
   }
@@ -74,6 +76,7 @@ function setupListeners() {
   for (let i = 0; i < locPreItems.length; i++) {
     let j = campus_location_term_pre[i];
     (locPreItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, locPreItems);
       setMultiBarActive(j, campus_location_term_pre);
     }
   }
@@ -82,6 +85,7 @@ function setupListeners() {
   for (let i = 0; i < locPostItems.length; i++) {
     let j = campus_location_term_post[i];
     (locPostItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, locPostItems);
       setMultiBarActive(j, campus_location_term_post);
     }
   }
@@ -111,6 +115,23 @@ function setMultiBarActive(term, arr) {
       } else {
         (items[j] as any).style.visibility = 'initial';
       }
+    }
+  }
+}
+
+/**
+ * if selectedItem is not active, adds the pressed class to
+ * selectedItem and removes it from the other items.
+ *  */
+function togglePressedForButtonItems(selectedItem: Element, items: HTMLCollectionOf<Element>) {
+  if (selectedItem.classList.contains('pressed')) {
+    return; // fast exit
+  }
+  for(let i = 0; i < items.length; i++) {
+    if (items[i] === selectedItem) {
+      items[i].classList.add('pressed'); // is active button
+    } else {
+      items[i].classList.remove('pressed'); // is inactive button
     }
   }
 }
