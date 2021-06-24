@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import * as $ from 'jquery';
 import { renderWordCloud } from './shared/wordcloud';
 import { renderHorizontalBarChat } from './shared/horizontalbarchart.js';
-import { renderMultiSeriesHorizontalBarChat } from './shared/multiserieshorizontalbarchart.js';
+import { renderMultiSeriesHorizontalBarChat, renderGroupedBarChart } from './shared/multiserieshorizontalbarchart.js';
 import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
 import { renderBoxPlot} from './shared/boxplot.js';
@@ -27,6 +27,12 @@ import { EXCHANGE, EXCHANGE_GEO_DATA } from './data/exchange';
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
 let campus_location_term_post = ["loc-4a", "loc-4b"];
+const friends_groups = {
+  'friends-gain-coop': 'Gained over coop term',
+  'friends-loss-coop': 'Lost over coop term',
+  'friends-gain-study': 'Gained over study term',
+  'friends-loss-study': 'Lost over study term'
+};
 
 window.onload = () => {
   let options = {
@@ -58,6 +64,7 @@ function setupListeners() {
   for (let i = 0; i < scaleItems.length; i++) {
     let j = i;
     (scaleItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, scaleItems);
       setActive(j);
     }
   }
@@ -66,6 +73,7 @@ function setupListeners() {
   for (let i = 0; i < ethnicityItems.length; i++) {
     let j = ethnicity[i];
     (ethnicityItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, ethnicityItems);
       setMultiBarActive(j, ethnicity);
     }
   }
@@ -74,6 +82,7 @@ function setupListeners() {
   for (let i = 0; i < locPreItems.length; i++) {
     let j = campus_location_term_pre[i];
     (locPreItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, locPreItems);
       setMultiBarActive(j, campus_location_term_pre);
     }
   }
@@ -82,7 +91,26 @@ function setupListeners() {
   for (let i = 0; i < locPostItems.length; i++) {
     let j = campus_location_term_post[i];
     (locPostItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, locPostItems);
       setMultiBarActive(j, campus_location_term_post);
+    }
+  }
+
+  let friendsGainItems = document.getElementsByClassName('friends-gain-item');
+  for (let i = 0; i < friendsGainItems.length; i++) {
+    let currentClass = Object.keys(friends_groups)[i];
+    (friendsGainItems[i] as any).onclick = function() {
+      this.classList.toggle('pressed');
+      const isActive = this.classList.contains('pressed');
+      let items = document.getElementsByClassName(currentClass);
+      for (let j = 0; j < items.length; j++) {
+        if (isActive) {
+          (items[j] as any).style.visibility = 'initial';
+        } else {
+          (items[j] as any).style.visibility = 'hidden';
+        }
+      }
+      // setMultiBarActive(currentClass, Object.keys(friends_groups));
     }
   }
 
@@ -111,6 +139,23 @@ function setMultiBarActive(term, arr) {
       } else {
         (items[j] as any).style.visibility = 'initial';
       }
+    }
+  }
+}
+
+/**
+ * if selectedItem is not active, adds the pressed class to
+ * selectedItem and removes it from the other items.
+ *  */
+function togglePressedForButtonItems(selectedItem: Element, items: HTMLCollectionOf<Element>) {
+  if (selectedItem.classList.contains('pressed')) {
+    return; // fast exit
+  }
+  for(let i = 0; i < items.length; i++) {
+    if (items[i] === selectedItem) {
+      items[i].classList.add('pressed'); // is active button
+    } else {
+      items[i].classList.remove('pressed'); // is inactive button
     }
   }
 }
@@ -495,10 +540,8 @@ function renderRelationships(options) {
   );
 
   // friends section
-  renderHorizontalBarChat(d3.select('#friends-gain-coop'), FRIENDSHIPS.GAIN_COOP, options.width, 250, false);
-  renderHorizontalBarChat(d3.select('#friends-loss-coop'), FRIENDSHIPS.LOSS_COOP, options.width, 250, false);
-  renderHorizontalBarChat(d3.select('#friends-gain-school'), FRIENDSHIPS.GAIN_SCHOOL, options.width, 250, false);
-  renderHorizontalBarChat(d3.select('#friends-loss-school'), FRIENDSHIPS.LOSS_SCHOOL, options.width, 250, false);
+  renderGroupedBarChart(d3.select('#friends-gain-term'), FRIENDSHIPS.CUMULATIVE, options.fullWidth, 500, friends_groups,
+  {});
 
   // romance section
   renderHistogram(
