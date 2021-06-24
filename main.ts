@@ -18,7 +18,7 @@ import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXU
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
-import { POST_GRAD, POST_LOCATION, DEBT, MOTIVATIONS, POST_RETURN_HOME } from './data/future';
+import { POST_GRAD, POST_LOCATION, MOTIVATIONS, FULL_TIME_COMPENSATION, POST_RETURN_HOME, POST_CONTENTNESS, COOP_CONVERSION, FULL_TIME_COMPANY, CONT_FYDP, PENG } from './data/future';
 import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
 import { BUDGET, INVEST, RESP, SCHOOL_EXPENSES, NEW_DEBT, LOANS } from './data/finances';
 import {SICK, OHIP, MENTAL_HEALTH, MENTAL_HEALTH_ISSUES, EXERCISE_FREQ, INTRAMURALS, EXERCISE_TYPE, EXERCISE_WORDS, WEIGHT, RECREATIONAL_SUBSTANCES, IMPOSTER_SYNDROME, IMPOSTER_SYNDROME_NOW} from './data/health';
@@ -397,14 +397,58 @@ function renderMisc(options) {
 }
 
 function renderFuture(options) {
+  drawWordCloud(d3.select('#ft-company'), FULL_TIME_COMPANY, options);
+
+  renderPieChart(d3.select('#coop-conversion'), COOP_CONVERSION, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#cont-fydp'), CONT_FYDP, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#peng'), PENG, options.width * 0.75, options.width * 0.75);
+  renderPieChart(d3.select('#post-return-home'), POST_RETURN_HOME, options.width * 0.75, options.width * 0.75);
+
   renderHorizontalBarChat(d3.select('#post-grad'), POST_GRAD, options.width, 150, true);
   renderHorizontalBarChat(d3.select('#post-location'), POST_LOCATION, options.width, 180, true);
-  renderBoxPlot(d3.select('#debt'), DEBT, options.width, 280, {
-    xAxisTitle: 'Family income bracket',
-    yAxisTitle: 'Amount of debt upon graduation'
-  });
   renderHorizontalBarChat(d3.select('#motivation'), MOTIVATIONS, options.width, 180, true);
-  renderPieChart(d3.select('#post-return-home'), POST_RETURN_HOME, options.width * 0.75, options.width * 0.75);
+  renderHorizontalBarChat(d3.select('#post-contentness'), POST_CONTENTNESS, options.width, 180, false);
+
+  renderHistogram(d3.select('#ft-total'),
+    FULL_TIME_COMPENSATION.TOTAL,
+    options.width,
+    200,
+    {
+      binCount: 8,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'CAD'
+    }
+  );
+  renderHistogram(d3.select('#ft-hourly'),
+    FULL_TIME_COMPENSATION.HOURLY,
+    options.width,
+    200,
+    {
+      binCount: 5,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'CAD'
+    }
+  );
+  renderHistogram(d3.select('#ft-stock'),
+    FULL_TIME_COMPENSATION.STOCK,
+    options.width,
+    200,
+    {
+      binCount: 6,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'CAD'
+    }
+  );
+  renderHistogram(d3.select('#ft-signing'),
+    FULL_TIME_COMPENSATION.SIGNING,
+    options.width,
+    200,
+    {
+      binCount: 6,
+      yAxisTitle: 'Count',
+      xAxisTitle: 'CAD'
+    }
+  );
 }
 
 function renderTransfers(options) {
