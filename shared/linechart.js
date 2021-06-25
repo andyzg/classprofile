@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { color } from 'd3';
 
 var margin = {top: 20, right: 60, bottom: 50, left: 80};
 
@@ -8,7 +9,7 @@ function renderLineChart(elem, data, width, height, options) {
 
 
   // Setup a color scale for filling each box
-  var colorScale = d3.scaleOrdinal(d3.schemeSet2);
+  var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
   // set the ranges
   var x = d3.scaleBand()
@@ -97,7 +98,10 @@ function renderLineChart(elem, data, width, height, options) {
         })
         .attr("x", 40)
         .attr("dy", "0.35em")
-        .style("font", "10px sans-serif")
+        .attr("class", "line-chart-label")
+        .style("fill", function (d) {
+          return colorScale(i);
+        })
         .text(function(d) { return d.location; });
     }
   }

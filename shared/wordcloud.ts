@@ -2,7 +2,7 @@
 import * as d3 from 'd3';
 import * as WordCloud from 'd3-cloud';
 
-let interpolater = d3.interpolateRgbBasis(['#BBBBBB', '#444444']);
+let interpolater = d3.interpolateRgbBasis(['#ff7f0e', '#1f76b4']);
 
 function maxWordSize(words) {
   let max = 0;

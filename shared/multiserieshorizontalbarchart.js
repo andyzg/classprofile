@@ -180,7 +180,7 @@ function renderMultiSeriesHorizontalBarChat(elem, unsortedData, width, height, s
  *            - yAxisTitle: title to display on the y axis
  */
 function renderGroupedBarChart(elem, data, width, height, keys, options) {
-  const margin = {top: 20, right: 20, bottom: 30, left: 40};
+  const margin = {top: 10, right: 30, bottom: 30, left: 40};
   const graphWidth = width - margin.left - margin.right;
   const graphHeight = height - margin.top - margin.bottom;
   const svg = elem.append("svg")
@@ -190,6 +190,30 @@ function renderGroupedBarChart(elem, data, width, height, keys, options) {
   const barOptions = {
     ...options,
   };
+
+  // add titles if provided
+  if (options.yAxisTitle) {
+    // text label for the y axis
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("x",0 - (graphHeight / 2))
+      .attr("dy", "1em")
+      .attr("font-size", "10px")
+      .style("text-anchor", "middle")
+      .text(options.yAxisTitle);
+  }
+
+  if (options.xAxisTitle) {
+    // text label for the x axis
+    svg.append("text")
+      .attr("transform",
+            "translate(" + (graphWidth/2) + " ," +
+                            (graphHeight + margin.top + 30) + ")")
+      .style("text-anchor", "middle")
+      .attr("font-size", "10px")
+      .text(options.xAxisTitle);
+  }
 
   const x0 = d3.scaleBand()
     .rangeRound([0, graphWidth])
@@ -249,7 +273,6 @@ function renderGroupedBarChart(elem, data, width, height, keys, options) {
     .attr("fill", "#000")
     .attr("font-weight", "bold")
     .attr("text-anchor", "start")
-    .text(barOptions.yAxisTitle);
 
   const legend = g.append("g")
     .attr("font-family", "sans-serif")

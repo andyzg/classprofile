@@ -3,10 +3,18 @@ rect.bar {
   mix-blend-mode: difference;
 }
 
+#coop-cloud text {
+  mix-blend-mode: normal;
+}
+
 text {
-  fill: rgb(71, 71, 71);;
+  fill: rgb(71, 71, 71);
   mix-blend-mode: luminosity;
   font-family: 'Source Code Pro', monospace;
+  &.line-chart-label {
+    mix-blend-mode: normal;
+    font-size: 10px;
+  }
 }
 
 .arc text,
@@ -62,7 +70,7 @@ g.tick line {
 }
 
 
-.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item {
+.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item, .admission-salary-item {
   display: inline-block;
   font-family: 'Source Code Pro', monospace;
   height: 32px;

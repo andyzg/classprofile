@@ -17,7 +17,7 @@ import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD, TRANSFER_FROM, ENRICHED_VS_GRADES, SLEEP_VS_GRADES } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE, EMIGRATED_COUNTRY, NUM_LANGUAGE, LANGUAGE_KNOWN } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
-import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, AGE_SALARY, HACKATHON_SALARY, SIDE_SALARY, SIDE_SALARY_2, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON } from './data/coop';
+import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, HACKATHON_SALARY, SIDE_SALARY, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON, COOP_RATINGS, COOP_TYPES, COOP_BREADOWN, COOP_JOBS } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
 import { POST_GRAD, POST_LOCATION, MOTIVATIONS, FULL_TIME_COMPENSATION, POST_RETURN_HOME, POST_CONTENTNESS, COOP_CONVERSION, FULL_TIME_COMPANY, CONT_FYDP, PENG } from './data/future';
 import { FAMILY, FRIENDSHIPS, ROMANCE } from './data/relationships';
@@ -29,11 +29,41 @@ let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
 let campus_location_term_post = ["loc-4a", "loc-4b"];
 let enriched_vs_grades = ["enriched-overall", "enriched-first-year"];
+let admission_salary = ['admission-salary-overall','admission-salary-first-year'];
 const friends_groups = {
   'friends-gain-coop': 'Gained over coop term',
   'friends-loss-coop': 'Lost over coop term',
   'friends-gain-study': 'Gained over study term',
   'friends-loss-study': 'Lost over study term'
+};
+
+const coop_ratings = {
+  'rating-outstanding': 'Outstanding',
+  'rating-excellent': 'Excellent',
+  'rating-very-good': 'Very Good',
+  'rating-satisfactory': 'Satisfactory'
+};
+
+const coop_types = {
+  'coop-swe': 'Software Engineering / Web Developer',
+  'coop-qa': 'QA / Testing',
+  'coop-devops': 'DevOps',
+  'coop-data-science': 'Data Science',
+  'coop-research': 'Research',
+  'coop-others': 'Others',
+};
+
+const coop_breakdown = {
+  'coop-app-num': 'Waterlooworks App.',
+  'coop-app-num-ext': 'External App.',
+  'coop-interviews': 'Interviews',
+  'coop-offers': 'Offers',
+};
+
+const coop_jobs = {
+  'coop-first-round': 'First Round',
+  'coop-continuous': 'Continuous',
+  'coop-external': 'External',
 };
 
 window.onload = () => {
@@ -59,6 +89,7 @@ window.onload = () => {
   setMultiBarActive("loc-1a", campus_location_term_pre);
   setMultiBarActive("loc-4a", campus_location_term_post);
   setMultiBarActive("enriched-overall", enriched_vs_grades);
+  setMultiBarActive("admission-salary-overall", admission_salary);
   setupListeners();
 }
 
@@ -126,6 +157,15 @@ function setupListeners() {
     }
   }
 
+  let admissionSalary = document.getElementsByClassName('admission-salary-item');
+  for (let i = 0; i < admissionSalary.length; i++) {
+    let j = admission_salary[i];
+    (admissionSalary[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, admissionSalary);
+      setMultiBarActive(j, admission_salary);
+    }
+  }
+
   window.addEventListener("scroll", onScroll);
 }
 
@@ -186,7 +226,7 @@ function onScroll(e) {
 function drawCoopWordCloud(elem, options) {
   let data = COMPANY_WORK_COUNT['data'];
   let words: any[] = [];
-  let textSize = 10;
+  let textSize = 15;
   if (options.fullWidth < 1200) {
     textSize = Math.pow(options.fullWidth / 1200, 0.25) * textSize;
   }
@@ -226,34 +266,54 @@ function drawWordCloud(elem, data, options, isFullWidth: boolean = false, height
 function renderCoop(options) {
   drawCoopWordCloud(d3.select('#coop-cloud'), options);
   renderBoxPlot(d3.select('#salary'), SALARY, options.width, 350, {
-    xAxisTitle: 'Co-op term number',
-    yAxisTitle: 'Monthly compensation',
+    xAxisTitle: 'Co-op term #',
+    yAxisTitle: 'Hourly compensation',
     tickFormat: (d) => { return '$' + d; }
   });
   renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.width, 500, {
     lineLabels: [{
       'x': '6th',
-      'value': 57,
+      'value': 3,
       'location': 'California'
     }, {
       'x': '6th',
-      'value': 23,
-      'location': 'East Coast Canada'
-    }, {
-      'x': '6th',
-      'value': 5,
-      'location': 'West Coast Canada'
-    }, {
-      'x': '6th',
-      'value': 17,
-      'location': 'PNW USA'
-    }, {
-      'x': '6th',
-      'value': 6,
+      'value': 11,
       'location': 'East Coast USA'
     }, {
       'x': '6th',
-      'value': 2,
+      'value': 12.25,
+      'location': 'GTA / Toronto'
+    }, {
+      'x': '6th',
+      'value': 5,
+      'location': 'K / W'
+    }, {
+      'x': '6th',
+      'value': 2.25,
+      'location': 'MW USA'
+    }, {
+      'x': '6th',
+      'value': 0.75,
+      'location': 'Ott. / MTL'
+    }, {
+      'x': '6th',
+      'value': 0.25,
+      'location': 'Other Ontario'
+    }, {
+      'x': '6th',
+      'value': 1.75,
+      'location': 'PNW USA'
+    }, {
+      'x': '6th',
+      'value': 11.75,
+      'location': 'Remote'
+    }, {
+      'x': '6th',
+      'value': 1.25,
+      'location': 'West Coast Canada'
+    }, {
+      'x': '6th',
+      'value': -0.25,
       'location': 'Outside NA'
     }],
     xAxisTitle: 'Co-op term number',
@@ -261,28 +321,28 @@ function renderCoop(options) {
     tickFormat: (d) => { return d + '%'; }
   });
   renderHorizontalBarChat(d3.select('#favourite-location'), FAVOURITE_LOCATION, options.width, 240, true);
-  renderBoxPlot(d3.select('#age-salary'), AGE_SALARY, options.width, 280, {
-    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
-    xAxisTitle: 'Age started coding'
-  });
+  // renderBoxPlot(d3.select('#age-salary'), AGE_SALARY, options.width, 280, {
+  //   yAxisTitle: 'Average first 3 co-op hourly salary in CAD',
+  //   xAxisTitle: 'Age started coding'
+  // });
   renderBoxPlot(d3.select('#hackathon-salary'), HACKATHON_SALARY, options.width, 400, {
     xAxisTitle: 'Number of hackathons attended',
-    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
+    yAxisTitle: 'Average co-op hourly salary in CAD',
   });
   renderBoxPlot(d3.select('#side-salary'), SIDE_SALARY, options.width, 350, {
     xAxisTitle: 'Commitment to side projects',
-    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
+    yAxisTitle: 'Average co-op hourly salary in CAD',
   });
-  renderBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350, {
-    yAxisTitle: 'Average first 3 co-op monthly salary in CAD',
+  renderMultiSeriesBoxPlot(d3.select('#admission-salary'), ADMISSION_SALARY, options.width, 350, {
+    yAxisTitle: 'Average co-op hourly salary in CAD',
     xAxisTitle: 'Admission average',
-  });
+  }, {"admission-salary-overall": 0, "admission-salary-first-year": 1});
   renderDotPlot(d3.select('#grade-salary'), GRADE_SALARY, options.width, 400, {
-    yAxisTitle: 'Monthly compensation in CAD',
+    yAxisTitle: 'Hourly compensation in CAD',
     xAxisTitle: 'Cumulative average',
     rawSize: true,
     domain: [50, 100],
-    range: [0, 18000],
+    range: [0, 150],
   });
   renderLineChart(d3.select('#gender-salary'), GENDER_SALARY, options.width, 300, {
     lineLabels: [{
@@ -294,7 +354,7 @@ function renderCoop(options) {
       'value': 9793,
       'location': 'Female'
     }],
-    yAxisTitle: 'Monthly salary in CAD',
+    yAxisTitle: 'Hourly salary in CAD',
     xAxisTitle: 'Co-op term number',
   });
   renderPieChart(d3.select('#missed_interview'), MISSED_INTERVIEW, options.width * 0.75, options.width * 0.75);
@@ -302,6 +362,22 @@ function renderCoop(options) {
   
   drawWordCloud(d3.select("#favourite-coop"), FAVOURITE_COOP, options)
   renderHorizontalBarChat(d3.select("#favourite-coop-reasons"), FAVOURITE_COOP_REASON, options.width, 250, true)
+  renderGroupedBarChart(d3.select('#coop-ratings'), COOP_RATINGS, options.width, 250, coop_ratings,
+  {
+    yAxisTitle: 'Number of respondents',
+  });
+  renderGroupedBarChart(d3.select('#coop-types'), COOP_TYPES, options.width, 250, coop_types,
+  {
+    yAxisTitle: 'Number of respondents',
+  });
+  renderGroupedBarChart(d3.select('#coop-breakdown'), COOP_BREADOWN, options.width, 250, coop_breakdown,
+  {
+    yAxisTitle: 'Number of respondents',
+  });
+  renderGroupedBarChart(d3.select('#coop-jobs'), COOP_JOBS, options.width, 250, coop_jobs,
+  {
+    yAxisTitle: 'Percent of respondents',
+  });
 }
 
 function renderLifestyle(options) {
