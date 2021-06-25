@@ -5,7 +5,8 @@ import { renderHorizontalBarChat } from './shared/horizontalbarchart.js';
 import { renderMultiSeriesHorizontalBarChat, renderGroupedBarChart } from './shared/multiserieshorizontalbarchart.js';
 import { renderPieChart } from './shared/piechart.js';
 import { renderLineChart } from './shared/linechart.js';
-import { renderBoxPlot} from './shared/boxplot.js';
+import { renderBoxPlot } from './shared/boxplot.js';
+import { renderMultiSeriesBoxPlot } from './shared/multiseriesboxplot.js';
 import * as util from './shared/utils';
 import { renderDotPlot, renderBinnedDotLine } from './shared/dotplot.js';
 import { renderHistogram } from './shared/histogram.js';
@@ -27,6 +28,7 @@ import { EXCHANGE, EXCHANGE_GEO_DATA } from './data/exchange';
 let ethnicity = ["ethnicity-all", "ethnicity-women", "ethnicity-men"];
 let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a", "loc-3b"];
 let campus_location_term_post = ["loc-4a", "loc-4b"];
+let enriched_vs_grades = ["enriched-overall", "enriched-first-year"];
 const friends_groups = {
   'friends-gain-coop': 'Gained over coop term',
   'friends-loss-coop': 'Lost over coop term',
@@ -56,6 +58,7 @@ window.onload = () => {
   setMultiBarActive("ethnicity-all", ethnicity);
   setMultiBarActive("loc-1a", campus_location_term_pre);
   setMultiBarActive("loc-4a", campus_location_term_post);
+  setMultiBarActive("enriched-overall", enriched_vs_grades);
   setupListeners();
 }
 
@@ -111,6 +114,15 @@ function setupListeners() {
         }
       }
       // setMultiBarActive(currentClass, Object.keys(friends_groups));
+    }
+  }
+
+  let enrichedGradesItems = document.getElementsByClassName('enriched-grades-item');
+  for (let i = 0; i < enrichedGradesItems.length; i++) {
+    let j = enriched_vs_grades[i];
+    (enrichedGradesItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, enrichedGradesItems);
+      setMultiBarActive(j, enriched_vs_grades);
     }
   }
 
@@ -341,10 +353,10 @@ function renderAcademics(options) {
     yAxisTitle: 'Cumulative average',
     xAxisTitle: 'Parents\' education',
   });
-  renderBoxPlot(d3.select('#enriched-grades'), ENRICHED_VS_GRADES, options.width, 280, {
+  renderMultiSeriesBoxPlot(d3.select('#enriched-grades'), ENRICHED_VS_GRADES, options.width, 280, {
     yAxisTitle: 'Cumulative average',
-    xAxisTitle: 'Enriched Program (EP)',
-  });
+    xAxisTitle: 'Enriched Programs',
+  }, {"enriched-overall": 0, "enriched-first-year": 1});
   renderBoxPlot(d3.select('#sleep-grades'), SLEEP_VS_GRADES, options.width, 280, {
     yAxisTitle: 'Cumulative average',
     xAxisTitle: 'Hours of Sleep',
