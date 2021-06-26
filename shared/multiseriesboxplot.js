@@ -21,8 +21,8 @@ function renderMultiSeriesBoxPlot(elem, data, width, height, options, numSeries)
   // for (var [key, groupCount] of Object.entries(data)) {
   for (var i =  0; i < data.length; i++) {
     var key = data[i]["name"];
-    var groupCount =  data[i]["value"]
-    var toggle =  data[i]["toggle"]
+    var groupCount =  data[i]["value"];
+    var toggle =  data[i]["toggle"];
     var localMin = d3.min(groupCount);
     var localMax = d3.max(groupCount);
     if (localMin < globalMin) globalMin = localMin

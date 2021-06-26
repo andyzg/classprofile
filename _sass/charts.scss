@@ -70,7 +70,7 @@ g.tick line {
 }
 
 
-.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item, .admission-salary-item {
+.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item, .admission-salary-item, .entrance-grades-item {
   display: inline-block;
   font-family: 'Source Code Pro', monospace;
   height: 32px;
@@ -139,4 +139,14 @@ g.tick line {
   &.pressed {
     background-color: #8DA0CC;
   }
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding-left:5px;
+  padding-right: 5px;
 }

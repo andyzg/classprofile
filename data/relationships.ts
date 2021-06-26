@@ -32,10 +32,10 @@ const ROMANCE = {
   MONTHS_NON_SINGLE: [10,9,12,20,29,6,0,20,51,0,4,18,0,0,52,48,2,24,4,40,0,0,0,12,25,0,13,36,10,21,4,28,51,24,26,20,0,11,52,28,40,52,0,0,52,0,20,28,38,0,24,53,32,56,0,47,0],
   DEGREE_NON_SINGLE: [],
   RELATIONSHIP_COUNT: [{'name': '0', 'value': 15},{'name': '1', 'value': 26},{'name': '2', 'value': 12},{'name': '3', 'value': 3}],
-  SEXUAL_PARTNERS: {
-    'Before university': [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,4],
-    'During university': [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,5,7,9],
-  },
+  SEXUAL_PARTNERS: [
+    {'name': 'Before university', 'value': [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,4] },
+    {'name': 'During university', 'value': [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,5,7,9] },
+  ],
   SECEST: [{'name':'No','value':50},{'name':'Yes (SE 2021)','value':3},{'name':'Yes (not SE 2021)','value':2},{'name':'Yes (both)','value':2}],
   CHEATING: [{'name':'No','value':47},{'name':'Yes','value':8}],
   CHEATING_REASONS: [{'name':'Have been cheated on','value':6},{'name':'Helped someone cheat','value':2},{'name':'Cheated on someone','value':2}],

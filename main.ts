@@ -14,7 +14,7 @@ import { renderGeographicMap } from './shared/geographicmap.js';
 
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES, PROGRAMMING_LANGUAGE, EDITOR, MOBILE_OS } from './data/lifestyle';
-import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD, TRANSFER_FROM, ENRICHED_VS_GRADES, SLEEP_VS_GRADES } from './data/academics';
+import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD, TRANSFER_FROM, ENRICHED_VS_GRADES, SLEEP_VS_GRADES, ENTRANCE_VS_GRADES } from './data/academics';
 import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE, EMIGRATED_COUNTRY, NUM_LANGUAGE, LANGUAGE_KNOWN } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, HACKATHON_SALARY, SIDE_SALARY, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON, COOP_RATINGS, COOP_TYPES, COOP_BREADOWN, COOP_JOBS } from './data/coop';
@@ -30,6 +30,7 @@ let campus_location_term_pre = ["loc-1a", "loc-1b", "loc-2a", "loc-2b","loc-3a",
 let campus_location_term_post = ["loc-4a", "loc-4b"];
 let enriched_vs_grades = ["enriched-overall", "enriched-first-year"];
 let admission_salary = ['admission-salary-overall','admission-salary-first-year'];
+let entrance_vs_grades = ["entrance-overall", "entrance-first-year"];
 const friends_groups = {
   'friends-gain-coop': 'Gained over coop term',
   'friends-loss-coop': 'Lost over coop term',
@@ -90,6 +91,7 @@ window.onload = () => {
   setMultiBarActive("loc-4a", campus_location_term_post);
   setMultiBarActive("enriched-overall", enriched_vs_grades);
   setMultiBarActive("admission-salary-overall", admission_salary);
+  setMultiBarActive("entrance-overall", entrance_vs_grades);
   setupListeners();
 }
 
@@ -163,6 +165,15 @@ function setupListeners() {
     (admissionSalary[i] as any).onclick = function() {
       togglePressedForButtonItems(this, admissionSalary);
       setMultiBarActive(j, admission_salary);
+    }
+  }
+  
+  let entranceGradesItems = document.getElementsByClassName('entrance-grades-item');
+  for (let i = 0; i < entranceGradesItems.length; i++) {
+    let j = entrance_vs_grades[i];
+    (entranceGradesItems[i] as any).onclick = function() {
+      togglePressedForButtonItems(this, entranceGradesItems);
+      setMultiBarActive(j, entrance_vs_grades);
     }
   }
 
@@ -433,6 +444,10 @@ function renderAcademics(options) {
     yAxisTitle: 'Cumulative average',
     xAxisTitle: 'Enriched Programs',
   }, {"enriched-overall": 0, "enriched-first-year": 1});
+  renderMultiSeriesBoxPlot(d3.select('#entrance-grades'), ENTRANCE_VS_GRADES, options.width, 280, {
+    yAxisTitle: 'Cumulative average',
+    // xAxisTitle: 'Enriched Program (EP)',
+  }, {"entrance-overall": 0, "entrance-first-year": 1});
   renderBoxPlot(d3.select('#sleep-grades'), SLEEP_VS_GRADES, options.width, 280, {
     yAxisTitle: 'Cumulative average',
     xAxisTitle: 'Hours of Sleep',

@@ -8,15 +8,23 @@ function renderBoxPlot(elem, data, width, height, options) {
 
   var barWidth = 30;
 
+  var keys = [];
+  for (var i =  0; i < data.length; i++) {
+    var key = data[i]["name"];
+    keys.push(key);
+  }
+
   // Setup a color scale for filling each box
   var colorScale = d3.scaleOrdinal(d3.schemeSet2)
-    .domain(Object.keys(data));
+    .domain(keys);
 
   var globalMax = 0
   var globalMin = 99999999;
   // Prepare the data for the box plots
   var boxPlotData = [];
-  for (var [key, groupCount] of Object.entries(data)) {
+  for (var i =  0; i < data.length; i++) {
+    var key = data[i]["name"];
+    var groupCount =  data[i]["value"];
     var localMin = d3.min(groupCount);
     var localMax = d3.max(groupCount);
     if (localMin < globalMin) globalMin = localMin
@@ -33,7 +41,7 @@ function renderBoxPlot(elem, data, width, height, options) {
 
   // Compute an ordinal xScale for the keys in boxPlotData
   var xScale = d3.scalePoint()
-    .domain(Object.keys(data))
+    .domain(keys)
     .rangeRound([0, width])
     .padding([0.5]);
 
