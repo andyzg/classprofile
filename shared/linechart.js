@@ -90,8 +90,9 @@ function renderLineChart(elem, data, width, height, options) {
   }
 
   if (options.lineLabels) {
+    let maxLabelWidth = 0;
     for (var i in options.lineLabels) {
-    svg.append("text")
+      const textElem = svg.append("text")
         .datum(options.lineLabels[i])
         .attr("transform", function(d) {
           return "translate(" + x(d.x) + "," + y(d.value) + ")";
@@ -102,7 +103,17 @@ function renderLineChart(elem, data, width, height, options) {
         .style("fill", function (d) {
           return colorScale(i);
         })
-        .text(function(d) { return d.location; });
+        .text(function(d) {
+          return d.location;
+        });
+      const textElemWidth = textElem.node().getBoundingClientRect().width;
+      if (textElemWidth > maxLabelWidth) {
+        maxLabelWidth = textElemWidth;
+      }
+    }
+    // increase width of svg by linechart label amount + a margin of 10
+    if (maxLabelWidth > (margin.right - 10)) {
+      elem.select('svg').attr('width',  width + margin.left + maxLabelWidth + 10);
     }
   }
 

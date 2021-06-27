@@ -751,10 +751,10 @@ const COOP_TYPES = [
   {'group': 'Coop 3', 'coop-swe': 49, 'coop-qa': 1, 'coop-devops': 0, 'coop-data-science': 1, 'coop-research': 0, 'coop-others': 0},
   {'group': 'Coop 4', 'coop-swe': 49, 'coop-qa': 0, 'coop-devops': 0, 'coop-data-science': 2, 'coop-research': 0, 'coop-others': 1},
   {'group': 'Coop 5', 'coop-swe': 47, 'coop-qa': 0, 'coop-devops': 0, 'coop-data-science': 1, 'coop-research': 2, 'coop-others': 1},
-  {'group': 'Coop 6', 'coop-swe': 39, 'coop-qa': 0, 'coop-devops': 0, 'coop-data-sciencey': 0, 'coop-research': 1, 'coop-others': 3},
+  {'group': 'Coop 6', 'coop-swe': 39, 'coop-qa': 0, 'coop-devops': 0, 'coop-data-science': 0, 'coop-research': 1, 'coop-others': 3},
 ]
 
-const COOP_BREADOWN = [
+const COOP_BREAKDOWN = [
   {'group': 'Coop 1', 'coop-app-num': 82.46, 'coop-app-num-ext': 93.6, 'coop-interviews': 6.53, 'coop-offers': 1.6},
   {'group': 'Coop 2', 'coop-app-num': 62.7, 'coop-app-num-ext': 56.6, 'coop-interviews': 8.18, 'coop-offers': 2.15},
   {'group': 'Coop 3', 'coop-app-num': 53.18, 'coop-app-num-ext': 49.82, 'coop-interviews': 6.56, 'coop-offers': 2.16},
@@ -791,6 +791,6 @@ export {
   FAVOURITE_COOP_REASON,
   COOP_RATINGS,
   COOP_TYPES,
-  COOP_BREADOWN,
+  COOP_BREAKDOWN,
   COOP_JOBS,
 }

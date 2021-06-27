@@ -695,7 +695,7 @@ let OVERLOADING_REASONS = [
     "name": "Graduate earlier",
     "value": 2
   }, {
-    "name": "Hve a lighter term after",
+    "name": "Have a lighter term after",
     "value": 14
   },
   {

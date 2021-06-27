@@ -187,9 +187,6 @@ function renderGroupedBarChart(elem, data, width, height, keys, options) {
     .attr("width", width)
     .attr("height", height)
   const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  const barOptions = {
-    ...options,
-  };
 
   // add titles if provided
   if (options.yAxisTitle) {
