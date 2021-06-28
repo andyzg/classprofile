@@ -7,7 +7,6 @@ function renderLineChart(elem, data, width, height, options) {
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
 
-
   // Setup a color scale for filling each box
   var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -56,7 +55,7 @@ function renderLineChart(elem, data, width, height, options) {
     // Add the valueline path.
     svg.append("path")
         .data([data])
-        .attr("class", "line")
+        .attr("class", "line " + options.toggle + "-" + i)
         .style("stroke", (d) => {
           return colorScale(i);
         })
@@ -91,15 +90,19 @@ function renderLineChart(elem, data, width, height, options) {
 
   if (options.lineLabels) {
     let maxLabelWidth = 0;
+    let lineLabelOffset = 0;
+    if (width >= 1000) {
+      lineLabelOffset = 60;
+    }
     for (var i in options.lineLabels) {
       const textElem = svg.append("text")
         .datum(options.lineLabels[i])
         .attr("transform", function(d) {
           return "translate(" + x(d.x) + "," + y(d.value) + ")";
         })
-        .attr("x", 40)
+        .attr("x", 40 + lineLabelOffset)
         .attr("dy", "0.35em")
-        .attr("class", "line-chart-label")
+        .attr("class", "line-chart-label " + options.toggle + "-" + i)
         .style("fill", function (d) {
           return colorScale(i);
         })

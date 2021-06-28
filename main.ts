@@ -31,6 +31,10 @@ let campus_location_term_post = ["loc-4a", "loc-4b"];
 let enriched_vs_grades = ["enriched-overall", "enriched-first-year"];
 let admission_salary = ['admission-salary-overall','admission-salary-first-year'];
 let entrance_vs_grades = ["entrance-overall", "entrance-first-year"];
+let work_location = ["work-location-0", "work-location-1", "work-location-2", "work-location-3", "work-location-4", "work-location-5",
+"work-location-6", "work-location-7", "work-location-8", "work-location-9", "work-location-10"];
+
+
 const friends_groups = {
   'friends-gain-coop': 'Gained over coop term',
   'friends-loss-coop': 'Lost over coop term',
@@ -92,6 +96,7 @@ window.onload = () => {
   setMultiBarActive("enriched-overall", enriched_vs_grades);
   setMultiBarActive("admission-salary-overall", admission_salary);
   setMultiBarActive("entrance-overall", entrance_vs_grades);
+  // setMultiBarActive("work-location-0", work_location);
   setupListeners();
 }
 
@@ -174,6 +179,23 @@ function setupListeners() {
     (entranceGradesItems[i] as any).onclick = function() {
       togglePressedForButtonItems(this, entranceGradesItems);
       setMultiBarActive(j, entrance_vs_grades);
+    }
+  }
+
+  let workLocationItems = document.getElementsByClassName('work-location-item');
+  for (let i = 0; i < workLocationItems.length; i++) {
+    let currentClass = work_location[i];
+    (workLocationItems[i] as any).onclick = function() {
+      this.classList.toggle('pressed');
+      const isActive = this.classList.contains('pressed');
+      let items = document.getElementsByClassName(currentClass);
+      for (let j = 0; j < items.length; j++) {
+        if (isActive) {
+          (items[j] as any).style.visibility = 'initial';
+        } else {
+          (items[j] as any).style.visibility = 'hidden';
+        }
+      }
     }
   }
 
@@ -281,7 +303,8 @@ function renderCoop(options) {
     yAxisTitle: 'Hourly compensation',
     tickFormat: (d) => { return '$' + d; }
   });
-  renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.width, 500, {
+  renderLineChart(d3.select('#work-location'), WORK_LOCATION, options.fullWidth, 500, {
+    toggle: 'work-location',
     lineLabels: [{
       'x': '6th',
       'value': 3,
@@ -289,7 +312,7 @@ function renderCoop(options) {
     }, {
       'x': '6th',
       'value': 11,
-      'location': 'East Coast USA'
+      'location': 'East Coast US'
     }, {
       'x': '6th',
       'value': 12.25,
@@ -301,7 +324,7 @@ function renderCoop(options) {
     }, {
       'x': '6th',
       'value': 2.25,
-      'location': 'MW USA'
+      'location': 'MW US'
     }, {
       'x': '6th',
       'value': 0.75,
@@ -313,7 +336,7 @@ function renderCoop(options) {
     }, {
       'x': '6th',
       'value': 1.75,
-      'location': 'PNW USA'
+      'location': 'PNW US'
     }, {
       'x': '6th',
       'value': 11.75,
@@ -356,6 +379,7 @@ function renderCoop(options) {
     range: [0, 150],
   });
   renderLineChart(d3.select('#gender-salary'), GENDER_SALARY, options.width, 300, {
+    toggle: 'gender-salary',
     lineLabels: [{
       'x': '6th',
       'value': 50,
@@ -432,6 +456,7 @@ function renderAcademics(options) {
   renderHorizontalBarChat(d3.select('#favourite-elective'), FAVOURITE_ELECTIVE, options.width, 390, false);
   renderHorizontalBarChat(d3.select('#transfer-from'), TRANSFER_FROM, options.width, 100, false);
   renderLineChart(d3.select('#attendance'), ATTENDANCE, options.width, 300, {
+    toggle: 'attendance',
     yAxisTitle: 'Proportion of class attended',
     xAxisTitle: 'Study term number',
     range: [50, 100]

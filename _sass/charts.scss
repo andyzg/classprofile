@@ -70,10 +70,9 @@ g.tick line {
 }
 
 
-.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item, .admission-salary-item, .entrance-grades-item {
+.loc-pre-item, .loc-post-item, .ethnicity-item, .friends-gain-item, .enriched-grades-item, .admission-salary-item, .entrance-grades-item, .work-location-item {
   display: inline-block;
   font-family: 'Source Code Pro', monospace;
-  height: 32px;
   line-height: 32px;
   text-align: center;
   padding-left: 5px;
@@ -138,6 +137,94 @@ g.tick line {
   background-color: #d1d9ea;
   &.pressed {
     background-color: #8DA0CC;
+  }
+}
+
+
+.work-location-item {
+  padding-top: 8px;
+  line-height: 20px;
+  min-height:32px;
+  font-size: 15px;
+
+
+}
+
+// Work location uses different set of colors
+.wl1 {
+  background-color: rgb(127, 189, 233);
+  &.pressed {
+    background-color: rgb(31, 119, 180);
+  }
+}
+
+.wl2 {
+  background-color: rgb(255, 191, 134);
+  &.pressed {
+    background-color: rgb(255, 127, 14);
+  }
+}
+
+.wl3 {
+  background-color: rgb(134, 222, 134);
+  &.pressed {
+    background-color: rgb(44, 160, 44);
+  }
+}
+
+.wl4 {
+  background-color:  rgb(235, 146, 146);
+  &.pressed {
+    background-color: rgb(214, 39, 40);
+  }
+}
+
+.wl5 {
+  background-color: rgb(201, 179, 222);
+  &.pressed {
+    background-color: rgb(148, 103, 189);
+  }
+}
+
+.wl6 {
+  background-color: rgb(203, 166, 158);
+  &.pressed {
+    background-color: rgb(140, 86, 75);
+  }
+}
+
+.wl7 {
+  background-color: rgb(241, 187, 224);
+  &.pressed {
+    background-color: rgb(227, 119, 194);
+  }
+}
+
+.wl8 {
+  background-color: rgb(191, 191, 191);
+  &.pressed {
+    background-color: rgb(127, 127, 127);
+  }
+}
+
+.wl9 {
+  background-color: rgb(232, 233, 133);
+  &.pressed {
+    background-color: rgb(188, 189, 34);
+  }
+}
+
+.wl10 {
+  background-color: rgb(129, 230, 240);
+  &.pressed {
+    background-color: rgb(23, 190, 207);
+  }
+}
+
+.wl11 {
+  background-color: rgb(127, 189, 233);
+  &.pressed {
+    background-color: rgb(31, 119, 180);
   }
 }
 
