@@ -414,6 +414,12 @@ let CAT_OR_DOG = [{
   "value": 18
 }];
 
+const SIBLINGS_PARENTS = [
+  {'group': '0', 'siblings-inc-zero': 1, 'siblings-inc-one': 8, 'siblings-inc-two': 4, 'siblings-inc-three': 4, 'siblings-inc-four': 1, 'siblings-inc-five': 0, 'siblings-inc-six': 2},
+  {'group': '1', 'siblings-inc-zero': 1, 'siblings-inc-one': 8, 'siblings-inc-two': 4, 'siblings-inc-three': 9, 'siblings-inc-four': 1, 'siblings-inc-five': 1, 'siblings-inc-six': 4},
+  {'group': '2+', 'siblings-inc-zero': 0, 'siblings-inc-one': 6, 'siblings-inc-two': 2, 'siblings-inc-three': 3, 'siblings-inc-four': 0, 'siblings-inc-five': 1, 'siblings-inc-six': 1},
+]
+
 let ADMISSION_AVERAGE = [85,85,85,87,90,93,93,94,94,94,94.5,94.5,95,95,95,95,95,95,95,95,95.4,95.6,96,96,96,96,96,96,96,96,96,96,96,96.4,96.5,96.5,97,97,97,97,97,97,97.5,97.5,97.5,97.5,98,98,98,98,98,98,98,98,98,98,98,98,99,99,99.2,99.38]
 
 export {
@@ -436,5 +442,6 @@ export {
   ADMISSION_AVERAGE,
   EMIGRATED_COUNTRY,
   NUM_LANGUAGE,
-  LANGUAGE_KNOWN
+  LANGUAGE_KNOWN,
+  SIBLINGS_PARENTS
 }

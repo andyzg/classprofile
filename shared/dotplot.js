@@ -7,8 +7,7 @@ function renderDotPlot(elem, data, width, height, options) {
   var MAX = {};
 
   // Setup a color scale for filling each box
-  var colorScale = d3.scaleOrdinal(d3.schemeSet2)
-    .domain([0, 6]);
+  var colorScale = ["#66C2A6", "#A6D954", "#FFD92F", "#E5C594", "#E88AC3"," #8DA0CC"];
 
   width = width - margin.left - margin.right;
   height = height - margin.top - margin.bottom;
@@ -85,7 +84,7 @@ function renderDotPlot(elem, data, width, height, options) {
     })
     .style("fill", function(d) {
       if ('term' in d) {
-        return colorScale(d['term']);
+        return colorScale[d['term'] % 6];
       }
       return '#000';
     })

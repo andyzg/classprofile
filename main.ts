@@ -15,7 +15,7 @@ import { renderGeographicMap } from './shared/geographicmap.js';
 import { TRANSFERRED,TERM_TRANSFERRED,REASONS_TRANSFERRED, DISLIKED_COURSES_TRANSFERRED,REGRET_TRANSFFERED } from './data/transfers'
 import { EXTRACURRICULARS, GROCERY_STORES, TRAVEL_LOCATIONS, RESTAURANTS, SLEEP_TIME, SLEEP_DURATION, COOKING_FREQUENCY, EATING_OUT_FREQUENCY, FAVOURITE_EXERCISE, DESIGN_TEAM, PARTIES, HAPPY_THINGS, NEW_HOBBIES, PROGRAMMING_LANGUAGE, EDITOR, MOBILE_OS } from './data/lifestyle';
 import { FAVOURITE_MANDATORY, FAVOURITE_ELECTIVE, DISLIKED_MANDATORY, ATTENDANCE, GRADES, PARENT_GRADES, ATTENDANCE_GRADE, CAMPUS_LOCATION_PRE, CAMPUS_LOCATION_POST, FAVOURITE_PROF_COUNT, FAILING, OPTIONS, OVERLOADING, OVERLOADING_REASONS, LARGEST_WORKLOAD, TRANSFER_FROM, ENRICHED_VS_GRADES, SLEEP_VS_GRADES, ENTRANCE_VS_GRADES } from './data/academics';
-import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE, EMIGRATED_COUNTRY, NUM_LANGUAGE, LANGUAGE_KNOWN } from './data/background';
+import { INTERNATIONAL, PARENT_EDUCATION, ETHNICITY, GENDER, YEAR_OF_BIRTH, SEXUAL_ORIENTATION, HOME_LOCATION, FAMILY_INCOME, IMMIGRATED, SIBLINGS, ENRICHED_PROGRAM, CEGEP, CEGEP_ATTENDED, MOTHER_TONGUE, PROGRAMMING, CAT_OR_DOG, ADMISSION_AVERAGE, EMIGRATED_COUNTRY, NUM_LANGUAGE, LANGUAGE_KNOWN, SIBLINGS_PARENTS } from './data/background';
 import { ORIGINAL, CHOOSE_PROGRAM, GENDER_RATING } from './data/outcome';
 import { SALARY, WORK_LOCATION, FAVOURITE_LOCATION, HACKATHON_SALARY, SIDE_SALARY, ADMISSION_SALARY, COMPANY_WORK_COUNT, FAVOURITE_COMPANIES, GRADE_SALARY, GENDER_SALARY,LATE_INTERVIEWER, LATE_INTERVIEW, MISSED_INTERVIEW, FAVOURITE_COOP, FAVOURITE_COOP_REASON, COOP_RATINGS, COOP_TYPES, COOP_BREAKDOWN, COOP_JOBS } from './data/coop';
 import { BURNOUT, FIGHTS, REDDIT_USAGE, CRYING, TRANSFER_THOUGHTS, DROPOUT_THOUGHTS, SE21_GRAD } from './data/misc';
@@ -63,6 +63,16 @@ const coop_breakdown_legend = {
   'coop-app-num-ext': 'External App.',
   'coop-interviews': 'Interviews',
   'coop-offers': 'Offers',
+};
+
+const siblings_parents_legend = {
+  'siblings-inc-zero': '0-50k / year',
+  'siblings-inc-one': '50k-100k / year',
+  'siblings-inc-two': '100k-150k / year',
+  'siblings-inc-three': '150k-200k / year',
+  'siblings-inc-four': '200k-250k / year',
+  'siblings-inc-five': '250k-300k / year',
+  'siblings-inc-size': '300k+ / year',
 };
 
 const coop_jobs = {
@@ -524,6 +534,11 @@ function renderBackground(options) {
   renderHorizontalBarChat(d3.select('#num-languages'), NUM_LANGUAGE, options.width, 280, false);
   renderHorizontalBarChat(d3.select('#known-languages'), LANGUAGE_KNOWN, options.width, 280, true);
   renderHorizontalBarChat(d3.select('#emigrated'), EMIGRATED_COUNTRY, options.width, 280, true);
+  renderGroupedBarChart(d3.select('#siblings-parents'), SIBLINGS_PARENTS, options.width, 250, siblings_parents_legend,
+  {
+    yAxisTitle: 'Number of Students',
+    xAxisTitle: 'Number of Siblings'
+  });
 }
 
 function renderOutcome(options) {
