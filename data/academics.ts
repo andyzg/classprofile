@@ -37,6 +37,41 @@ let GRADES = [
   }
 ];
 
+let GRADES_OFFICIAL = [
+  {
+    "x": "1A",
+    "value": [86.4]	
+  },
+  {
+    "x": "1B",
+    "value": [81.3]	
+  },
+  {
+    "x": "2A",
+    "value": [84.8]
+  },
+  {
+    "x": "2B",
+    "value": [82.2]
+  },
+  {
+    "x": "3A",
+    "value": [87.8]
+  },
+  {
+    "x": "3B",
+    "value": [83.1]
+  },
+  {
+    "x": "4A",
+    "value": [89.6]
+  },
+  {
+    "x": "4B",
+    "value": [90.6]
+  }
+];
+
 
 let TRANSFER_FROM = [{
   "name": "Computer Engineering",
@@ -765,4 +800,5 @@ export {
   ENRICHED_VS_GRADES,
   SLEEP_VS_GRADES,
   ENTRANCE_VS_GRADES,
+  GRADES_OFFICIAL,
 }
