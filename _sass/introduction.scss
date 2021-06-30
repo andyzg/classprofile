@@ -64,3 +64,118 @@
   .slider.round:before {
     border-radius: 50%;
   }
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+  }
+
+#timeline {
+    position: relative;
+    display: table; //*For Firefox
+    height: 100%;
+    margin: {
+      left: auto;
+      right: auto;
+      top: 5rem;
+    }
+    div {
+      &:after {
+        content: '';
+        width: 2px;
+        position: absolute;
+        top: .5rem;
+        bottom: 0rem;
+        left: 160px;
+        z-index: 1;
+        background: #C5C5C5;
+      }
+    }
+    h3 {
+    //   position: -webkit-sticky;
+    //   position: sticky;
+      top: 5rem;
+      color: #888;
+      margin: 0;
+      font: {
+        size: 1em;
+        weight: 400;
+      }
+      @media (min-width: 62em) {
+        font-size: 1.1em;
+      }
+    }
+    section.year {
+    position: relative;
+    &:first-child section{
+      margin-top: -1.3em;
+      padding-bottom: 0px;
+    }
+    section {
+      position: initial;
+      margin-top: -1.35rem;
+      padding-bottom: 1.25em;
+      margin-bottom: 2.2em;
+      h4 {
+        position: absolute;
+        bottom: 0;
+        font: {
+          size: .9em;
+          weight: 400;
+        }
+        line-height: 1.2em;
+        margin: 0;
+        padding: 0 0 0 99px;
+        color: #C5C5C5;
+        @media (min-width: 62em) {
+          font-size: 1em;
+        }
+      }
+      ul {
+        list-style-type: none;
+        padding: 0 0 0 175px;
+        margin: 0 0 1em;
+        max-width: 32rem;
+        font-size: 1em;
+        @media (min-width: 62em) {
+          font-size: 1.1em;
+          padding: 0 0 0 181px;
+        }
+        &:last-child {
+          margin: {
+            bottom: 0;
+          }
+        }
+        &:first-of-type:after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          background: #C5C5C5;
+          border: 2px solid #FFFFFF;
+          @include border-radius(50%);
+          position: absolute;
+          left: 154px;
+          top: 3px;
+          z-index: 2;
+        }
+        li {
+          margin-left: .5rem;
+          &:before {
+            content: '+';
+            font-weight: bold;
+            margin-left: -.5rem;
+            padding-right: .3rem;
+          }
+          &:not(:first-child) {
+            margin-top: .5rem;
+          }
+          span.price {
+            color: mediumturquoise;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
