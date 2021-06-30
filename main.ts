@@ -33,7 +33,7 @@ let admission_salary = ['admission-salary-overall','admission-salary-first-year'
 let entrance_vs_grades = ["entrance-overall", "entrance-first-year"];
 let work_location = ["work-location-0", "work-location-1", "work-location-2", "work-location-3", "work-location-4", "work-location-5",
 "work-location-6", "work-location-7", "work-location-8", "work-location-9", "work-location-10"];
-
+let concise_version = false;
 
 const friends_groups = {
   'friends-gain-coop': 'Gained over coop term',
@@ -209,7 +209,31 @@ function setupListeners() {
     }
   }
 
+  let conciseToggle = document.getElementById('concise-toggle');
+  conciseToggle.onclick = function() {
+    if(concise_version){
+      show_all_content();
+      concise_version = false;
+    }else{
+      hide_content();
+      concise_version = true;
+    }
+  }
   window.addEventListener("scroll", onScroll);
+}
+
+function hide_content() {
+  let items = document.getElementsByClassName("long_version");
+  for(let i = 0; i < items.length; i++){
+    (items[i] as any).style.display = 'none';
+  }
+}
+
+function show_all_content() {
+  let items = document.getElementsByClassName("long_version");
+  for(let i = 0; i < items.length; i++){
+    (items[i] as any).style.display = 'block';
+  }
 }
 
 function setActive(term) {
