@@ -633,7 +633,7 @@ function renderFuture(options) {
     {
       binCount: 8,
       yAxisTitle: 'Count',
-      xAxisTitle: 'CAD'
+      xAxisTitle: 'CAD (thousands)'
     }
   );
   renderHistogram(d3.select('#ft-hourly'),
@@ -653,7 +653,7 @@ function renderFuture(options) {
     {
       binCount: 6,
       yAxisTitle: 'Count',
-      xAxisTitle: 'CAD'
+      xAxisTitle: 'CAD (thousands)'
     }
   );
   renderHistogram(d3.select('#ft-signing'),
@@ -663,7 +663,7 @@ function renderFuture(options) {
     {
       binCount: 6,
       yAxisTitle: 'Count',
-      xAxisTitle: 'CAD'
+      xAxisTitle: 'CAD (thousands)'
     }
   );
 }
@@ -705,7 +705,7 @@ function renderRelationships(options) {
     options.fullWidth,
     400,
     {
-      domain: [0, 13000], // ignoring the last few values that skew the graph
+      domain: [0, 13], // ignoring the last few values that skew the graph
       binCount: 12,
       fillColour: '#18bbc9',
     }
